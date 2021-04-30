@@ -1,0 +1,12 @@
+coc
+Code
+configstore
+dconf
+fontconfig
+font-manager
+gtk-*
+htop
+nextjs*
+procps
+pulse
+nvim/plugged

@@ -1,0 +1,16 @@
+# /home/saintno/.config/tmuxinator/frontend.yml
+
+name: styles
+root: ~/Sources/Halocom/frontend
+
+windows:
+  - editor:
+      layout: a941,234x66,0,0[234x46,0,0,0,234x19,0,47{77x19,0,47,1,77x19,78,47,2,78x19,156,47,3}]
+      # Synchronize all panes of this window, can be enabled before or after the pane commands run.
+      # 'before' represents legacy functionality and will be deprecated in a future release, in favour of 'after'
+      # synchronize: after
+      panes:
+        - nvim
+        - clear
+        - clear
+        - git status
