@@ -19,6 +19,7 @@ Plug 'tpope/vim-fugitive' "---------------------------- Git status in status bar
 Plug 'joshdick/onedark.vim' "---------------------------------- My fucking theme
 Plug 'Valloric/MatchTagAlways' "------- Always highlights the XML/HTML tags that enclose your cursor location
 Plug 'zirrostig/vim-schlepp'
+Plug 'airblade/vim-gitgutter'
 
 " Frameworks
 Plug 'MaxMEllon/vim-jsx-pretty' "----------------------------------------- React

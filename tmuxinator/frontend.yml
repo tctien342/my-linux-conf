@@ -11,6 +11,6 @@ windows:
       # synchronize: after
       panes:
         - nvim
-        - clear
-        - clear
-        - git status
+        - git log
+        -
+        -
