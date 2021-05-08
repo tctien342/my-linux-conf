@@ -16,7 +16,8 @@ Plug 'pineapplegiant/spaceduck', { 'branch': 'main' }"--------- My Fucking theme
 Plug 'pechorin/any-jump.vim' "-------------------------------------- Jump helper
 Plug 'itchyny/lightline.vim' "----------------------------------- New status bar
 Plug 'tpope/vim-fugitive' "---------------------------- Git status in status bar
-Plug 'joshdick/onedark.vim' "---------------------------------- My fucking theme
+" Plug 'joshdick/onedark.vim' "---------------------------------- My fucking theme
+Plug 'kaicataldo/material.vim', { 'branch': 'main' }
 Plug 'Valloric/MatchTagAlways' "------- Always highlights the XML/HTML tags that enclose your cursor location
 Plug 'zirrostig/vim-schlepp'
 Plug 'airblade/vim-gitgutter'

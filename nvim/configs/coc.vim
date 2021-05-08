@@ -95,6 +95,7 @@ nmap <silent> gr <Plug>(coc-rename)
 nmap <silent> gR <Plug>(coc-references)
 nmap <silent> ge <Plug>(coc-diagnostic-prev)
 nmap <silent> gE <Plug>(coc-diagnostic-next)
+nmap <silent> ga :CocAction<cr>
 
 " Use K to show documentation in preview window
 nnoremap <silent> K :call <SID>show_documentation()<CR>
@@ -120,3 +121,11 @@ inoremap <silent><expr> <C-j>
       \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
       \ <SID>check_back_space() ? "\<TAB>" :
       \ coc#refresh()
+
+" Fold
+let javascript_fold=1
+let typescript_fold=1
+
+" Add `:Fold` command to fold current buffer.
+command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+

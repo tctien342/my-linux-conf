@@ -11,14 +11,14 @@ let g:nvim_tree_gitignore = 1
 " COLORS SOLARIZED {{{
 set t_Co=256
 syntax on
-colorscheme onedark
+colorscheme material
 
 " }}}
 
 " LIGHTLINE {{{
 
 let g:lightline = {
-      \ 'colorscheme': 'wombat',
+      \ 'colorscheme': 'material_vim',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
@@ -118,6 +118,7 @@ nmap <leader>m <Plug>MarkdownPreviewToggle
 " PRETTIER {{{
 
 au FileType css,scss let b:prettier_exec_cmd = "prettier-stylelint"
+let g:prettier#exec_cmd_path = "/Users/saintno/.nvm/versions/node/v14.16.1/bin/prettier"
 let g:prettier#exec_cmd_async= 1
 
 " }}}
@@ -132,5 +133,7 @@ let g:matchup_matchpref.html = {'tagnameonly': 1}
 lua require'colorizer'.setup()
 
 " Transparent background
-hi Normal guibg=NONE ctermbg=NONE
+hi Normal     ctermbg=NONE guibg=NONE
+hi LineNr     ctermbg=NONE guibg=NONE
+hi SignColumn ctermbg=NONE guibg=NONE
 

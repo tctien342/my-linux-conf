@@ -160,22 +160,5 @@ endif
 
 " Clipboard
 lang en_US.UTF-8
-
-" Fix supertab stupid
-let g:SuperTabDefaultCompletionType = "<c-n>"
-set tags=tags
-
-" Wsl support
 set clipboard+=unnamedplus
-let g:clipboard = {
-          \   'name': 'win32yank-wsl',
-          \   'copy': {
-          \      '+': 'win32yank.exe -i --crlf',
-          \      '*': 'win32yank.exe -i --crlf',
-          \    },
-          \   'paste': {
-          \      '+': 'win32yank.exe -o --lf',
-          \      '*': 'win32yank.exe -o --lf',
-          \   },
-          \   'cache_enabled': 0,
-          \ }
+
