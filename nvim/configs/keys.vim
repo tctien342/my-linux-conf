@@ -65,3 +65,7 @@ vmap <unique> <down>  <Plug>SchleppDown
 vmap <unique> <left>  <Plug>SchleppLeft
 vmap <unique> <right> <Plug>SchleppRight
 
+
+"------- Hack paste
+xnoremap p "0p
+nnoremap p "0p
