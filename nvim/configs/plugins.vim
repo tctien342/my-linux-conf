@@ -130,6 +130,14 @@ let g:matchup_matchpref.html = {'tagnameonly': 1}
 
 " }}}
 
+
+" VIM-EMMET {{{
+
+let g:user_emmet_leader_key=','
+
+" }}}
+
+
 lua require'colorizer'.setup()
 
 " Transparent background

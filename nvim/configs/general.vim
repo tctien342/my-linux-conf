@@ -160,5 +160,5 @@ endif
 
 " Clipboard
 lang en_US.UTF-8
-set clipboard+=unnamedplus
+set clipboard=unnamedplus
 
