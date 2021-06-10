@@ -8,15 +8,18 @@ Plug 'junegunn/fzf.vim' "-----------------------------------------  Fuzzy search
 Plug 'chengzeyi/fzf-preview.vim'
 Plug 'psliwka/vim-smoothie' "------------------------------------- Smooth Scroll
 Plug 'kyazdani42/nvim-web-devicons' "---------------------------- For file icons
-Plug 'kyazdani42/nvim-tree.lua' "------------------------------- Better NerdTree
+" Plug 'kyazdani42/nvim-tree.lua' "------------------------------- Better NerdTree
+Plug 'preservim/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'ryanoasis/vim-devicons'
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+Plug 'PhilRunninger/nerdtree-visual-selection'
+
 Plug 'andymass/vim-matchup' "------------- Better % and highlight matching words
 Plug 'rhysd/clever-f.vim' "-------------------------------- Make f more powerful
-Plug 'sheerun/vim-polyglot' "---------------------------------- Syntax highlight
 Plug 'pineapplegiant/spaceduck', { 'branch': 'main' }"--------- My Fucking theme
 Plug 'pechorin/any-jump.vim' "-------------------------------------- Jump helper
-Plug 'itchyny/lightline.vim' "----------------------------------- New status bar
-Plug 'tpope/vim-fugitive' "---------------------------- Git status in status bar
-" Plug 'joshdick/onedark.vim' "---------------------------------- My fucking theme
+Plug 'famiu/feline.nvim' "--------------------------------------- New status bar
 Plug 'kaicataldo/material.vim', { 'branch': 'main' }
 Plug 'Valloric/MatchTagAlways' "------- Always highlights the XML/HTML tags that enclose your cursor location
 Plug 'zirrostig/vim-schlepp'

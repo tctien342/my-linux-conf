@@ -1,7 +1,7 @@
 " NVIMTREE {{{
 
 " Mappings
-noremap <Leader>t :NvimTreeToggle<CR> "----------------------------- NERDTree Toggle
+noremap <Leader>t :NERDTreeToggle<CR> "----------------------------- NERDTree Toggle
 let g:nvim_tree_ignore = [ '.git', 'node_modules', '.cache' ]
 let g:nvim_tree_gitignore = 1
 
@@ -12,21 +12,6 @@ let g:nvim_tree_gitignore = 1
 set t_Co=256
 syntax on
 colorscheme material
-
-" }}}
-
-" LIGHTLINE {{{
-
-let g:lightline = {
-      \ 'colorscheme': 'material_vim',
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
-      \ },
-      \ 'component_function': {
-      \   'gitbranch': 'FugitiveHead'
-      \ },
-      \ }
 
 " }}}
 
@@ -139,6 +124,7 @@ let g:user_emmet_leader_key=','
 
 
 lua require'colorizer'.setup()
+lua require'feline'.setup()
 
 " Transparent background
 hi Normal     ctermbg=NONE guibg=NONE
