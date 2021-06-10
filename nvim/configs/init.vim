@@ -6,26 +6,29 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } "-------------- Fuzzy search
 Plug 'junegunn/fzf.vim' "-----------------------------------------  Fuzzy search
 Plug 'chengzeyi/fzf-preview.vim'
-Plug 'psliwka/vim-smoothie' "------------------------------------- Smooth Scroll
+
 Plug 'kyazdani42/nvim-web-devicons' "---------------------------- For file icons
-" Plug 'kyazdani42/nvim-tree.lua' "------------------------------- Better NerdTree
-Plug 'preservim/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'preservim/nerdtree'
 Plug 'ryanoasis/vim-devicons'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'PhilRunninger/nerdtree-visual-selection'
 
+Plug 'psliwka/vim-smoothie' "------------------------------------- Smooth Scroll
 Plug 'andymass/vim-matchup' "------------- Better % and highlight matching words
 Plug 'rhysd/clever-f.vim' "-------------------------------- Make f more powerful
-Plug 'pineapplegiant/spaceduck', { 'branch': 'main' }"--------- My Fucking theme
 Plug 'pechorin/any-jump.vim' "-------------------------------------- Jump helper
-Plug 'famiu/feline.nvim' "--------------------------------------- New status bar
-Plug 'kaicataldo/material.vim', { 'branch': 'main' }
+
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'joshdick/onedark.vim'
+
 Plug 'Valloric/MatchTagAlways' "------- Always highlights the XML/HTML tags that enclose your cursor location
 Plug 'zirrostig/vim-schlepp'
 Plug 'airblade/vim-gitgutter'
 
 " Frameworks
+" Plug 'HerringtonDarkholme/yats.vim'
 Plug 'MaxMEllon/vim-jsx-pretty' "----------------------------------------- React
 
 " Faster code

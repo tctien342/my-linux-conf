@@ -1,17 +1,22 @@
-" NVIMTREE {{{
+" NERDTree {{{
 
 " Mappings
 noremap <Leader>t :NERDTreeToggle<CR> "----------------------------- NERDTree Toggle
-let g:nvim_tree_ignore = [ '.git', 'node_modules', '.cache' ]
-let g:nvim_tree_gitignore = 1
 
+" }}}
+
+" AIRLine {{{
+
+let g:airline_theme='base16'
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#formatter = 'unique_tail'
 
 " }}}
 
 " COLORS SOLARIZED {{{
 set t_Co=256
 syntax on
-colorscheme material
+colorscheme onedark
 
 " }}}
 
@@ -115,7 +120,6 @@ let g:matchup_matchpref.html = {'tagnameonly': 1}
 
 " }}}
 
-
 " VIM-EMMET {{{
 
 let g:user_emmet_leader_key=','
@@ -124,7 +128,6 @@ let g:user_emmet_leader_key=','
 
 
 lua require'colorizer'.setup()
-lua require'feline'.setup()
 
 " Transparent background
 hi Normal     ctermbg=NONE guibg=NONE
