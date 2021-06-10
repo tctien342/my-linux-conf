@@ -58,10 +58,10 @@ set relativenumber "------------------------------------- Show relative number
 
 " FILE TYPES {{{
 
-augroup language_react
-    autocmd!
-    autocmd bufnewfile,bufread *.tsx set filetype=typescriptreact
-augroup END
+" augroup language_react
+"     autocmd!
+"     autocmd bufnewfile,bufread *.tsx set filetype=typescriptreact
+" augroup END
 
 " }}}
 

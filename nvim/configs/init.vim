@@ -11,7 +11,7 @@ Plug 'kyazdani42/nvim-web-devicons' "---------------------------- For file icons
 Plug 'kyazdani42/nvim-tree.lua' "------------------------------- Better NerdTree
 Plug 'andymass/vim-matchup' "------------- Better % and highlight matching words
 Plug 'rhysd/clever-f.vim' "-------------------------------- Make f more powerful
-Plug 'sheerun/vim-polyglot' "---------------------------------- Syntax highlight
+" Plug 'sheerun/vim-polyglot' "---------------------------------- Syntax highlight
 Plug 'pineapplegiant/spaceduck', { 'branch': 'main' }"--------- My Fucking theme
 Plug 'pechorin/any-jump.vim' "-------------------------------------- Jump helper
 Plug 'itchyny/lightline.vim' "----------------------------------- New status bar
