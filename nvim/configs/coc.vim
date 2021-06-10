@@ -5,7 +5,7 @@ set pumheight=5 "--------------------------------- limit autocomple candidates
 set hidden "------------------------- if hidden is not set, TextEdit might fail.
 set shortmess+=c "------------------- don't give |ins-completion-menu| messages.
 set updatetime=300 "------------ smaller updatetime for CursorHold & CursorHoldI
-set cmdheight=1 "----------------------------------- better display for messages
+set cmdheight=2 "----------------------------------- better display for messages
 set signcolumn=yes "------------------------------------ always show signcolumns
 
 hi CocErrorSign  ctermfg=Red guifg=#f2323f
