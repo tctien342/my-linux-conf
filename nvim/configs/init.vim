@@ -11,11 +11,8 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 
 Plug 'kyazdani42/nvim-web-devicons' "---------------------------- For file icons
-Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'preservim/nerdtree'
 Plug 'ryanoasis/vim-devicons'
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-Plug 'PhilRunninger/nerdtree-visual-selection'
+Plug 'kyazdani42/nvim-tree.lua'
 
 Plug 'psliwka/vim-smoothie' "------------------------------------- Smooth Scroll
 Plug 'andymass/vim-matchup' "------------- Better % and highlight matching words

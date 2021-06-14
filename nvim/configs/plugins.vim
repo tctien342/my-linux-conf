@@ -1,7 +1,7 @@
-" NERDTree {{{
+" NVIMTree {{{
 
 " Mappings
-noremap <Leader>t :NERDTreeToggle<CR> "----------------------------- NERDTree Toggle
+noremap <Leader>t :NvimTreeToggle<CR> "----------------------------- NERDTree Toggle
 
 " }}}
 
