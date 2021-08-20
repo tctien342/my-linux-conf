@@ -22,46 +22,46 @@ colorscheme onedark
 
 " TELEScope {{{
 
-nnoremap <leader>f <cmd>Telescope find_files<cr>
-nnoremap <leader>s <cmd>Telescope live_grep<cr>
-nnoremap <leader><leader> <cmd>Telescope buffers<cr>
-nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+" nnoremap <leader>f <cmd>Telescope find_files<cr>
+" nnoremap <leader>s <cmd>Telescope live_grep<cr>
+" nnoremap <leader><leader> <cmd>Telescope buffers<cr>
+" nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 
 " }}}
 
 " FZF.VIM {{{
 
 " Just ignore .git folders
-" command! -bang -nargs=? -complete=dir DefaultFiles
-"   \ call fzf#run({'source': 'ag --hidden --skip-vcs-ignores --ignore .git -g ""'})
+command! -bang -nargs=? -complete=dir DefaultFiles
+  \ call fzf#run({'source': 'ag --hidden --skip-vcs-ignores --ignore .git -g ""'})
 
-" " Mappings
-" nmap <leader>f        :GFiles<cr>
-" nmap <leader>s        :FZFAg<cr>
-" nmap <leader>F        :DefaultFiles<cr>
-" nmap <leader>l        :BLines<cr>
-" nmap <leader>L        :Ag<cr>
-" nmap <leader><leader> :Buffers<cr>
-" nmap <leader>c        :Commits<cr>
-" nmap <leader>a        :Ag<cr>
+" Mappings
+nmap <leader>f        :GFiles<cr>
+nmap <leader>s        :FZFAg<cr>
+nmap <leader>F        :DefaultFiles<cr>
+nmap <leader>l        :BLines<cr>
+nmap <leader>L        :Ag<cr>
+nmap <leader><leader> :Buffers<cr>
+nmap <leader>c        :Commits<cr>
+nmap <leader>a        :Ag<cr>
 
-" " Use o to open candidate in quickfix window
-" autocmd BufReadPost quickfix nnoremap <buffer> o <CR>
+" Use o to open candidate in quickfix window
+autocmd BufReadPost quickfix nnoremap <buffer> o <CR>
 
-" " Action mappings
-" let g:fzf_action = {
-"   \ 'ctrl-t': 'tab split',
-"   \ 'ctrl-x': 'split',
-"   \ 'ctrl-v': 'vsplit' }
+" Action mappings
+let g:fzf_action = {
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-x': 'split',
+  \ 'ctrl-v': 'vsplit' }
 
-" " In Neovim, you can set up fzf window using a Vim command
-" let g:fzf_layout = { 'window': { 'width': 0.95, 'height': 0.8 } }
-" let g:fzf_history_dir = '~/.local/share/fzf-history'
+" In Neovim, you can set up fzf window using a Vim command
+let g:fzf_layout = { 'window': { 'width': 0.95, 'height': 0.8 } }
+let g:fzf_history_dir = '~/.local/share/fzf-history'
 
-" " Hide statusline when open fzf
-" autocmd! FileType fzf
-" autocmd  FileType fzf set laststatus=0 noshowmode noruler
-"   \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
+" Hide statusline when open fzf
+autocmd! FileType fzf
+autocmd  FileType fzf set laststatus=0 noshowmode noruler
+  \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 
 " }}}
 

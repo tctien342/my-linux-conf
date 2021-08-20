@@ -1,7 +1,7 @@
 # /home/saintno/.config/tmuxinator/frontend.yml
 
 name: halox
-root: ~/Sources/Halocom/board
+root: ~/Sources/Halocom/HaloXUI
 
 windows:
   - editor:

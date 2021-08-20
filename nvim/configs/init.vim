@@ -3,12 +3,12 @@ set nocompatible "----------------------------------------------- Polygot Syntax
 call plug#begin('~/.config/nvim/plugged')
 
 " Tools
-" Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } "-------------- Fuzzy search
-" Plug 'junegunn/fzf.vim' "-----------------------------------------  Fuzzy search
-" Plug 'chengzeyi/fzf-preview.vim'
-Plug 'nvim-lua/popup.nvim'
-Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } "-------------- Fuzzy search
+Plug 'junegunn/fzf.vim' "-----------------------------------------  Fuzzy search
+Plug 'chengzeyi/fzf-preview.vim'
+" Plug 'nvim-lua/popup.nvim'
+" Plug 'nvim-lua/plenary.nvim'
+" Plug 'nvim-telescope/telescope.nvim'
 
 Plug 'kyazdani42/nvim-web-devicons' "---------------------------- For file icons
 Plug 'ryanoasis/vim-devicons'
