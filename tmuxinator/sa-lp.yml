@@ -1,7 +1,7 @@
 # /home/saintno/.config/tmuxinator/frontend.yml
 
-name: frontend
-root: ~/Sources/Halocom/SAFrontend
+name: SALanding
+root: ~/Sources/Halocom/SALanding
 
 windows:
   - editor:
