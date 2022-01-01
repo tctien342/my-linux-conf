@@ -55,8 +55,9 @@ nnoremap <tab> :tabnext<CR>
 nnoremap <S-tab> :tabprevious<CR>
 nnoremap <C-tab> :tabedit<CR>
 nnoremap <C-e> !!$SHELL<CR>
-nnoremap gf :PrettierAsync<CR>
+" nnoremap gf :PrettierAsync<CR>
 nnoremap gs :w<CR>
+nnoremap gf :lua vim.lsp.buf.formatting()<CR>
 
 
 "------- Move block code
@@ -65,6 +66,13 @@ vmap <unique> <down>  <Plug>SchleppDown
 vmap <unique> <left>  <Plug>SchleppLeft
 vmap <unique> <right> <Plug>SchleppRight
 
+"------- Fix list
+nnoremap <leader>xx <cmd>TroubleToggle<cr>
+nnoremap <leader>xw <cmd>TroubleToggle workspace_diagnostics<cr>
+nnoremap <leader>xd <cmd>TroubleToggle document_diagnostics<cr>
+nnoremap <leader>xq <cmd>TroubleToggle quickfix<cr>
+nnoremap <leader>xl <cmd>TroubleToggle loclist<cr>
+nnoremap gR <cmd>TroubleToggle lsp_references<cr>
 
 "------- Hack paste
 xnoremap p "0p

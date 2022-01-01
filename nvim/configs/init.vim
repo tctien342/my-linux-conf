@@ -3,12 +3,8 @@ set nocompatible "----------------------------------------------- Polygot Syntax
 call plug#begin('~/.config/nvim/plugged')
 
 " Tools
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } "-------------- Fuzzy search
-Plug 'junegunn/fzf.vim' "-----------------------------------------  Fuzzy search
-Plug 'chengzeyi/fzf-preview.vim'
-" Plug 'nvim-lua/popup.nvim'
-" Plug 'nvim-lua/plenary.nvim'
-" Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
 
 Plug 'kyazdani42/nvim-web-devicons' "---------------------------- For file icons
 Plug 'ryanoasis/vim-devicons'
@@ -16,12 +12,10 @@ Plug 'kyazdani42/nvim-tree.lua'
 
 Plug 'psliwka/vim-smoothie' "------------------------------------- Smooth Scroll
 Plug 'andymass/vim-matchup' "------------- Better % and highlight matching words
-Plug 'rhysd/clever-f.vim' "-------------------------------- Make f more powerful
 Plug 'pechorin/any-jump.vim' "-------------------------------------- Jump helper
 
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'joshdick/onedark.vim'
+Plug 'nvim-lualine/lualine.nvim' "---------------------------------- Status line
+Plug 'joshdick/onedark.vim' "---------------------------------- My Fucking theme
 
 Plug 'Valloric/MatchTagAlways' "------- Always highlights the XML/HTML tags that enclose your cursor location
 Plug 'zirrostig/vim-schlepp'
@@ -52,7 +46,28 @@ Plug 'kyoz/npm.vim' "-------------------------- Work with npm more easier in Vim
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  } "-- Markdown
 Plug 'christoomey/vim-tmux-navigator' "-------------------------- Vim and Tmux
 
-" Performance
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" LSP Performance
+Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
+Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
+Plug 'jose-elias-alvarez/null-ls.nvim'
+Plug 'jose-elias-alvarez/nvim-lsp-ts-utils'
+Plug 'neovim/nvim-lspconfig'
+
+" Completion
+Plug 'neovim/nvim-lspconfig'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-cmdline'
+Plug 'hrsh7th/nvim-cmp'
+Plug 'f3fora/cmp-spell'
+" For luasnip users.
+Plug 'L3MON4D3/LuaSnip'
+Plug 'saadparwaiz1/cmp_luasnip'
+" Beauty complete
+Plug 'onsails/lspkind-nvim'
+Plug 'ray-x/lsp_signature.nvim'
+Plug 'rmagatti/goto-preview'
+Plug 'folke/trouble.nvim'
 
 call plug#end() "---------------------------------------- End of Vim-Plug define

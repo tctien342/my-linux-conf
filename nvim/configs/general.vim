@@ -1,3 +1,6 @@
+" General config
+set pumheight=5 "--------------------------------- limit autocomple candidates
+
 " PYTHON PROVIDERS {{{
 
 if has('macunix')
