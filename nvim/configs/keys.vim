@@ -58,7 +58,7 @@ nnoremap <C-e> !!$SHELL<CR>
 " nnoremap gf :PrettierAsync<CR>
 nnoremap gs :w<CR>
 nnoremap gf :lua vim.lsp.buf.formatting()<CR>
-
+nnoremap <silent> gt :BufferLinePick<CR>
 
 "------- Move block code
 vmap <unique> <up>    <Plug>SchleppUp

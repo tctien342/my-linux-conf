@@ -1,4 +1,12 @@
 lua << EOF
+-- Tabs
+require("bufferline").setup{
+  options = {
+      diagnostics = "nvim_lsp"
+    }
+}
+
+-- Preview GD
 local gopreview = require('goto-preview')
 gopreview.setup({
   width = 120; -- Width of the floating window

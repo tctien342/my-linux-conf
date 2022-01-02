@@ -181,7 +181,7 @@ lspconfig.pyright.setup(coq.lsp_ensure_capabilities({
 
 -- FOR LUA
 lspconfig.efm.setup(coq.lsp_ensure_capabilities({
-    init_options = {documentFormatting = true},
+    init_options = {documentFormatting = false},
     on_attach = function(client, bufnr)
       default_key(bufnr)
     end,
