@@ -70,5 +70,6 @@ Plug 'onsails/lspkind-nvim'
 Plug 'ray-x/lsp_signature.nvim'
 Plug 'rmagatti/goto-preview'
 Plug 'folke/trouble.nvim'
+Plug 'folke/lsp-colors.nvim'
 
 call plug#end() "---------------------------------------- End of Vim-Plug define

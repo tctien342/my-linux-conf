@@ -1,4 +1,3 @@
-lua << EOF
 -- Tabs
 require("bufferline").setup{
   options = {
@@ -283,4 +282,11 @@ ins_right {
 -- Now don't forget to initialize lualine
 lualine.setup(config)
 
-EOF
+-- Config colors
+require("lsp-colors").setup({
+  Error = "#db4b4b",
+  Warning = "#e0af68",
+  Information = "#0db9d7",
+  Hint = "#10B981"
+})
+

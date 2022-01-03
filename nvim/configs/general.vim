@@ -1,5 +1,6 @@
 " General config
 set pumheight=5 "--------------------------------- limit autocomple candidates
+set completeopt=menu,menuone,noselect
 
 " PYTHON PROVIDERS {{{
 

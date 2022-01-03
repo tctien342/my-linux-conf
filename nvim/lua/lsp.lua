@@ -1,10 +1,3 @@
-set completeopt=menu,menuone,noselect
-
-lua << EOF
-local has_words_before = function()
-  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
-end
 
 local luasnip = require("luasnip")
 local lspconfig = require("lspconfig")
@@ -12,6 +5,11 @@ local coq = require "coq"
 local cmp = require'cmp'
 local lspkind = require('lspkind')
 local null_ls = require("null-ls")
+
+local has_words_before = function()
+  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+end
 
 null_ls.setup({
     sources = {
@@ -209,4 +207,4 @@ lspconfig.bashls.setup(coq.lsp_ensure_capabilities({
       default_key(bufnr)
     end,
 }))
-EOF
+

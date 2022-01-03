@@ -5,6 +5,5 @@
   runtime configs/general.vim "------------------------------------------- Configs
   runtime configs/keys.vim "---------------------------------------------- Keymaps
   runtime configs/plugins.vim "----------------------------------- Plugins configs
-  runtime configs/lsp.vim "----------------------------------- Plugins configs
-  runtime configs/utils.vim "----------------------------------- Plugins configs
+  lua require('init')
 " }}}
