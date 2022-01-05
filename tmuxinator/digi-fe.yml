@@ -1,7 +1,7 @@
 # /home/saintno/.config/tmuxinator/frontend.yml
 
-name: SAInternal
-root: ~/Sources/Halocom/ConnectIN
+name: digi-fe
+root: ~/Sources/Halocom/InternalDigi
 
 windows:
   - editor:

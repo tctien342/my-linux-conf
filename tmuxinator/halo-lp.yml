@@ -1,7 +1,7 @@
 # /home/saintno/.config/tmuxinator/frontend.yml
 
 name: halo-lp
-root: ~/Sources/Halocom/HaloLP
+root: ~/Sources/Halocom/HalocomLP
 
 windows:
   - editor:

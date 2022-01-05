@@ -16,7 +16,7 @@ Plug 'pechorin/any-jump.vim' "-------------------------------------- Jump helper
 Plug 'akinsho/bufferline.nvim'
 
 Plug 'nvim-lualine/lualine.nvim' "---------------------------------- Status line
-Plug 'joshdick/onedark.vim' "---------------------------------- My Fucking theme
+Plug 'frenzyexists/aquarium-vim', { 'branch': 'develop' }
 
 Plug 'Valloric/MatchTagAlways' "------- Always highlights the XML/HTML tags that enclose your cursor location
 Plug 'zirrostig/vim-schlepp'
@@ -61,7 +61,6 @@ Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-cmdline'
 Plug 'hrsh7th/nvim-cmp'
-Plug 'f3fora/cmp-spell'
 " For luasnip users.
 Plug 'L3MON4D3/LuaSnip'
 Plug 'saadparwaiz1/cmp_luasnip'
@@ -71,5 +70,8 @@ Plug 'ray-x/lsp_signature.nvim'
 Plug 'rmagatti/goto-preview'
 Plug 'folke/trouble.nvim'
 Plug 'folke/lsp-colors.nvim'
+" GPS
+Plug 'nvim-treesitter/nvim-treesitter'
+Plug 'SmiteshP/nvim-gps'
 
 call plug#end() "---------------------------------------- End of Vim-Plug define

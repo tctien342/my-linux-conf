@@ -70,8 +70,6 @@ cmp.setup({
       { name = 'path' },
     },{
         { name = 'buffer' },
-      }, {
-        { name ='spell' },
       })
 })
 
@@ -93,7 +91,8 @@ cmp.setup.cmdline(':', {
 
 -- Setup lspconfig.
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
-local default_key = function(bufnr)
+
+local default_key = function(client, bufnr)
     require "lsp_signature".on_attach({
       bind = true, -- This is mandatory, otherwise border config won't get registered.
       handler_opts = {
@@ -106,8 +105,6 @@ local default_key = function(bufnr)
     vim.api.nvim_buf_set_keymap(bufnr, "n", 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts_lsp)
     vim.api.nvim_buf_set_keymap(bufnr, "n", 'ga', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts_lsp)
     vim.api.nvim_buf_set_keymap(bufnr, "n", 'gf', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts_lsp)
-    vim.opt.spell = true
-    vim.opt.spelllang = { 'en_us' }
 end
 
 lspconfig.tsserver.setup(coq.lsp_ensure_capabilities({
@@ -158,7 +155,7 @@ lspconfig.tsserver.setup(coq.lsp_ensure_capabilities({
         local opts = { silent = true }
         vim.api.nvim_buf_set_keymap(bufnr, "n", "gr", ":TSLspRenameFile<CR>", opts)
         vim.api.nvim_buf_set_keymap(bufnr, "n", "gi", ":TSLspImportAll<CR>", opts)
-        default_key(bufnr)
+        default_key(client, bufnr)
     end,
 }))
 
@@ -168,12 +165,12 @@ cssCap.textDocument.completion.completionItem.snippetSupport = true
 lspconfig.cssls.setup(coq.lsp_ensure_capabilities({
   capabilities = cssCap,
   on_attach = function(client, bufnr)
-    default_key(bufnr)
+    default_key(client, bufnr)
   end
 }))
 lspconfig.pyright.setup(coq.lsp_ensure_capabilities({
   on_attach = function(client, bufnr)
-    default_key(bufnr)
+    default_key(client, bufnr)
   end
 }))
 
@@ -181,7 +178,7 @@ lspconfig.pyright.setup(coq.lsp_ensure_capabilities({
 lspconfig.efm.setup(coq.lsp_ensure_capabilities({
     init_options = {documentFormatting = false},
     on_attach = function(client, bufnr)
-      default_key(bufnr)
+      default_key(client, bufnr)
     end,
     settings = {
         rootMarkers = {".git/"},
@@ -197,14 +194,14 @@ lspconfig.efm.setup(coq.lsp_ensure_capabilities({
 lspconfig.vimls.setup(coq.lsp_ensure_capabilities({
     init_options = {documentFormatting = true},
     on_attach = function(client, bufnr)
-      default_key(bufnr)
+      default_key(client, bufnr)
     end,
 }))
 -- FOR BASH SCRIPT
 lspconfig.bashls.setup(coq.lsp_ensure_capabilities({
     init_options = {documentFormatting = true},
     on_attach = function(client, bufnr)
-      default_key(bufnr)
+      default_key(client, bufnr)
     end,
 }))
 

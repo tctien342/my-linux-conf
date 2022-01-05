@@ -10,7 +10,9 @@ noremap <Leader>t :NvimTreeToggle<CR> "----------------------------- NERDTree To
 set t_Co=256
 syntax on
 set termguicolors     " enable true colors support
-colorscheme onedark
+colorscheme aquarium
+let g:aqua_transparency = 1
+let g:aquarium_style="dark"
 
 "}}}
 
