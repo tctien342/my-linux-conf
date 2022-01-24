@@ -5,15 +5,6 @@ require("bufferline").setup{
     }
 }
 
--- Preview GD
-local gopreview = require('goto-preview')
-gopreview.setup({
-  width = 120; -- Width of the floating window
-  height = 20; -- Height of the floating window
-  border = {"↖", "─" ,"┐", "│", "┘", "─", "└", "│"}; -- Border characters of the floating window
-  default_mappings = true; -- Bind default mappings
-})
-
 require("trouble").setup {
   position = "bottom", -- position of the list can be: bottom, top, left, right
   height = 10, -- height of the trouble list when position is top or bottom
@@ -61,9 +52,6 @@ require("trouble").setup {
   },
   use_diagnostic_signs = false -- enabling this will use the signs defined in your lsp client
 }
--- Current Code Position
-local gps = require("nvim-gps")
-gps.setup()
 
 -- LUA LINE
 local lualine = require 'lualine'
@@ -74,9 +62,6 @@ lualine.setup({
   sections = {
     lualine_a = {'mode'},
     lualine_b = {'branch', 'diff', 'diagnostics'},
-    lualine_c = {
-      { gps.get_location, cond = gps.is_available },
-    },
     lualine_x = {'encoding', 'fileformat', 'filetype'},
     lualine_y = { 'progress' },
     lualine_z = {'location'}

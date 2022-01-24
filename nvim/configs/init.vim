@@ -49,29 +49,17 @@ Plug 'christoomey/vim-tmux-navigator' "-------------------------- Vim and Tmux
 
 " LSP Performance
 Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
-Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
+" Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
 Plug 'jose-elias-alvarez/null-ls.nvim'
 Plug 'jose-elias-alvarez/nvim-lsp-ts-utils'
 Plug 'neovim/nvim-lspconfig'
 
-" Completion
-Plug 'neovim/nvim-lspconfig'
-Plug 'hrsh7th/cmp-nvim-lsp'
-Plug 'hrsh7th/cmp-buffer'
-Plug 'hrsh7th/cmp-path'
-Plug 'hrsh7th/cmp-cmdline'
-Plug 'hrsh7th/nvim-cmp'
-" For luasnip users.
-Plug 'L3MON4D3/LuaSnip'
-Plug 'saadparwaiz1/cmp_luasnip'
 " Beauty complete
-Plug 'onsails/lspkind-nvim'
 Plug 'ray-x/lsp_signature.nvim'
-Plug 'rmagatti/goto-preview'
 Plug 'folke/trouble.nvim'
 Plug 'folke/lsp-colors.nvim'
-" GPS
-Plug 'nvim-treesitter/nvim-treesitter'
-Plug 'SmiteshP/nvim-gps'
+
+" Language pack
+Plug 'sheerun/vim-polyglot'
 
 call plug#end() "---------------------------------------- End of Vim-Plug define

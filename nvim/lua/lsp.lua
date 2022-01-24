@@ -1,9 +1,7 @@
-
-local luasnip = require("luasnip")
+-- local luasnip = require("luasnip")
 local lspconfig = require("lspconfig")
 local coq = require "coq"
-local cmp = require'cmp'
-local lspkind = require('lspkind')
+-- local cmp = require'cmp'
 local null_ls = require("null-ls")
 
 local has_words_before = function()
@@ -19,85 +17,73 @@ null_ls.setup({
     },
 })
 
-cmp.setup({
-    formatting = {
-      format = lspkind.cmp_format({
-        with_text = false, -- do not show text alongside icons
-        maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
+-- cmp.setup({
+--     snippet = {
+--       -- REQUIRED - you must specify a snippet engine
+--       expand = function(args)
+--         require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+--       end,
+--     },
+--     mapping = {
+--       ["<Tab>"] = cmp.mapping(function(fallback)
+--       if cmp.visible() then
+--         cmp.select_next_item()
+--       elseif luasnip.expand_or_jumpable() then
+--         luasnip.expand_or_jump()
+--       elseif has_words_before() then
+--         cmp.complete()
+--       else
+--         fallback()
+--       end
+--     end, { "i", "s" }),
+--     ["<S-Tab>"] = cmp.mapping(function(fallback)
+--       if cmp.visible() then
+--         cmp.select_prev_item()
+--       elseif luasnip.jumpable(-1) then
+--         luasnip.jump(-1)
+--       else
+--         fallback()
+--       end
+--     end, { "i", "s" }),
+--       ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+--     },
+--     sources = cmp.config.sources({
+--       { name = 'nvim_lsp' },
+--       { name = 'luasnip' }, -- For luasnip users.
+--       { name = 'path' },
+--     },{
+--         { name = 'buffer' },
+--       })
+-- })
 
-        -- The function below will be called before any actual modifications from lspkind
-        -- so that you can provide more controls on popup customization. (See [#30](https://github.com/onsails/lspkind-nvim/pull/30))
-        before = function (entry, vim_item)
-          return vim_item
-        end
-      })
-    },
-    snippet = {
-      -- REQUIRED - you must specify a snippet engine
-      expand = function(args)
-        -- vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
-        require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
-        -- require('snippy').expand_snippet(args.body) -- For `snippy` users.
-        -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
-      end,
-    },
-    mapping = {
-      ["<Tab>"] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_next_item()
-      elseif luasnip.expand_or_jumpable() then
-        luasnip.expand_or_jump()
-      elseif has_words_before() then
-        cmp.complete()
-      else
-        fallback()
-      end
-    end, { "i", "s" }),
-    ["<S-Tab>"] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_prev_item()
-      elseif luasnip.jumpable(-1) then
-        luasnip.jump(-1)
-      else
-        fallback()
-      end
-    end, { "i", "s" }),
-      ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-    },
-    sources = cmp.config.sources({
-      { name = 'nvim_lsp' },
-      { name = 'luasnip' }, -- For luasnip users.
-      { name = 'path' },
-    },{
-        { name = 'buffer' },
-      })
-})
+-- -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
+-- cmp.setup.cmdline('/', {
+--   sources = {
+--     { name = 'buffer' }
+--   }
+-- })
 
--- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
-cmp.setup.cmdline('/', {
-  sources = {
-    { name = 'buffer' }
-  }
-})
+-- -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+-- cmp.setup.cmdline(':', {
+--   sources = cmp.config.sources({
+--     { name = 'path' }
+--   }, {
+--     { name = 'cmdline' }
+--   })
+-- })
 
--- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
-cmp.setup.cmdline(':', {
-  sources = cmp.config.sources({
-    { name = 'path' }
-  }, {
-    { name = 'cmdline' }
-  })
-})
-
--- Setup lspconfig.
-local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+-- -- Setup lspconfig.
+-- local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 local default_key = function(client, bufnr)
     require "lsp_signature".on_attach({
       bind = true, -- This is mandatory, otherwise border config won't get registered.
       handler_opts = {
         border = "rounded"
-      }
+      },
+      auto_close_after = 3,
+      transparency = 80,
+      timer_interval = 100
     }, bufnr)
     local opts_lsp = { noremap=true, silent=true }
     vim.api.nvim_buf_set_keymap(bufnr, "n", 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts_lsp)
