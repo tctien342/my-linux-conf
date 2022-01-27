@@ -2,14 +2,6 @@ local lspconfig = require("lspconfig")
 local coq = require "coq"
 local TSPrebuild = {}
 local has_prebuilt = false
-local eslint = {
-  lintCommand = "eslint_d -f unix --stdin --stdin-filename ${INPUT}",
-  lintStdin = true,
-  lintFormats = {"%f:%l:%c: %m"},
-  lintIgnoreExitCode = true,
-  formatCommand = "eslint_d --fix-to-stdout --stdin --stdin-filename=${INPUT}",
-  formatStdin = true
-}
 
 TSPrebuild.on_attach = function(client, bufnr)
     if has_prebuilt then return end
@@ -84,7 +76,15 @@ lspconfig.tsserver.setup(coq.lsp_ensure_capabilities({
         if client.config.flags then
           client.config.flags.allow_incremental_sync = true
          end        
-        client.resolved_capabilities.document_formatting = false
+        client.resolved_capabilities.document_formatting = true
+        if client.resolved_capabilities.document_formatting then
+          vim.cmd([[
+          augroup LspFormatting
+              autocmd! * <buffer>
+              autocmd BufWritePre <buffer> EslintFixAll
+          augroup END
+          ]])
+        end
         -- no default maps, so you may want to define some here
         local opts = { silent = true }
         default_key(client, bufnr)
@@ -106,36 +106,6 @@ lspconfig.pyright.setup(coq.lsp_ensure_capabilities({
   end
 }))
 
--- FOR LUA
-lspconfig.efm.setup(coq.lsp_ensure_capabilities({
-    init_options = {documentFormatting = true, goto_definition = false},
-    on_attach = function(client, bufnr)
-      default_key(client, bufnr)
-    end,
-    settings = {
-        rootMarkers = {".git/"},
-        languages = {
-            lua = {
-                {formatCommand = "lua-format -i", formatStdin = true}
-            },
-            javascript = {eslint},
-            javascriptreact = {eslint}, 
-            ["javascript.jsx"] = {eslint},
-            typescript = {eslint},      
-            ["typescript.tsx"] = {eslint},
-            typescriptreact = {eslint}  
-        }
-    },
-    filetypes = {
-      "javascript",
-      "javascriptreact",
-      "javascript.jsx",
-      "typescript",
-      "typescript.tsx",
-      "typescriptreact"
-    },
-}))
-
 -- FOR VIM
 lspconfig.vimls.setup(coq.lsp_ensure_capabilities({
     init_options = {documentFormatting = true},
@@ -149,5 +119,36 @@ lspconfig.bashls.setup(coq.lsp_ensure_capabilities({
     on_attach = function(client, bufnr)
       default_key(client, bufnr)
     end,
+}))
+
+lspconfig.eslint.setup(coq.lsp_ensure_capabilities({
+    cmd = { "vscode-eslint-language-server", "--stdio" },
+    filetypes = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx", "vue" },
+    init_options = {documentFormatting = true},
+    settings = {
+      codeAction = {
+        disableRuleComment = {
+          enable = true,
+          location = "separateLine"
+        },
+        showDocumentation = {
+          enable = true
+        }
+      },
+      codeActionOnSave = {
+        enable = true,
+        mode = "all"
+      },
+      format = true,
+      onIgnoredFiles = "off",
+      packageManager = "npm",
+      quiet = false,
+      run = "onType",
+      useESLintClass = false,
+      validate = "on",
+      workingDirectory = {
+        mode = "location"
+      }
+    },
 }))
 
