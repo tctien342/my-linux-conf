@@ -55,8 +55,8 @@ nnoremap <tab> :tabnext<CR>
 nnoremap <S-tab> :tabprevious<CR>
 nnoremap <C-tab> :tabedit<CR>
 nnoremap <C-e> !!$SHELL<CR>
-" nnoremap gf :PrettierAsync<CR>
 nnoremap gs :w<CR>
+nnoremap bd :bd<CR>
 nnoremap gf :lua vim.lsp.buf.formatting()<CR>
 nnoremap <silent> gt :BufferLinePick<CR>
 

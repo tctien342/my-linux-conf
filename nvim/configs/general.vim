@@ -34,12 +34,10 @@ set nowrap "---------------------------------- do not automatically wrap on load
 set colorcolumn=0 "-------------------------------------------- line column show
 set nospell "-------------------------------------------------- Disable spelling
 set formatoptions-=t "--------------- Do not automatically wrap text when typing
-set listchars=tab:\|\ ,trail:▫
 set formatoptions=tcqronj "-------------------- Set vims text formatting options
 set title "-------------------------------------- Let vim set the terminal title
-set updatetime=500 "-------------------------------- Redraw the status bar often
+set updatetime=100 "-------------------------------- Redraw the status bar often
 set list "--------------------------------------------- Show trailing whitespace
-set listchars=tab:•\ ,trail:•,extends:»,precedes:« "-- Unprintable chars mapping
 set showcmd	"--------------------------------------- Display incomplete commands
 set termencoding=utf-8 "------------------------------------------- Always utf-8
 set fileencoding=utf-8

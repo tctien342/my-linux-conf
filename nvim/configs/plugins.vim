@@ -10,9 +10,7 @@ noremap <Leader>t :NvimTreeToggle<CR> "----------------------------- NERDTree To
 set t_Co=256
 syntax on
 set termguicolors     " enable true colors support
-colorscheme aquarium
-let g:aqua_transparency = 1
-let g:aquarium_style="dark"
+colorscheme tokyonight
 
 "}}}
 
@@ -110,14 +108,6 @@ nmap <leader>m <Plug>MarkdownPreviewToggle
 
 " }}}
 
-" PRETTIER {{{
-
-au FileType css,scss let b:prettier_exec_cmd = "prettier-stylelint"
-let g:prettier#exec_cmd_path = "/Users/saintno/.nvm/versions/node/v14.16.1/bin/prettier"
-let g:prettier#exec_cmd_async= 1
-
-" }}}
-
 " VIM-MATCHUP {{{
 
 let g:matchup_matchpref = {}
@@ -130,11 +120,12 @@ let g:matchup_matchpref.html = {'tagnameonly': 1}
 let g:user_emmet_leader_key=','
 
 " }}}
+"
+" VIM-MOVE {{{
 
-" Disable COQ remap default
-let g:coq_settings = { "auto_start": v:true, "keymap.jump_to_mark": "<c-q>" }
+let g:move_key_modifier = 'C'
 
-lua require'colorizer'.setup()
+" }}}
 
 " Transparent background
 " hi Normal     ctermbg=NONE guibg=NONE

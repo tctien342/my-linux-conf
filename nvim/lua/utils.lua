@@ -5,6 +5,16 @@ require("bufferline").setup{
     }
 }
 
+require'shade'.setup({
+  overlay_opacity = 50,
+  opacity_step = 1,
+  keys = {
+    brightness_up    = '<C-Up>',
+    brightness_down  = '<C-Down>',
+    toggle           = '<Leader>d',
+  }
+})
+
 require("trouble").setup {
   position = "bottom", -- position of the list can be: bottom, top, left, right
   height = 10, -- height of the trouble list when position is top or bottom
@@ -55,13 +65,20 @@ require("trouble").setup {
 
 -- LUA LINE
 local lualine = require 'lualine'
+local gps = require("nvim-gps")
+gps.setup()
 lualine.setup({
   options = {
+    theme = 'tokyonight',
     section_separators = { left = '', right = ''},
   },
   sections = {
     lualine_a = {'mode'},
     lualine_b = {'branch', 'diff', 'diagnostics'},
+    lualine_b = {'branch', 'diff', 'diagnostics'},
+    lualine_c = {
+		  { gps.get_location, cond = gps.is_available },
+		},
     lualine_x = {'encoding', 'fileformat', 'filetype'},
     lualine_y = { 'progress' },
     lualine_z = {'location'}
@@ -75,4 +92,57 @@ require("lsp-colors").setup({
   Information = "#0db9d7",
   Hint = "#10B981"
 })
+require'colorizer'.setup()
 
+-- Comment code
+require('nvim_comment').setup()
+
+-- Identline
+vim.opt.termguicolors = true
+vim.cmd [[highlight IndentBlanklineIndent5 guifg=#61AFEF gui=nocombine]]
+vim.cmd [[highlight IndentBlanklineIndent6 guifg=#C678DD gui=nocombine]]
+require("indent_blankline").setup {
+    space_char_blankline = " ",
+    char_highlight_list = {
+        "IndentBlanklineIndent5",
+        "IndentBlanklineIndent6",
+    },
+}
+
+-- Auto pair with COQ
+local remap = vim.api.nvim_set_keymap
+local npairs = require('nvim-autopairs')
+
+npairs.setup({ map_bs = false, map_cr = false })
+vim.g.coq_settings = { keymap = { recommended = false, jump_to_mark = "<c-q>" }, auto_start = true }
+
+-- these mappings are coq recommended mappings unrelated to nvim-autopairs
+remap('i', '<esc>', [[pumvisible() ? "<c-e><esc>" : "<esc>"]], { expr = true, noremap = true })
+remap('i', '<c-c>', [[pumvisible() ? "<c-e><c-c>" : "<c-c>"]], { expr = true, noremap = true })
+remap('i', '<tab>', [[pumvisible() ? "<c-n>" : "<tab>"]], { expr = true, noremap = true })
+remap('i', '<s-tab>', [[pumvisible() ? "<c-p>" : "<bs>"]], { expr = true, noremap = true })
+
+-- skip it, if you use another global object
+_G.MUtils= {}
+
+MUtils.CR = function()
+  if vim.fn.pumvisible() ~= 0 then
+    if vim.fn.complete_info({ 'selected' }).selected ~= -1 then
+      return npairs.esc('<c-y>')
+    else
+      return npairs.esc('<c-e>') .. npairs.autopairs_cr()
+    end
+  else
+    return npairs.autopairs_cr()
+  end
+end
+remap('i', '<cr>', 'v:lua.MUtils.CR()', { expr = true, noremap = true })
+
+MUtils.BS = function()
+  if vim.fn.pumvisible() ~= 0 and vim.fn.complete_info({ 'mode' }).mode == 'eval' then
+    return npairs.esc('<c-e>') .. npairs.autopairs_bs()
+  else
+    return npairs.autopairs_bs()
+  end
+end
+remap('i', '<bs>', 'v:lua.MUtils.BS()', { expr = true, noremap = true })
