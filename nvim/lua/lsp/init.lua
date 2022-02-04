@@ -1,0 +1,8 @@
+require("lsp/bash")
+require("lsp/css")
+require("lsp/dart")
+require("lsp/vim")
+require("lsp/lua")
+require("lsp/json")
+require("lsp/python")
+require("lsp/javascript")

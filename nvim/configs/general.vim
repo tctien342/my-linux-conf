@@ -1,5 +1,5 @@
 " General config
-set pumheight=5 "--------------------------------- limit autocomple candidates
+set pumheight=6 "--------------------------------- limit autocomple candidates
 set completeopt=menu,menuone,noselect
 
 " PYTHON PROVIDERS {{{
@@ -164,3 +164,4 @@ endif
 lang en_US.UTF-8
 set clipboard=unnamedplus
 
+au BufEnter,BufWinEnter,WinEnter,CmdwinEnter * if bufname('%') == "NvimTree" | set laststatus=0 | else | set laststatus=2 | endif

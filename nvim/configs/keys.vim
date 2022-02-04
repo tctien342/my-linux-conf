@@ -41,12 +41,12 @@ nnoremap Q <Nop>
 
 " WINDOW RESIZE {{{
 
-if bufwinnr(1)
-  noremap <silent> <C-H> :vertical resize -4<CR>
-  noremap <silent> <C-L> :vertical resize +4><CR>
-  noremap <silent> <C-J> :resize -4<CR>
-  noremap <silent> <C-K> :resize +4<CR>
-endif
+" if bufwinnr(1)
+"   noremap <silent> <C-H> :vertical resize -4<CR>
+"   noremap <silent> <C-L> :vertical resize +4><CR>
+"   noremap <silent> <C-J> :resize -4<CR>
+"   noremap <silent> <C-K> :resize +4<CR>
+" endif
 
 " }}}
 
@@ -61,10 +61,10 @@ nnoremap gf :lua vim.lsp.buf.formatting()<CR>
 nnoremap <silent> gt :BufferLinePick<CR>
 
 "------- Move block code
-vmap <unique> <up>    <Plug>SchleppUp
-vmap <unique> <down>  <Plug>SchleppDown
-vmap <unique> <left>  <Plug>SchleppLeft
-vmap <unique> <right> <Plug>SchleppRight
+" vmap <unique> <up>    <Plug>SchleppUp
+" vmap <unique> <down>  <Plug>SchleppDown
+" vmap <unique> <left>  <Plug>SchleppLeft
+" vmap <unique> <right> <Plug>SchleppRight
 
 "------- Fix list
 nnoremap <leader>xx <cmd>TroubleToggle<cr>

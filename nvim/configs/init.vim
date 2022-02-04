@@ -17,10 +17,9 @@ Plug 'akinsho/bufferline.nvim'
 
 Plug 'nvim-lualine/lualine.nvim' "---------------------------------- Status line
 Plug 'frenzyexists/aquarium-vim', { 'branch': 'develop' }
-Plug 'matze/vim-move'
+Plug 'booperlv/nvim-gomove'
 Plug 'airblade/vim-gitgutter'
-Plug 'sunjon/shade.nvim' "--------------------------------------- Dim inactive w
-Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
+Plug 'EdenEast/nightfox.nvim'
 
 " Faster code
 Plug 'windwp/nvim-autopairs' "------------------------------- Auto pair brackets
@@ -40,6 +39,7 @@ Plug 'christoomey/vim-tmux-navigator' "-------------------------- Vim and Tmux
 " LSP Performance
 Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
 Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
+Plug 'ms-jpq/coq.thirdparty', {'branch': '3p'}
 Plug 'jose-elias-alvarez/null-ls.nvim'
 Plug 'neovim/nvim-lspconfig'
 Plug 'weilbith/nvim-code-action-menu'
@@ -52,5 +52,8 @@ Plug 'folke/lsp-colors.nvim'
 " Language pack
 Plug 'SmiteshP/nvim-gps'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+
+" CODEPILOT
+Plug 'github/copilot.vim'
 
 call plug#end() "---------------------------------------- End of Vim-Plug define
