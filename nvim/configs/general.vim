@@ -165,3 +165,5 @@ lang en_US.UTF-8
 set clipboard=unnamedplus
 
 au BufEnter,BufWinEnter,WinEnter,CmdwinEnter * if bufname('%') == "NvimTree" | set laststatus=0 | else | set laststatus=2 | endif
+au BufWritePost ~/.config/nvim/*.{vim,lua} so $MYVIMRC
+

@@ -42,7 +42,11 @@ Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
 Plug 'ms-jpq/coq.thirdparty', {'branch': '3p'}
 Plug 'jose-elias-alvarez/null-ls.nvim'
 Plug 'neovim/nvim-lspconfig'
-Plug 'weilbith/nvim-code-action-menu'
+Plug 'simrat39/symbols-outline.nvim' "------------------------------ Outline symbols
+
+" Code action
+Plug 'MunifTanjim/nui.nvim'
+Plug 'CosmicNvim/cosmic-ui'
 
 " Beauty complete
 Plug 'ray-x/lsp_signature.nvim'

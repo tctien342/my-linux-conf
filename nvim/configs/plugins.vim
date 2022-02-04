@@ -143,6 +143,8 @@ xmap <C-l> <Plug>GoVSDRight
 
 " }}}
 
+noremap <Leader>a :SymbolsOutline<CR> "----------------------------- Outline Toggle
+
 " Transparent background
 " hi Normal     ctermbg=NONE guibg=NONE
 " hi LineNr     ctermbg=NONE guibg=NONE
