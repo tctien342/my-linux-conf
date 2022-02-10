@@ -35,13 +35,19 @@ lspconfig.sumneko_lua.setup(coq.lsp_ensure_capabilities({
 
 require"lspconfig".efm.setup {
     init_options = {documentFormatting = true},
-    filetypes = {"lua"},
+    filetypes = {"lua", "json"},
     settings = {
         rootMarkers = {".git/"},
         languages = {
             lua = {
                 {
                     formatCommand = "lua-format -i --no-keep-simple-function-one-line --no-break-after-operator --column-limit=150 --break-after-table-lb",
+                    formatStdin = true
+                }
+            },
+            json = {
+                {
+                    formatCommand = "prettier_d_slim --stdin-filepath ${INPUT}",
                     formatStdin = true
                 }
             }

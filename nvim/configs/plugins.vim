@@ -15,9 +15,10 @@ set termguicolors     " enable true colors support
 " TELEScope {{{
 
 nnoremap <leader>f <cmd>Telescope find_files<cr>
+nnoremap <leader>j <cmd>Telescope grep_string<cr>
 nnoremap <leader>s <cmd>Telescope live_grep<cr>
 nnoremap <leader><leader> <cmd>Telescope buffers<cr>
-nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+" nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 
 " }}}
 

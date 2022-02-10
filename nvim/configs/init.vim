@@ -12,7 +12,6 @@ Plug 'kyazdani42/nvim-tree.lua'
 
 Plug 'psliwka/vim-smoothie' "------------------------------------- Smooth Scroll
 Plug 'andymass/vim-matchup' "------------- Better % and highlight matching words
-Plug 'pechorin/any-jump.vim' "-------------------------------------- Jump helper
 Plug 'akinsho/bufferline.nvim'
 
 Plug 'nvim-lualine/lualine.nvim' "---------------------------------- Status line
@@ -43,6 +42,9 @@ Plug 'ms-jpq/coq.thirdparty', {'branch': '3p'}
 Plug 'jose-elias-alvarez/null-ls.nvim'
 Plug 'neovim/nvim-lspconfig'
 Plug 'simrat39/symbols-outline.nvim' "------------------------------ Outline symbols
+
+" Specific platform
+Plug 'akinsho/flutter-tools.nvim'
 
 " Code action
 Plug 'MunifTanjim/nui.nvim'
