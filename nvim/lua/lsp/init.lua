@@ -1,5 +1,7 @@
+require("lsp/cmp")
 require("lsp/bash")
 require("lsp/css")
+require("lsp/cplus")
 require("lsp/dart")
 require("lsp/vim")
 require("lsp/lua")

@@ -36,12 +36,19 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  } "-- Mar
 Plug 'christoomey/vim-tmux-navigator' "-------------------------- Vim and Tmux
 
 " LSP Performance
-Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
-Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
-Plug 'ms-jpq/coq.thirdparty', {'branch': '3p'}
-Plug 'jose-elias-alvarez/null-ls.nvim'
 Plug 'neovim/nvim-lspconfig'
 Plug 'simrat39/symbols-outline.nvim' "------------------------------ Outline symbols
+Plug 'prettier/vim-prettier', { 'do': 'yarn install --frozen-lockfile --production' }
+
+" CMP autocomplete
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-cmdline'
+Plug 'hrsh7th/nvim-cmp'
+Plug 'onsails/lspkind-nvim'
+Plug 'L3MON4D3/LuaSnip'
+Plug 'saadparwaiz1/cmp_luasnip'
 
 " Specific platform
 Plug 'akinsho/flutter-tools.nvim'

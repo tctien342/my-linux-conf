@@ -2,7 +2,9 @@ require("lsp/init")
 
 -- Border hover lsp info
 local lsp = vim.lsp
-lsp.handlers["textDocument/hover"] = lsp.with(vim.lsp.handlers.hover, {border = "rounded"})
+lsp.handlers["textDocument/hover"] = lsp.with(vim.lsp.handlers.hover, {border = "single"})
+
+lsp.handlers["textDocument/signatureHelp"] = lsp.with(vim.lsp.handlers.signature_help, {border = "single"})
 
 -- Allow show function info while typing
 require"lsp_signature".setup({
@@ -32,7 +34,7 @@ vim.g.symbols_outline = {
         hover_symbol = "<C-space>",
         toggle_preview = "K",
         rename_symbol = "r",
-        code_actions = "a",
+        code_actions = "a"
     },
     lsp_blacklist = {},
     symbol_blacklist = {},

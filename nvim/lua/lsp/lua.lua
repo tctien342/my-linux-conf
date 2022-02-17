@@ -1,12 +1,13 @@
-local coq = require("lsp/coq")
 local lspconfig = require("lspconfig")
 local default_key = require("lsp/default")
 
+local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 local runtime_path = vim.split(package.path, ';')
 table.insert(runtime_path, "lua/?.lua")
 table.insert(runtime_path, "lua/?/init.lua")
 
-lspconfig.sumneko_lua.setup(coq.lsp_ensure_capabilities({
+lspconfig.sumneko_lua.setup({
+    capabilities = capabilities,
     settings = {
         Lua = {
             runtime = {
@@ -31,7 +32,7 @@ lspconfig.sumneko_lua.setup(coq.lsp_ensure_capabilities({
         client.resolved_capabilities.document_formatting = false
         default_key(client, bufnr)
     end
-}))
+})
 
 require"lspconfig".efm.setup {
     init_options = {documentFormatting = true},
@@ -45,12 +46,7 @@ require"lspconfig".efm.setup {
                     formatStdin = true
                 }
             },
-            json = {
-                {
-                    formatCommand = "prettier_d_slim --stdin-filepath ${INPUT}",
-                    formatStdin = true
-                }
-            }
+            json = {{formatCommand = "prettier_d_slim --stdin-filepath ${INPUT}", formatStdin = true}}
         }
     }
 }

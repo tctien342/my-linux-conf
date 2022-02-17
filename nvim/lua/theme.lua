@@ -24,4 +24,12 @@ nightfox.setup({
 -- Load the configuration set above and apply the colorscheme
 nightfox.load()
 
-require('telescope').setup {pickers = {find_files = {theme = "dropdown"}, live_grep = {theme = "dropdown"}, buffers = {theme = "dropdown"}}}
+require('telescope').setup {
+    pickers = {
+        find_files = {theme = "dropdown"},
+        live_grep = {theme = "dropdown"},
+        buffers = {theme = "dropdown"},
+        lsp_code_actions = {theme = "dropdown"}
+    }
+
+}

@@ -145,6 +145,10 @@ xmap <C-l> <Plug>GoVSDRight
 " }}}
 
 noremap <Leader>a :SymbolsOutline<CR> "----------------------------- Outline Toggle
+noremap gp :PrettierAsync<CR> "----------------------------- Formating use prettier
+imap <silent><script><expr> <C-A> copilot#Accept("\<CR>")
+let g:copilot_no_tab_map = v:true
+
 
 " Transparent background
 " hi Normal     ctermbg=NONE guibg=NONE

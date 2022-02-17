@@ -1,4 +1,3 @@
-local coq = require("lsp/coq")
 local lspconfig = require("lspconfig")
 local default_key = require("lsp/default")
 local TSPrebuild = {}
@@ -36,11 +35,13 @@ TSPrebuild.on_attach = function(client, bufnr)
         prebuild_query(lang, "highlights")
         prebuild_query(lang, "injections")
     end
-
     has_prebuilt = true
 end
 
-lspconfig.tsserver.setup(coq.lsp_ensure_capabilities({
+local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+
+lspconfig.tsserver.setup({
+    capabilities = capabilities,
     on_attach = function(client, bufnr)
         TSPrebuild.on_attach(client, bufnr)
         if client.config.flags then client.config.flags.allow_incremental_sync = true end
@@ -54,15 +55,15 @@ lspconfig.tsserver.setup(coq.lsp_ensure_capabilities({
           ]])
         end
         -- no default maps, so you may want to define some here
-        local opts = {silent = true}
         default_key(client, bufnr)
     end
-}))
+})
 
-lspconfig.eslint.setup(coq.lsp_ensure_capabilities({
+lspconfig.eslint.setup({
     cmd = {"vscode-eslint-language-server", "--stdio"},
     filetypes = {"javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx", "vue"},
     init_options = {documentFormatting = true},
+    capabilities = capabilities,
     settings = {
         codeAction = {disableRuleComment = {enable = true, location = "separateLine"}, showDocumentation = {enable = true}},
         codeActionOnSave = {enable = true, mode = "all"},
@@ -75,4 +76,4 @@ lspconfig.eslint.setup(coq.lsp_ensure_capabilities({
         validate = "on",
         workingDirectory = {mode = "location"}
     }
-}))
+})
