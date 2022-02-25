@@ -3,6 +3,7 @@
 " Mappings
 lua require'nvim-tree'.setup()
 noremap <Leader>t :NvimTreeToggle<CR> "----------------------------- NERDTree Toggle
+noremap <Leader>r :NvimTreeRefresh<CR> "--------------------------- NERDTree Refresh
 
 " }}}
 
