@@ -38,7 +38,25 @@ Plug 'christoomey/vim-tmux-navigator' "-------------------------- Vim and Tmux
 " LSP Performance
 Plug 'neovim/nvim-lspconfig'
 Plug 'simrat39/symbols-outline.nvim' "------------------------------ Outline symbols
-Plug 'prettier/vim-prettier', { 'do': 'yarn install --frozen-lockfile --production' }
+Plug 'prettier/vim-prettier', {
+  \ 'do': 'npm i && npm i prettier-plugin-solidity',
+  \ 'for': [
+    \ 'javascript',
+    \ 'typescript',
+    \ 'css',
+    \ 'less',
+    \ 'scss',
+    \ 'json',
+    \ 'graphql',
+    \ 'markdown',
+    \ 'vue',
+    \ 'lua',
+    \ 'php',
+    \ 'python',
+    \ 'ruby',
+    \ 'html',
+    \ 'swift',
+    \ 'solidity'] }
 
 " CMP autocomplete
 Plug 'hrsh7th/cmp-nvim-lsp'
@@ -65,6 +83,10 @@ Plug 'folke/lsp-colors.nvim'
 " Language pack
 Plug 'SmiteshP/nvim-gps'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+
+" Solidity DEV
+Plug 'TovarishFin/vim-solidity'
+Plug 'dense-analysis/ale'
 
 " CODEPILOT
 Plug 'github/copilot.vim'

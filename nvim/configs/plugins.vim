@@ -145,8 +145,15 @@ xmap <C-l> <Plug>GoVSDRight
 
 " }}}
 
+" ALE {{{
+
+let b:ale_linters = ['solhint']
+
+" }}}
+
+
 noremap <Leader>a :SymbolsOutline<CR> "----------------------------- Outline Toggle
-noremap gp :PrettierAsync<CR> "----------------------------- Formating use prettier
+noremap gp :Prettier<CR> "----------------------------- Formating use prettier
 imap <silent><script><expr> <C-A> copilot#Accept("\<CR>")
 let g:copilot_no_tab_map = v:true
 
