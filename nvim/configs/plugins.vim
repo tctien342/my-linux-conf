@@ -10,6 +10,7 @@ noremap <Leader>r :NvimTreeRefresh<CR> "--------------------------- NERDTree Ref
 " COLORS SOLARIZED {{{
 syntax on
 set termguicolors     " enable true colors support
+colorscheme onedark
 
 "}}}
 
@@ -147,9 +148,40 @@ xmap <C-l> <Plug>GoVSDRight
 
 " ALE {{{
 
-let b:ale_linters = ['solhint']
+" let g:ale_linters = {
+" \   'solidity': ['solhint'],
+" \}
+" let g:ale_linters_explicit = 1
 
 " }}}
+
+" Float Terminal {{{
+
+" Floaterm settings
+let g:floaterm_width = 0.6
+let g:floaterm_height = 0.6
+" Autoclose if job exited normally, otherwise stay open (0 open, 2 close)
+let g:floaterm_autoclose = 1
+" Open terminal with F4
+let g:floaterm_keymap_toggle = 'tt'
+let g:floaterm_keymap_new    = 'tn'
+let g:floaterm_keymap_prev   = 'th'
+let g:floaterm_keymap_next   = 'tl'
+noremap tt :FloatermToggle<CR>
+noremap tfr :FloatermNew --height=0.6 --width=0.4 --wintype=float --name=debug --position=topright --autoclose=2<CR>
+noremap th :FloatermPrev<CR>
+noremap tl :FloatermNext<CR>
+noremap tn :FloatermNew<CR>
+
+" Open file manager (ranger) with F3
+nnoremap <silent> <F3> :FloatermNew ranger<CR>
+" Exit terminal mode with Esc (I don't normally use Esc in terminal)
+tnoremap <Esc> <C-\><C-n>
+" Send Esc to terminal with "verbatim" C-v
+tnoremap <C-v><Esc> <Esc>
+
+" }}}
+
 
 
 noremap <Leader>a :SymbolsOutline<CR> "----------------------------- Outline Toggle
@@ -159,7 +191,8 @@ let g:copilot_no_tab_map = v:true
 
 
 " Transparent background
-" hi Normal     ctermbg=NONE guibg=NONE
-" hi LineNr     ctermbg=NONE guibg=NONE
-" hi SignColumn ctermbg=NONE guibg=NONE
+hi Normal     ctermbg=NONE guibg=NONE
+hi LineNr     ctermbg=NONE guibg=NONE
+hi SignColumn ctermbg=NONE guibg=NONE
+hi Floaterm guibg=NONE
 

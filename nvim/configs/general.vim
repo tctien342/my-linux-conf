@@ -50,7 +50,6 @@ set noshowmode "--------------------------- Hide default mode text (e.g. INSERT)
 set display+=lastline "--------------------- As must as possible of the lastline
 set signcolumn=yes "---------------------------------- Always open gutter column
 set previewheight=3 "------------------------------------ Smaller preview height
-set clipboard+=unnamed "----------------------------------- Allow copy into clip
 " Disable for performance
 set number "------------------------------------------------- Show line number
 " set ruler "---------- Line number, column's number, virtual column's number...
@@ -162,7 +161,7 @@ endif
 
 " Clipboard
 lang en_US.UTF-8
-set clipboard=unnamedplus
+set clipboard+=unnamedplus
 
 au BufWritePost ~/.config/nvim/*.{vim,lua} so $MYVIMRC
 

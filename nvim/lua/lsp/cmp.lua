@@ -52,7 +52,7 @@ cmp.setup({
         end, {"i", "s"}),
         ['<CR>'] = cmp.mapping.confirm({select = true})
     },
-    sources = cmp.config.sources({{name = 'nvim_lsp'}, {name = 'luasnip'}}, {{name = 'buffer'}})
+    sources = cmp.config.sources({{name = 'nvim_lsp'}, {name = 'luasnip'}}, {{name = 'buffer'}}, {{name = "path"}})
 })
 
 -- Set configuration for specific filetype.

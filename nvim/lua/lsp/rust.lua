@@ -3,6 +3,7 @@ local default_key = require("lsp/default")
 
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
+
 lspconfig.rust_analyzer.setup({
     capabilities = capabilities,
     on_attach = function(client, bufnr)
@@ -10,3 +11,5 @@ lspconfig.rust_analyzer.setup({
         default_key(client, bufnr)
     end
 })
+
+require('rust-tools').setup({})

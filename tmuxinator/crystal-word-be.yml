@@ -1,11 +1,11 @@
 # /home/saintno/.config/tmuxinator/frontend.yml
 
-name: smart-crystal
-root: ~/Sources/Lab/CrystalWorld
+name: crystal-world-be
+root: ~/Sources/Lab/CrystalWorldBE/
 
 windows:
   - editor:
-      layout: dfbb,187x40,0,0{129x40,0,0,0,57x40,130,0[57x19,130,0,1,57x20,130,20,2]}
+      layout: 8ec1,188x48,0,0[188x36,0,0,0,188x11,0,37{94x11,0,37,1,93x11,95,37,2}]
       # Synchronize all panes of this window, can be enabled before or after the pane commands run.
       # 'before' represents legacy functionality and will be deprecated in a future release, in favour of 'after'
       # synchronize: after
