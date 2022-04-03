@@ -1,9 +1,11 @@
-" SaintNo SuperVIM
+" @saintno neovim configuration
 
 " CONFIG'S SOURCES {{{
-  runtime configs/init.vim "---------------------------------------- Pluggins list
-  runtime configs/general.vim "------------------------------------------- Configs
-  runtime configs/keys.vim "---------------------------------------------- Keymaps
-  runtime configs/plugins.vim "----------------------------------- Plugins configs
-  runtime configs/coc.vim "----------------------------------- LSP Config
+    runtime vim/0.general.vim
+" }}}
+
+" LUA CONFIGURATION {{{
+    lua require('plugins')
+    lua require('completion')
+    lua require('lsp')
 " }}}
