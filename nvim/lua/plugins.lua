@@ -24,7 +24,6 @@ return require('packer').startup(function()
                         \ 'typescriptreact': 'jsxRegion,tsxRegion',
                         \ 'javascriptreact': 'jsxRegion',
                         \ }
-
                 ]])
             end
         }
@@ -43,7 +42,12 @@ return require('packer').startup(function()
     -- Collection of configurations for the built-in LSP client
     use {
         'sheerun/vim-polyglot', 'neovim/nvim-lspconfig',
-        'williamboman/nvim-lsp-installer', 'stevearc/dressing.nvim'
+        'williamboman/nvim-lsp-installer', 'stevearc/dressing.nvim', {
+            'j-hui/fidget.nvim',
+            config = function()
+                require"fidget".setup {window = {blend = 0}}
+            end
+        }
     }
 
     -- Rust support
@@ -76,6 +80,15 @@ return require('packer').startup(function()
         end
     }
 
+    -- Code action sign
+    use {
+        'kosayoda/nvim-lightbulb',
+        config = function()
+            require'nvim-lightbulb'.setup {}
+            vim.cmd [[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()]]
+        end
+    }
+
     -- Function's signature when coding
     use {
         'ray-x/lsp_signature.nvim',
@@ -83,7 +96,7 @@ return require('packer').startup(function()
             require"lsp_signature".setup({
                 bind = true, -- This is mandatory, otherwise border config won't get registered.
                 floating_window = true,
-                handler_opts = {border = "rounded"}
+                handler_opts = {border = "none"}
             })
         end
     }
@@ -141,10 +154,18 @@ return require('packer').startup(function()
     -- Generate docstring
     use {'kkoomen/vim-doge', run = ':call doge#install()'}
 
-    -- Theme of nvim
+    -- Theme of nvim, transparent background
     use {
         'joshdick/onedark.vim',
-        config = function() vim.cmd([[colorscheme onedark]]) end
+        config = function()
+            vim.cmd([[
+                colorscheme onedark
+                hi Normal     ctermbg=NONE guibg=NONE
+                hi LineNr     ctermbg=NONE guibg=NONE
+                hi SignColumn ctermbg=NONE guibg=NONE
+                hi Floaterm guibg=NONE
+            ]])
+        end
     }
 
     -- My best fen
@@ -165,7 +186,18 @@ return require('packer').startup(function()
     use {
         'akinsho/bufferline.nvim',
         config = function()
-            require("bufferline").setup {options = {diagnostics = "nvim_lsp"}}
+            require("bufferline").setup {
+                options = {
+                    diagnostics = "nvim_lsp",
+                    offsets = {
+                        {
+                            filetype = "neo-tree",
+                            text = "File Explorer",
+                            text_align = "center"
+                        }
+                    }
+                }
+            }
             vim.cmd([[nnoremap <silent> gt :BufferLinePick<CR>]])
         end
     }
@@ -174,7 +206,12 @@ return require('packer').startup(function()
         'nvim-lualine/lualine.nvim',
         requires = {'kyazdani42/nvim-web-devicons', opt = true},
         config = function()
-            require('lualine').setup({options = {theme = 'onedark'}})
+            require('lualine').setup({
+                options = {
+                    theme = 'codedark',
+                    section_separators = {left = '', right = ''}
+                }
+            })
         end
     }
     -- Smooth scroll

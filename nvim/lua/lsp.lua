@@ -28,7 +28,6 @@ end
 local attach_default = function(client, bufnr)
     require"lsp_signature".on_attach({
         auto_close_after = 3,
-        transparency = 80,
         timer_interval = 100
     }, bufnr)
 end

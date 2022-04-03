@@ -40,6 +40,22 @@ set nobackup "------------------------------------------------- Dont save backup
 filetype plugin on "--------------------------------------------- Turn on plugin
 set backspace=indent,eol,start "----------------- Allow backspace in insert mode
 
+" PYTHON PROVIDERS {{{
+
+  if has('macunix')
+    " OSX
+    let g:python3_host_prog = '/usr/local/bin/python3' "---------- Set python 3 provider
+    let g:python_host_prog = '/usr/local/bin/python2' "-------------- Set python 2 provider
+  elseif has('unix')
+    " Ubuntu
+    let g:python3_host_prog = '/usr/bin/python3' "---------- Set python 3 provider
+    let g:python_host_prog = '/usr/bin/python' "-------------- Set python 2 provider
+  elseif has('win32') || has('win64')
+    " Window
+  endif
+  
+  " }}}
+
 if has('mouse')
     set mouse=a "----------------------------- Allow use mouse, possible in nvim
 endif
