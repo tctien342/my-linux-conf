@@ -8,7 +8,9 @@ return require('packer').startup(function()
     -- Auto pairs
     use {
         'windwp/nvim-autopairs',
-        config = function() require('nvim-autopairs').setup {} end
+        config = function()
+            require('nvim-autopairs').setup {}
+        end
     }
 
     -- Auto tag for HTML, JSX, TSX
@@ -34,15 +36,14 @@ return require('packer').startup(function()
 
     -- Autocomplete using CMP
     use {
-        'hrsh7th/cmp-nvim-lsp', 'hrsh7th/cmp-buffer', 'hrsh7th/cmp-path',
-        'hrsh7th/cmp-cmdline', 'hrsh7th/nvim-cmp', 'onsails/lspkind-nvim',
-        'L3MON4D3/LuaSnip', 'saadparwaiz1/cmp_luasnip'
+        'hrsh7th/cmp-nvim-lsp', 'hrsh7th/cmp-buffer', 'hrsh7th/cmp-path', 'hrsh7th/cmp-cmdline',
+        'hrsh7th/nvim-cmp', 'onsails/lspkind-nvim', 'L3MON4D3/LuaSnip', 'saadparwaiz1/cmp_luasnip'
     }
 
     -- Collection of configurations for the built-in LSP client
     use {
-        'sheerun/vim-polyglot', 'neovim/nvim-lspconfig',
-        'williamboman/nvim-lsp-installer', 'stevearc/dressing.nvim', {
+        'sheerun/vim-polyglot', 'neovim/nvim-lspconfig', 'williamboman/nvim-lsp-installer',
+        'stevearc/dressing.nvim', 'RRethy/vim-illuminate', {
             'j-hui/fidget.nvim',
             config = function()
                 require"fidget".setup {window = {blend = 0}}
@@ -54,14 +55,18 @@ return require('packer').startup(function()
     use {
         'simrat39/rust-tools.nvim',
         requires = 'neovim/nvim-lspconfig',
-        config = function() require('rust-tools').setup({}) end
+        config = function()
+            require('rust-tools').setup({})
+        end
     }
 
     -- Flutter support
     use {
         'akinsho/flutter-tools.nvim',
         requires = 'nvim-lua/plenary.nvim',
-        config = function() require("flutter-tools").setup {} end
+        config = function()
+            require("flutter-tools").setup {}
+        end
     }
 
     -- For checking and debug LSP diagnostic
@@ -123,10 +128,7 @@ return require('packer').startup(function()
     }
 
     -- Format code for common languages
-    use {
-        'prettier/vim-prettier',
-        run = 'npm i && npm i prettier-plugin-solidity'
-    }
+    use {'prettier/vim-prettier', run = 'npm i && npm i prettier-plugin-solidity'}
 
     -- Tree explorer
     use {
@@ -148,7 +150,9 @@ return require('packer').startup(function()
     -- Comment block of code
     use {
         'terrortylor/nvim-comment',
-        config = function() require('nvim_comment').setup() end
+        config = function()
+            require('nvim_comment').setup()
+        end
     }
 
     -- Generate docstring
@@ -172,15 +176,16 @@ return require('packer').startup(function()
     use {
         'github/copilot.vim',
         config = function()
-            vim.cmd(
-                [[imap <silent><script><expr> <C-A> copilot#Accept("\<CR>")]])
+            vim.cmd([[imap <silent><script><expr> <C-A> copilot#Accept("\<CR>")]])
         end
     }
 
     -- Color viewer
     use {
         'norcalli/nvim-colorizer.lua',
-        config = function() require'colorizer'.setup() end
+        config = function()
+            require'colorizer'.setup()
+        end
     }
     -- Buffer's tab
     use {
@@ -190,11 +195,7 @@ return require('packer').startup(function()
                 options = {
                     diagnostics = "nvim_lsp",
                     offsets = {
-                        {
-                            filetype = "neo-tree",
-                            text = "File Explorer",
-                            text_align = "center"
-                        }
+                        {filetype = "neo-tree", text = "File Explorer", text_align = "center"}
                     }
                 }
             }
@@ -207,10 +208,7 @@ return require('packer').startup(function()
         requires = {'kyazdani42/nvim-web-devicons', opt = true},
         config = function()
             require('lualine').setup({
-                options = {
-                    theme = 'codedark',
-                    section_separators = {left = '', right = ''}
-                }
+                options = {theme = 'codedark', section_separators = {left = '', right = ''}}
             })
         end
     }
@@ -242,6 +240,37 @@ return require('packer').startup(function()
                 xmap <C-k> <Plug>GoVSDUp
                 xmap <C-l> <Plug>GoVSDRight
             ]])
+        end
+    }
+
+    -- Git lens alternative
+    use {
+        'lewis6991/gitsigns.nvim',
+        config = function()
+            require('gitsigns').setup({current_line_blame = true})
+        end
+    }
+
+    -- Scrollbar with LSP support
+    use {
+        "petertriho/nvim-scrollbar",
+        config = function()
+            require("scrollbar").setup()
+        end
+    }
+
+    -- Auto forcus window
+    use {
+        "beauwilliams/focus.nvim",
+        config = function()
+            require("focus").setup({
+                relativenumber = false,
+                hybridnumber = false,
+                cursorline = false,
+                signcolumn = false,
+                compatible_filetrees = {"neo-tree"},
+                treewidth = 30
+            })
         end
     }
 end)

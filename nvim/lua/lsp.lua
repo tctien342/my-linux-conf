@@ -12,9 +12,8 @@ local utils = require "utils"
 local map = utils.map
 
 local servers = {
-    "bashls", "pyright", "clangd", "yamlls", "cssls", "tsserver", "eslint",
-    "jsonls", "sumneko_lua", "efm", "rust_analyzer", "solidity_ls", "vimls",
-    'emmet_ls'
+    "bashls", "pyright", "clangd", "yamlls", "cssls", "tsserver", "eslint", "jsonls", "sumneko_lua",
+    "efm", "rust_analyzer", "solidity_ls", "vimls", 'emmet_ls'
 }
 
 for _, name in pairs(servers) do
@@ -26,10 +25,8 @@ for _, name in pairs(servers) do
 end
 
 local attach_default = function(client, bufnr)
-    require"lsp_signature".on_attach({
-        auto_close_after = 3,
-        timer_interval = 100
-    }, bufnr)
+    require'illuminate'.on_attach(client)
+    require"lsp_signature".on_attach({auto_close_after = 3, timer_interval = 100}, bufnr)
 end
 
 local enhance_server_opts = {
@@ -39,8 +36,7 @@ local enhance_server_opts = {
     ["efm"] = efm_opts,
     ["sumneko_lua"] = lua_opts,
     ["emmet_ls"] = function(opts)
-        opts.capabilities.textDocument.completion.completionItem.snippetSupport =
-            true
+        opts.capabilities.textDocument.completion.completionItem.snippetSupport = true
         opts.filetypes = {"html", "css", "typescriptreact", "javascriptreact"}
     end
 }
@@ -53,8 +49,7 @@ lsp_installer.on_server_ready(function(server)
     -- Call LSP hover -- Go detail
     map('n', 'D', '<cmd>lua vim.lsp.buf.hover()<cr>')
     -- Call code action with telescope --  Go action
-    map('n', 'ga',
-        '<cmd>lua require("telescope.builtin").lsp_code_actions()<cr>')
+    map('n', 'ga', '<cmd>lua require("telescope.builtin").lsp_code_actions()<cr>')
     -- Rename using LSP -- Go rename
     map('n', 'gr', '<cmd>lua vim.lsp.buf.rename()<cr>')
     -- Format using LSP -- Go format 
@@ -62,14 +57,15 @@ lsp_installer.on_server_ready(function(server)
     -- Jump into other instance -- Go Jump
     map('n', 'gj', '<cmd>lua require("telescope.builtin").lsp_references()<cr>')
 
-    local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp
-                                                                         .protocol
+    local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol
                                                                          .make_client_capabilities())
     -- Specify the default options which we'll use to setup all servers
     local opts = {
         capabilities = capabilities,
         on_attach = attach_default,
-        root_dir = function() return "." end
+        root_dir = function()
+            return "."
+        end
     }
 
     if enhance_server_opts[server.name] then

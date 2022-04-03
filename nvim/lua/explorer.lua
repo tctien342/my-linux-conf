@@ -7,14 +7,10 @@ config = function()
     vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
 
     -- If you want icons for diagnostic errors, you'll need to define them somewhere:
-    vim.fn.sign_define("DiagnosticSignError",
-                       {text = " ", texthl = "DiagnosticSignError"})
-    vim.fn.sign_define("DiagnosticSignWarn",
-                       {text = " ", texthl = "DiagnosticSignWarn"})
-    vim.fn.sign_define("DiagnosticSignInfo",
-                       {text = " ", texthl = "DiagnosticSignInfo"})
-    vim.fn.sign_define("DiagnosticSignHint",
-                       {text = "", texthl = "DiagnosticSignHint"})
+    vim.fn.sign_define("DiagnosticSignError", {text = " ", texthl = "DiagnosticSignError"})
+    vim.fn.sign_define("DiagnosticSignWarn", {text = " ", texthl = "DiagnosticSignWarn"})
+    vim.fn.sign_define("DiagnosticSignInfo", {text = " ", texthl = "DiagnosticSignInfo"})
+    vim.fn.sign_define("DiagnosticSignHint", {text = "", texthl = "DiagnosticSignHint"})
     -- NOTE: this is changed from v1.x, which used the old style of highlight groups
     -- in the form "LspDiagnosticsSignWarning"
 
@@ -38,12 +34,7 @@ config = function()
                 expander_expanded = "",
                 expander_highlight = "NeoTreeExpander"
             },
-            icon = {
-                folder_closed = "",
-                folder_open = "",
-                folder_empty = "ﰊ",
-                default = "*"
-            },
+            icon = {folder_closed = "", folder_open = "", folder_empty = "ﰊ", default = "*"},
             modified = {symbol = "[+]", highlight = "NeoTreeModified"},
             name = {trailing_slash = false, use_git_status_colors = true},
             git_status = {
@@ -64,7 +55,7 @@ config = function()
         },
         window = {
             position = "left",
-            width = 40,
+            width = 30,
             mappings = {
                 ["<space>"] = "toggle_node",
                 ["<2-LeftMouse>"] = "open",
@@ -95,7 +86,7 @@ config = function()
         nesting_rules = {},
         filesystem = {
             filtered_items = {
-                visible = false, -- when true, they will just be displayed differently than normal items
+                visible = true, -- when true, they will just be displayed differently than normal items
                 hide_dotfiles = true,
                 hide_gitignored = true,
                 hide_by_name = {
@@ -117,10 +108,7 @@ config = function()
             use_libuv_file_watcher = false -- This will use the OS level file watchers to detect changes
             -- instead of relying on nvim autocmd events.
         },
-        buffers = {
-            show_unloaded = true,
-            window = {mappings = {["bd"] = "buffer_delete"}}
-        },
+        buffers = {show_unloaded = true, window = {mappings = {["bd"] = "buffer_delete"}}},
         git_status = {
             window = {
                 position = "float",
