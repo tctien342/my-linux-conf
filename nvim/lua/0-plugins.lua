@@ -1,5 +1,5 @@
-local explorer_config = require('explorer')
-local utils = require('utils')
+local explorer_config = require('configs.explorer')
+local scroll_config = require('configs.scroll')
 
 return require('packer').startup(function()
     -- Packer can manage itself
@@ -213,7 +213,7 @@ return require('packer').startup(function()
         end
     }
     -- Smooth scroll
-    use {'karb94/neoscroll.nvim', config = utils.scroll_conf}
+    use {'karb94/neoscroll.nvim', config = scroll_config}
     -- Move block code
     use {
         'booperlv/nvim-gomove',

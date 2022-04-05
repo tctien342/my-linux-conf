@@ -1,10 +1,4 @@
--- This file contains util's configs and tools
-function map(mode, lhs, rhs, opts)
-    local options = {noremap = true, silent = true}
-    if opts then options = vim.tbl_extend('force', options, opts) end
-    vim.api.nvim_set_keymap(mode, lhs, rhs, options)
-end
-
+-- This file include config for neoscroll
 function scroll()
     require('neoscroll').setup({
         -- All these keys will be mapped to their corresponding default scrolling animation
@@ -26,4 +20,4 @@ function scroll()
     require('neoscroll.config').set_mappings(t)
 end
 
-return {map = map, scroll_conf = scroll}
+return scroll

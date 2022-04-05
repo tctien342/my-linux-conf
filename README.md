@@ -1,7 +1,6 @@
 # My linux configuration
 
-+ Using i3 as workspace + compton for transparent background
-+ Nvim config for Typescript + ReactJS and NodeJS
++ Nvim config for Typescript + ReactJS, Rust and SOL with full Lua as base
 + Using alacritty as IDE
 + Tmux workspace
 

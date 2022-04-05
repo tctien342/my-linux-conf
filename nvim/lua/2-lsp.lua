@@ -7,7 +7,7 @@ local efm_opts = require "servers.efm"
 local eslint_opts = require "servers.eslint"
 local lua_opts = require "servers.lua"
 
-local utils = require "utils"
+local utils = require "configs.utils"
 -- For mapping keys
 local map = utils.map
 
@@ -52,7 +52,7 @@ lsp_installer.on_server_ready(function(server)
     map('n', 'ga', '<cmd>lua require("telescope.builtin").lsp_code_actions()<cr>')
     -- Rename using LSP -- Go rename
     map('n', 'gr', '<cmd>lua vim.lsp.buf.rename()<cr>')
-    -- Format using LSP -- Go format 
+    -- Format using LSP -- Go format
     map('n', 'gf', '<cmd>lua vim.lsp.buf.formatting()<cr>')
     -- Jump into other instance -- Go Jump
     map('n', 'gj', '<cmd>lua require("telescope.builtin").lsp_references()<cr>')

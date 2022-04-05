@@ -1,4 +1,4 @@
-local utils = require("utils")
+local utils = require("configs.utils")
 -- Default format JS will be eslint, if not have config yet -> fallback into Prettier
 vim.cmd [[
     command! FormatJS EslintFixAll"
