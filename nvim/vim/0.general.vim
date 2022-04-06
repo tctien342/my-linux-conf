@@ -20,6 +20,7 @@ set display+=lastline "--------------------- As must as possible of the lastline
 set previewheight=3 "------------------------------------ Smaller preview height
 set relativenumber "------------------------------------- Show relative number
 set signcolumn=yes "------------------------------------- Fix diagnostic sign jumping in number bar
+set splitright  "---------------------------------- Fix nvim-tree not fixed left
 
 
 set relativenumber "------------------------------------- Show relative number

@@ -5,4 +5,9 @@ function map(mode, lhs, rhs, opts)
     vim.api.nvim_set_keymap(mode, lhs, rhs, options)
 end
 
-return {map = map}
+function wait(seconds)
+    local start = os.time()
+    repeat until os.time() > start + seconds
+end
+
+return {map = map, wait = wait}

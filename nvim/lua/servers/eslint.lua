@@ -1,4 +1,4 @@
-local utils = require("configs.utils")
+local utils = require('configs.utils')
 -- Default format JS will be eslint, if not have config yet -> fallback into Prettier
 vim.cmd [[
     command! FormatJS EslintFixAll"
@@ -9,18 +9,18 @@ local eslint_opts = function(opts)
 
     opts.settings = {
         format = {enable = true},
-        codeActionOnSave = {enable = true, mode = "all"},
-        run = "onType"
+        codeActionOnSave = {enable = true, mode = 'all'},
+        run = 'onType'
     }
     opts.init_options = {documentFormatting = true}
     opts.handlers = {
-        ["eslint/noLibrary"] = function()
+        ['eslint/noLibrary'] = function()
             vim.cmd [[
                 command! FormatJS PrettierAsync"
             ]]
             return 0
         end,
-        ["eslint/noConfig"] = function()
+        ['eslint/noConfig'] = function()
             vim.cmd [[
                 command! FormatJS PrettierAsync"
             ]]

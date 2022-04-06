@@ -10,3 +10,6 @@ nextjs*
 procps
 pulse
 nvim/plugged
+
+tmuxinator/*
+!tmuxinator/template.yaml

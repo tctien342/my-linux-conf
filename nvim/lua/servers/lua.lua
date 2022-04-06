@@ -1,12 +1,18 @@
 local runtime_path = vim.split(package.path, ';')
-table.insert(runtime_path, "lua/?.lua")
-table.insert(runtime_path, "lua/?/init.lua")
+table.insert(runtime_path, 'lua/?.lua')
+table.insert(runtime_path, 'lua/?/init.lua')
 
 local lua_opts = function(opts)
     local default_attach = opts.on_attach
     opts.on_attach = function(client, buf)
         default_attach(client, buf)
         client.resolved_capabilities.document_formatting = false
+        vim.cmd([[
+            augroup LspFormatting
+                autocmd! * <buffer>
+                autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting()
+            augroup END
+        ]])
     end
     opts.settings = {
         Lua = {
@@ -22,7 +28,7 @@ local lua_opts = function(opts)
             },
             workspace = {
                 -- Make the server aware of Neovim runtime files
-                library = vim.api.nvim_get_runtime_file("", true)
+                library = vim.api.nvim_get_runtime_file('', true)
             },
             -- Do not send telemetry data containing a randomized but unique identifier
             telemetry = {enable = false}

@@ -32,13 +32,18 @@ return require('packer').startup(function()
     }
 
     -- Navigtion using HJKL
-    use {'christoomey/vim-tmux-navigator'}
+    use {'christoomey/vim-tmux-navigator'} -- Autocomplete using CMP
+    -- Plugins for CMP, will be used when author fix its bug
+    -- use {'zbirenbaum/copilot-cmp', after = {'copilot.lua', 'nvim-cmp'}}
 
-    -- Autocomplete using CMP
+    -- Ma best fen
+    use {'github/copilot.vim'}
     use {
-        'hrsh7th/cmp-nvim-lsp', 'hrsh7th/cmp-buffer', 'hrsh7th/cmp-path', 'hrsh7th/cmp-cmdline',
-        'hrsh7th/nvim-cmp', 'onsails/lspkind-nvim', 'L3MON4D3/LuaSnip', 'saadparwaiz1/cmp_luasnip'
+        'hrsh7th/nvim-cmp', 'hrsh7th/cmp-nvim-lsp', 'hrsh7th/cmp-buffer', 'hrsh7th/cmp-path',
+        'hrsh7th/cmp-cmdline', 'onsails/lspkind-nvim', 'L3MON4D3/LuaSnip',
+        'saadparwaiz1/cmp_luasnip'
     }
+
 
     -- Collection of configurations for the built-in LSP client
     use {
@@ -46,7 +51,7 @@ return require('packer').startup(function()
         'stevearc/dressing.nvim', 'RRethy/vim-illuminate', {
             'j-hui/fidget.nvim',
             config = function()
-                require"fidget".setup {window = {blend = 0}}
+                require'fidget'.setup {window = {blend = 0}}
             end
         }
     }
@@ -65,16 +70,16 @@ return require('packer').startup(function()
         'akinsho/flutter-tools.nvim',
         requires = 'nvim-lua/plenary.nvim',
         config = function()
-            require("flutter-tools").setup {}
+            require('flutter-tools').setup {}
         end
     }
 
     -- For checking and debug LSP diagnostic
     use {
-        "folke/trouble.nvim",
-        requires = "kyazdani42/nvim-web-devicons",
+        'folke/trouble.nvim',
+        requires = 'kyazdani42/nvim-web-devicons',
         config = function()
-            require("trouble").setup {}
+            require('trouble').setup {}
             vim.cmd([[
                 nnoremap <leader>xx <cmd>TroubleToggle<cr>
                 nnoremap <leader>xw <cmd>TroubleToggle workspace_diagnostics<cr>
@@ -98,10 +103,10 @@ return require('packer').startup(function()
     use {
         'ray-x/lsp_signature.nvim',
         config = function()
-            require"lsp_signature".setup({
+            require'lsp_signature'.setup({
                 bind = true, -- This is mandatory, otherwise border config won't get registered.
                 floating_window = true,
-                handler_opts = {border = "none"}
+                handler_opts = {border = 'single'}
             })
         end
     }
@@ -113,10 +118,10 @@ return require('packer').startup(function()
         config = function()
             require('telescope').setup({
                 pickers = {
-                    find_files = {theme = "dropdown"},
-                    live_grep = {theme = "dropdown"},
-                    buffers = {theme = "dropdown"},
-                    lsp_code_actions = {theme = "dropdown"}
+                    find_files = {theme = 'dropdown'},
+                    live_grep = {theme = 'dropdown'},
+                    buffers = {theme = 'dropdown'},
+                    lsp_code_actions = {theme = 'dropdown'}
                 }
             })
             vim.cmd([[
@@ -132,11 +137,9 @@ return require('packer').startup(function()
 
     -- Tree explorer
     use {
-        "nvim-neo-tree/neo-tree.nvim",
-        branch = "v2.x",
+        'kyazdani42/nvim-tree.lua',
         requires = {
-            "nvim-lua/plenary.nvim", "kyazdani42/nvim-web-devicons", -- not strictly required, but recommended
-            "MunifTanjim/nui.nvim"
+            'kyazdani42/nvim-web-devicons' -- not strictly required, but recommended
         },
         config = explorer_config
     }
@@ -160,23 +163,23 @@ return require('packer').startup(function()
 
     -- Theme of nvim, transparent background
     use {
-        'joshdick/onedark.vim',
+        'rose-pine/neovim',
+        as = 'rose-pine',
+        tag = 'v1.*',
         config = function()
+            require('rose-pine').setup({
+                dark_variant = 'moon',
+                disable_background = true,
+                disable_float_background = true,
+                highlight_groups = {ColorColumn = {bg = 'rose'}}
+            })
             vim.cmd([[
-                colorscheme onedark
-                hi Normal     ctermbg=NONE guibg=NONE
-                hi LineNr     ctermbg=NONE guibg=NONE
-                hi SignColumn ctermbg=NONE guibg=NONE
-                hi Floaterm guibg=NONE
+                colorscheme rose-pine
             ]])
-        end
-    }
-
-    -- My best fen
-    use {
-        'github/copilot.vim',
-        config = function()
-            vim.cmd([[imap <silent><script><expr> <C-A> copilot#Accept("\<CR>")]])
+            -- Set lualine theme
+            require('lualine').setup({
+                options = {theme = 'rose-pine', section_separators = {left = '', right = ''}}
+            })
         end
     }
 
@@ -191,11 +194,11 @@ return require('packer').startup(function()
     use {
         'akinsho/bufferline.nvim',
         config = function()
-            require("bufferline").setup {
+            require('bufferline').setup {
                 options = {
-                    diagnostics = "nvim_lsp",
+                    diagnostics = 'nvim_lsp',
                     offsets = {
-                        {filetype = "neo-tree", text = "File Explorer", text_align = "center"}
+                        {filetype = 'NvimTree', text = 'File Explorer', text_align = 'center'}
                     }
                 }
             }
@@ -203,22 +206,15 @@ return require('packer').startup(function()
         end
     }
     -- Vim status line
-    use {
-        'nvim-lualine/lualine.nvim',
-        requires = {'kyazdani42/nvim-web-devicons', opt = true},
-        config = function()
-            require('lualine').setup({
-                options = {theme = 'codedark', section_separators = {left = '', right = ''}}
-            })
-        end
-    }
+    use {'nvim-lualine/lualine.nvim', requires = {'kyazdani42/nvim-web-devicons', opt = true}}
+
     -- Smooth scroll
     use {'karb94/neoscroll.nvim', config = scroll_config}
     -- Move block code
     use {
         'booperlv/nvim-gomove',
         config = function()
-            require("gomove").setup {}
+            require('gomove').setup {}
             vim.cmd([[
                 nmap <S-h> <Plug>GoNSMLeft
                 nmap <S-j> <Plug>GoNSMDown
@@ -253,22 +249,22 @@ return require('packer').startup(function()
 
     -- Scrollbar with LSP support
     use {
-        "petertriho/nvim-scrollbar",
+        'petertriho/nvim-scrollbar',
         config = function()
-            require("scrollbar").setup()
+            require('scrollbar').setup()
         end
     }
 
     -- Auto forcus window
     use {
-        "beauwilliams/focus.nvim",
+        'beauwilliams/focus.nvim',
         config = function()
-            require("focus").setup({
+            require('focus').setup({
                 relativenumber = false,
                 hybridnumber = false,
                 cursorline = false,
                 signcolumn = false,
-                compatible_filetrees = {"neo-tree"},
+                compatible_filetrees = {'neo-tree'},
                 treewidth = 30
             })
         end
