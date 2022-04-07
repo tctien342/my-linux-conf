@@ -33,17 +33,31 @@ return require('packer').startup(function()
 
     -- Navigtion using HJKL
     use {'christoomey/vim-tmux-navigator'} -- Autocomplete using CMP
-    -- Plugins for CMP, will be used when author fix its bug
-    -- use {'zbirenbaum/copilot-cmp', after = {'copilot.lua', 'nvim-cmp'}}
 
     -- Ma best fen
-    use {'github/copilot.vim'}
+    -- use {
+    --     'github/copilot.vim',
+    --     config = function()
+    --     end
+    -- }
+    -- Plugins for CMP, will be used when author fix its bug
+    use {
+        'zbirenbaum/copilot.lua',
+        event = 'InsertEnter',
+        config = function()
+            vim.defer_fn(function()
+                require('copilot').setup()
+            end, 100)
+        end
+    }
+
+    use {'zbirenbaum/copilot-cmp', after = {'copilot.lua', 'nvim-cmp'}}
+
     use {
         'hrsh7th/nvim-cmp', 'hrsh7th/cmp-nvim-lsp', 'hrsh7th/cmp-buffer', 'hrsh7th/cmp-path',
         'hrsh7th/cmp-cmdline', 'onsails/lspkind-nvim', 'L3MON4D3/LuaSnip',
         'saadparwaiz1/cmp_luasnip'
     }
-
 
     -- Collection of configurations for the built-in LSP client
     use {

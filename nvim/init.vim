@@ -9,4 +9,5 @@
     lua require('0-plugins')
     lua require('1-completion')
     lua require('2-lsp')
+    lua require('3-binding')
 " }}}

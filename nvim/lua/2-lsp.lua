@@ -63,7 +63,8 @@ lsp_installer.on_server_ready(function(server)
     -- Jump into other instance -- Go Jump
     map('n', 'gj', '<cmd>lua require("telescope.builtin").lsp_references()<cr>')
     -- Diagnostic details
-    map('n', '!', '<cmd>lua vim.diagnostic.open_float(nil, { focus = false })<cr>')
+    map('n', '``',
+        '<cmd>lua vim.diagnostic.open_float(nil, { focus = false, border = "single" })<cr>')
 
     local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol
                                                                          .make_client_capabilities())
@@ -93,7 +94,5 @@ lsp.handlers['textDocument/publishDiagnostics'] = lsp.with(lsp.diagnostic.on_pub
 })
 
 lsp.handlers['textDocument/hover'] = lsp.with(vim.lsp.handlers.hover, {border = 'single'})
-
 lsp.handlers['textDocument/signatureHelp'] = lsp.with(vim.lsp.handlers.signature_help,
-
                                                       {border = 'single'})
