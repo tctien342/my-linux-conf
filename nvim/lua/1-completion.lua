@@ -39,13 +39,15 @@ cmp.setup({
             end
         })
     },
-    documentation = {
-        border = 'single',
-        winhighlight = 'NormalFloat:CompeDocumentation,FloatBorder:CompeDocumentationBorder',
-        max_width = 50,
-        min_width = 50,
-        max_height = math.floor(vim.o.lines * 0.3),
-        min_height = 3
+    window = {
+        documentation = {
+            border = 'single',
+            winhighlight = 'NormalFloat:CompeDocumentation,FloatBorder:CompeDocumentationBorder',
+            max_width = 50,
+            min_width = 50,
+            max_height = math.floor(vim.o.lines * 0.3),
+            min_height = 3
+        }
     },
     mapping = {
         ['<Tab>'] = cmp.mapping(function(fallback)

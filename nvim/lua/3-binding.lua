@@ -2,7 +2,7 @@ local utils = require 'configs.utils'
 local map = utils.map
 
 -- Close current buffer
-map('n', '<C-w>', '<cmd>BClose<cr>')
+map('n', '<C-q>', '<cmd>BClose<cr>')
 
 -- Switching buffer with <`-number>
 map('n', '`1', '<cmd>BufferLineGoToBuffer 1<cr>')

@@ -1,5 +1,6 @@
 local explorer_config = require('configs.explorer')
 local scroll_config = require('configs.scroll')
+local lualine_config = require('configs.lualine')
 
 return require('packer').startup(function()
     -- Packer can manage itself
@@ -35,22 +36,15 @@ return require('packer').startup(function()
     use {'christoomey/vim-tmux-navigator'} -- Autocomplete using CMP
 
     -- Ma best fen
-    -- use {
-    --     'github/copilot.vim',
-    --     config = function()
-    --     end
-    -- }
-    -- Plugins for CMP, will be used when author fix its bug
     use {
         'zbirenbaum/copilot.lua',
-        event = 'InsertEnter',
+        event = {'VimEnter'},
         config = function()
             vim.defer_fn(function()
                 require('copilot').setup()
             end, 100)
         end
     }
-
     use {'zbirenbaum/copilot-cmp', after = {'copilot.lua', 'nvim-cmp'}}
 
     use {
@@ -119,7 +113,10 @@ return require('packer').startup(function()
         config = function()
             require'lsp_signature'.setup({
                 bind = true, -- This is mandatory, otherwise border config won't get registered.
-                floating_window = true,
+                hint_enable = true,
+                fix_pos = false,
+                auto_close_after = 3,
+                floating_window = false,
                 handler_opts = {border = 'single'}
             })
         end
@@ -180,6 +177,7 @@ return require('packer').startup(function()
         'rose-pine/neovim',
         as = 'rose-pine',
         tag = 'v1.*',
+        requires = {'nvim-lualine/lualine.nvim', 'ray-x/lsp_signature.nvim'},
         config = function()
             require('rose-pine').setup({
                 dark_variant = 'moon',
@@ -219,8 +217,13 @@ return require('packer').startup(function()
             vim.cmd([[nnoremap <silent> gt :BufferLinePick<CR>]])
         end
     }
+
     -- Vim status line
-    use {'nvim-lualine/lualine.nvim', requires = {'kyazdani42/nvim-web-devicons', opt = true}}
+    use {
+        'nvim-lualine/lualine.nvim',
+        requires = {'kyazdani42/nvim-web-devicons', opt = true},
+        config = lualine_config
+    }
 
     -- Smooth scroll
     use {'karb94/neoscroll.nvim', config = scroll_config}

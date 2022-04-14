@@ -7,6 +7,7 @@ local javascript_opts = require 'servers.javascript'
 local efm_opts = require 'servers.efm'
 local eslint_opts = require 'servers.eslint'
 local lua_opts = require 'servers.lua'
+local tailwindcss_opts = require 'servers.tailwindcss'
 
 local utils = require 'configs.utils'
 -- For mapping keys
@@ -15,7 +16,7 @@ local map = utils.map
 local servers = {
     'bashls', 'pyright', 'clangd', 'yamlls', 'cssls', 'tsserver', 'eslint', 'jsonls', 'sumneko_lua',
     'efm', 'rust_analyzer', 'vimls', 'emmet_ls', 'cssmodules_ls', 'dockerls', 'dotls', 'html',
-    'jsonls'
+    'jsonls', 'tailwindcss', 'cssmodules_ls'
 }
 
 for _, name in pairs(servers) do
@@ -32,7 +33,6 @@ end
 
 local attach_default = function(client, bufnr)
     require'illuminate'.on_attach(client)
-    require'lsp_signature'.on_attach({auto_close_after = 3, timer_interval = 100}, bufnr)
 end
 
 local enhance_server_opts = {
@@ -44,7 +44,8 @@ local enhance_server_opts = {
     ['emmet_ls'] = function(opts)
         opts.capabilities.textDocument.completion.completionItem.snippetSupport = true
         opts.filetypes = {'html', 'css', 'typescriptreact', 'javascriptreact'}
-    end
+    end,
+    ['tailwindcss'] = tailwindcss_opts
 }
 
 lsp_installer.on_server_ready(function(server)
@@ -71,10 +72,10 @@ lsp_installer.on_server_ready(function(server)
     -- Specify the default options which we'll use to setup all servers
     local opts = {
         capabilities = capabilities,
-        on_attach = attach_default,
-        root_dir = function()
-            return '.'
-        end
+        on_attach = attach_default
+        -- root_dir = function()
+        --     return '.'
+        -- end
     }
 
     if enhance_server_opts[server.name] then
