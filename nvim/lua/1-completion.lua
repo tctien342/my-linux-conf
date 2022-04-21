@@ -12,7 +12,6 @@ local has_words_before = function()
 end
 
 cmp.setup({
-    completion = {completeopt = 'menu,menuone,noinsert'},
     snippet = {
         expand = function(args)
             require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
@@ -27,7 +26,7 @@ cmp.setup({
             -- so that you can provide more controls on popup customization. (See [#30](https://github.com/onsails/lspkind-nvim/pull/30))
             before = function(entry, vim_item)
                 vim_item.menu = ({
-                    copilot = '[POT]',
+                    copilot = '[AI]',
                     nvim_lsp = '[LSP]',
                     emoji = '[EMO]',
                     path = '[PTH]',
@@ -73,11 +72,7 @@ cmp.setup({
         end, {'i', 's'}),
         ['<CR>'] = cmp.mapping.confirm({select = true})
     },
-    sources = {
-        {name = 'copilot', group_index = 2}, {name = 'nvim_lsp', group_index = 2},
-        {name = 'luasnip', group_index = 2}, {name = 'buffer', group_index = 2},
-        {name = 'path', group_index = 2}
-    }
+    sources = {{name = 'copilot'}, {name = 'nvim_lsp'}, {name = 'buffer'}, {name = 'path'}}
 })
 
 -- Set configuration for specific filetype.
@@ -91,8 +86,7 @@ cmp.setup.filetype('gitcommit', {
 cmp.setup.cmdline('/', {sources = {{name = 'buffer'}}})
 
 -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
-
-cmp.setup.cmdline(':', {sources = cmp.config.sources({{name = 'path'}}, {{name = 'cmdline'}})})
+-- cmp.setup.cmdline(':', {sources = cmp.config.sources({{name = 'path'}}, {{name = 'cmdline'}})})
 
 -- For autopairs
 cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done({map_char = {tex = ''}}))

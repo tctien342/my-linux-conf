@@ -1,6 +1,6 @@
 let mapleader = " " "----------------------------------------------------------- Setting leader key
 set pumheight=6 "--------------------------------------------------------------- limit autocomple candidates
-set completeopt=menu,menuone,noselect "----------------------------------------- Setup for CMP completion
+set completeopt=longest,menu,noselect "----------------------------------------- Setup for CMP completion
 
 set guioptions-=m "-------------------------------------------- Remove menu bar
 set guioptions-=T "--------------------------------------------- Remove toolbar
@@ -13,7 +13,7 @@ set nospell "-------------------------------------------------- Disable spelling
 set title "-------------------------------------- Let vim set the terminal title
 set updatetime=100 "-------------------------------- Redraw the status bar often
 set list "--------------------------------------------- Show trailing whitespace
-set showcmd	"--------------------------------------- Display incomplete commands
+set showcmd "--------------------------------------- Display incomplete commands
 set laststatus=2 "-------------------------------------- Always show status line
 set showtabline=2 "----------------------------------------- Always show tabline
 set display+=lastline "--------------------- As must as possible of the lastline

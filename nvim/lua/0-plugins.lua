@@ -1,6 +1,11 @@
 local explorer_config = require('configs.explorer')
 local scroll_config = require('configs.scroll')
 local lualine_config = require('configs.lualine')
+local treesitter_config = require('configs.treesister')
+local gomove_config = require('configs.gomove')
+local telescope_config = require('configs.telescope')
+local theme_config = require('configs.theme')
+local wilder_config = require('configs.wilder')
 
 return require('packer').startup(function()
     -- Packer can manage itself
@@ -14,22 +19,12 @@ return require('packer').startup(function()
         end
     }
 
-    -- Auto tag for HTML, JSX, TSX
+    -- Treesitter for better language compatible
     use {
-        'AndrewRadev/tagalong.vim', {
-            'alvan/vim-closetag',
-            config = function()
-                vim.cmd([[
-                    let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.jsx,*.tsx'
-                    let g:closetag_regions = {
-                        \ 'typescript.tsx': 'jsxRegion,tsxRegion',
-                        \ 'javascript.jsx': 'jsxRegion',
-                        \ 'typescriptreact': 'jsxRegion,tsxRegion',
-                        \ 'javascriptreact': 'jsxRegion',
-                        \ }
-                ]])
-            end
-        }
+        'nvim-treesitter/nvim-treesitter',
+        requires = 'windwp/nvim-ts-autotag',
+        run = ':TSUpdate',
+        config = treesitter_config
     }
 
     -- Navigtion using HJKL
@@ -55,8 +50,8 @@ return require('packer').startup(function()
 
     -- Collection of configurations for the built-in LSP client
     use {
-        'sheerun/vim-polyglot', 'neovim/nvim-lspconfig', 'williamboman/nvim-lsp-installer',
-        'stevearc/dressing.nvim', 'RRethy/vim-illuminate', {
+        'neovim/nvim-lspconfig', 'williamboman/nvim-lsp-installer', 'stevearc/dressing.nvim',
+        'RRethy/vim-illuminate', {
             'j-hui/fidget.nvim',
             config = function()
                 require'fidget'.setup {window = {blend = 0}}
@@ -126,21 +121,7 @@ return require('packer').startup(function()
     use {
         'nvim-telescope/telescope.nvim',
         requires = {{'nvim-lua/plenary.nvim'}},
-        config = function()
-            require('telescope').setup({
-                pickers = {
-                    find_files = {theme = 'dropdown'},
-                    live_grep = {theme = 'dropdown'},
-                    buffers = {theme = 'dropdown'},
-                    lsp_code_actions = {theme = 'dropdown'}
-                }
-            })
-            vim.cmd([[
-                    nnoremap <leader>f <cmd>Telescope find_files<cr>
-                    nnoremap <leader>s <cmd>Telescope live_grep<cr>
-                    nnoremap <leader><leader> <cmd>Telescope buffers<cr>
-                ]])
-        end
+        config = telescope_config
     }
 
     -- Format code for common languages
@@ -178,21 +159,7 @@ return require('packer').startup(function()
         as = 'rose-pine',
         tag = 'v1.*',
         requires = {'nvim-lualine/lualine.nvim', 'ray-x/lsp_signature.nvim'},
-        config = function()
-            require('rose-pine').setup({
-                dark_variant = 'moon',
-                disable_background = true,
-                disable_float_background = true,
-                highlight_groups = {ColorColumn = {bg = 'rose'}}
-            })
-            vim.cmd([[
-                colorscheme rose-pine
-            ]])
-            -- Set lualine theme
-            require('lualine').setup({
-                options = {theme = 'rose-pine', section_separators = {left = '', right = ''}}
-            })
-        end
+        config = theme_config
     }
 
     -- Color viewer
@@ -228,33 +195,7 @@ return require('packer').startup(function()
     -- Smooth scroll
     use {'karb94/neoscroll.nvim', config = scroll_config}
     -- Move block code
-    use {
-        'booperlv/nvim-gomove',
-        config = function()
-            require('gomove').setup {}
-            vim.cmd([[
-                nmap <S-h> <Plug>GoNSMLeft
-                nmap <S-j> <Plug>GoNSMDown
-                nmap <S-k> <Plug>GoNSMUp
-                nmap <S-l> <Plug>GoNSMRight
-
-                xmap <S-h> <Plug>GoVSMLeft
-                xmap <S-j> <Plug>GoVSMDown
-                xmap <S-k> <Plug>GoVSMUp
-                xmap <S-l> <Plug>GoVSMRight
-
-                nmap <C-h> <Plug>GoNSDLeft
-                nmap <C-j> <Plug>GoNSDDown
-                nmap <C-k> <Plug>GoNSDUp
-                nmap <C-l> <Plug>GoNSDRight
-
-                xmap <C-h> <Plug>GoVSDLeft
-                xmap <C-j> <Plug>GoVSDDown
-                xmap <C-k> <Plug>GoVSDUp
-                xmap <C-l> <Plug>GoVSDRight
-            ]])
-        end
-    }
+    use {'booperlv/nvim-gomove', config = gomove_config}
 
     -- Git lens alternative
     use {
@@ -286,4 +227,6 @@ return require('packer').startup(function()
             })
         end
     }
+
+    use {'gelguy/wilder.nvim', config = wilder_config}
 end)
