@@ -15,8 +15,8 @@ local map = utils.map
 
 local servers = {
     'bashls', 'pyright', 'clangd', 'yamlls', 'cssls', 'tsserver', 'eslint', 'jsonls', 'sumneko_lua',
-    'efm', 'rust_analyzer', 'vimls', 'emmet_ls', 'cssmodules_ls', 'dockerls', 'dotls', 'html',
-    'jsonls', 'tailwindcss', 'cssmodules_ls'
+    'efm', 'vimls', 'emmet_ls', 'cssmodules_ls', 'dockerls', 'dotls', 'html', 'jsonls',
+    'tailwindcss', 'cssmodules_ls', 'rust_analyzer'
 }
 
 for _, name in pairs(servers) do
@@ -56,7 +56,7 @@ lsp_installer.on_server_ready(function(server)
     -- Call LSP hover -- Go detail
     map('n', 'D', '<cmd>lua vim.lsp.buf.hover()<cr>')
     -- Call code action with telescope --  Go action
-    map('n', 'ga', '<cmd>lua require("telescope.builtin").lsp_code_actions()<cr>')
+    map('n', 'ga', '<cmd>lua vim.lsp.buf.code_action()<cr>')
     -- Rename using LSP -- Go rename
     map('n', 'gr', '<cmd>lua vim.lsp.buf.rename()<cr>')
     -- Format using LSP -- Go format
@@ -78,12 +78,28 @@ lsp_installer.on_server_ready(function(server)
         -- end
     }
 
-    if enhance_server_opts[server.name] then
-        -- Enhance the default opts with the server-specific ones
-        enhance_server_opts[server.name](opts)
+    if server.name == 'rust_analyzer' then
+        local rustopts = {
+            tools = {
+                autoSetHints = true,
+                hover_with_actions = false,
+                inlay_hints = {
+                    show_parameter_hints = true,
+                    parameter_hints_prefix = '',
+                    other_hints_prefix = ''
+                }
+            },
+            server = vim.tbl_deep_extend('force', server:get_default_options(), opts, {})
+        }
+        require('rust-tools').setup(rustopts)
+        server:attach_buffers()
+    else
+        if enhance_server_opts[server.name] then
+            -- Enhance the default opts with the server-specific ones
+            enhance_server_opts[server.name](opts)
+        end
+        server:setup(opts)
     end
-
-    server:setup(opts)
 end)
 
 local lsp = vim.lsp

@@ -8,10 +8,11 @@ let g:neovide_remember_window_size = v:true
 let g:neovide_cursor_vfx_mode = "pixiedust"
 let g:neovide_cursor_antialiasing=v:true
 
-nmap <D-c> "+y
-vmap <D-c> "+y
-nmap <D-v> "+p
-inoremap <D-v> <C-r>+
-cnoremap <D-v> <C-r>+
-" use <c-r> to insert original character without triggering things like auto-pairs
-inoremap <D-r> <C-v>
+" Map CMD+V for NEOVIDE
+" nmap <D-c> "+y
+" vmap <D-c> "+y
+" nmap <D-v> "+p
+" inoremap <D-v> <C-r>+
+" cnoremap <D-v> <C-r>+
+" " use <c-r> to insert original character without triggering things like auto-pairs
+" inoremap <D-r> <C-v>

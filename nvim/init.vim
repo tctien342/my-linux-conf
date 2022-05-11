@@ -10,4 +10,6 @@
     lua require('1-completion')
     lua require('2-lsp')
     lua require('3-binding')
+    lua require('telescope').load_extension('ui-select')
+
 " }}}

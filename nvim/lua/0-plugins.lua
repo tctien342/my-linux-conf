@@ -50,8 +50,7 @@ return require('packer').startup(function()
 
     -- Collection of configurations for the built-in LSP client
     use {
-        'neovim/nvim-lspconfig', 'williamboman/nvim-lsp-installer', 'stevearc/dressing.nvim',
-        'RRethy/vim-illuminate', {
+        'neovim/nvim-lspconfig', 'williamboman/nvim-lsp-installer', 'RRethy/vim-illuminate', {
             'j-hui/fidget.nvim',
             config = function()
                 require'fidget'.setup {window = {blend = 0}}
@@ -62,10 +61,7 @@ return require('packer').startup(function()
     -- Rust support
     use {
         'simrat39/rust-tools.nvim',
-        requires = 'neovim/nvim-lspconfig',
-        config = function()
-            require('rust-tools').setup({})
-        end
+        requires = {'neovim/nvim-lspconfig', 'nvim-lua/plenary.nvim', 'mfussenegger/nvim-dap'}
     }
 
     -- Flutter support
@@ -120,6 +116,7 @@ return require('packer').startup(function()
     -- For files searching, code actions
     use {
         'nvim-telescope/telescope.nvim',
+        'nvim-telescope/telescope-ui-select.nvim',
         requires = {{'nvim-lua/plenary.nvim'}},
         config = telescope_config
     }
@@ -229,4 +226,11 @@ return require('packer').startup(function()
     }
 
     use {'gelguy/wilder.nvim', config = wilder_config}
+
+    use {
+        'andweeb/presence.nvim',
+        config = function()
+            require('presence'):setup({})
+        end
+    } -- Discord activity
 end)

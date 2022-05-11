@@ -1,10 +1,11 @@
 local config = function()
     require('telescope').setup({
+        extensions = {['ui-select'] = {require('telescope.themes').get_dropdown {}}},
         pickers = {
             find_files = {theme = 'dropdown'},
             live_grep = {theme = 'dropdown'},
-            buffers = {theme = 'dropdown'},
-            lsp_code_actions = {theme = 'dropdown'}
+            buffers = {theme = 'dropdown'}
+            -- lsp_code_actions = {theme = 'dropdown'}
         }
     })
     vim.cmd([[
