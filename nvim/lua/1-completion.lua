@@ -4,6 +4,8 @@ local lspkind = require('lspkind')
 local luasnip = require('luasnip')
 local cmp_autopairs = require('nvim-autopairs.completion.cmp')
 
+require('luasnip.loaders.from_vscode').lazy_load({paths = {'/Users/saintno/.config/nvim/snippets'}})
+
 local has_words_before = function()
     local line, col = unpack(vim.api.nvim_win_get_cursor(0))
     return col ~= 0
@@ -72,7 +74,10 @@ cmp.setup({
         end, {'i', 's'}),
         ['<CR>'] = cmp.mapping.confirm({select = true})
     },
-    sources = {{name = 'copilot'}, {name = 'nvim_lsp'}, {name = 'buffer'}, {name = 'path'}}
+    sources = {
+        {name = 'copilot'}, {name = 'luasnip'}, {name = 'nvim_lsp'}, {name = 'buffer'},
+        {name = 'path'}
+    }
 })
 
 -- Set configuration for specific filetype.

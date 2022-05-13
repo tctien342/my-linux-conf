@@ -69,7 +69,7 @@ return require('packer').startup(function()
         'akinsho/flutter-tools.nvim',
         requires = 'nvim-lua/plenary.nvim',
         config = function()
-            require('flutter-tools').setup {}
+            require('flutter-tools').setup {widget_guides = {enabled = true}}
         end
     }
 
@@ -116,10 +116,11 @@ return require('packer').startup(function()
     -- For files searching, code actions
     use {
         'nvim-telescope/telescope.nvim',
-        'nvim-telescope/telescope-ui-select.nvim',
         requires = {{'nvim-lua/plenary.nvim'}},
         config = telescope_config
     }
+
+    use {'nvim-telescope/telescope-ui-select.nvim', requires = {'nvim-telescope/telescope.nvim'}}
 
     -- Format code for common languages
     use {'prettier/vim-prettier', run = 'npm i && npm i prettier-plugin-solidity'}
@@ -195,12 +196,7 @@ return require('packer').startup(function()
     use {'booperlv/nvim-gomove', config = gomove_config}
 
     -- Git lens alternative
-    use {
-        'lewis6991/gitsigns.nvim',
-        config = function()
-            require('gitsigns').setup({current_line_blame = true})
-        end
-    }
+    use {'f-person/git-blame.nvim'}
 
     -- Scrollbar with LSP support
     use {

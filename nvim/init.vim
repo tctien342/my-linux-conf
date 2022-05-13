@@ -1,15 +1,14 @@
 " @saintno neovim configuration
 
 " CONFIG'S SOURCES {{{
-    runtime vim/0.general.vim
-    runtime vim/1.neovide.vim
+    runtime vim/0.general.vim "---- General vim config
+    runtime vim/1.neovide.vim "---- Neovide specifict config
 " }}}
 
 " LUA CONFIGURATION {{{
-    lua require('0-plugins')
-    lua require('1-completion')
-    lua require('2-lsp')
-    lua require('3-binding')
-    lua require('telescope').load_extension('ui-select')
-
+    lua require('0-plugins') ------ Plugins managerment
+    lua require('1-completion') --- Nvim completation
+    lua require('2-lsp') ---------- LSP Installation
+    lua require('3-binding') ------ Keybinding
+    lua require('4-etc') ---------- Other configuration
 " }}}
