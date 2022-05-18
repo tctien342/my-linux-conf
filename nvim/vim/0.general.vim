@@ -7,6 +7,7 @@ set guioptions-=T "--------------------------------------------- Remove toolbar
 set guioptions-=r "------------------------------- Remove right-hand scroll bar
 set guioptions-=L "-------------------------------- Remove left-hand scroll bar
 
+set nowrap "------------------------------------------ Single row, no break line
 set nocompatible "--------------------------------------------- For Nvim Polygot
 set colorcolumn=0 "-------------------------------------------- line column show
 set nospell "-------------------------------------------------- Disable spelling

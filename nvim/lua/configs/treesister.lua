@@ -8,7 +8,8 @@ local config = function()
 
         -- Install languages synchronously (only applied to `ensure_installed`)
         sync_install = true,
-        autotag = {enable = true},
+        autotag = {enable = true}, -- Plugin
+        context_commentstring = {enable = true}, -- Plugin
         highlight = {
             enable = true,
             -- Setting this to true will run `:h syntax` and tree-sitter at the same time.

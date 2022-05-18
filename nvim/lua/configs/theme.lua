@@ -8,10 +8,6 @@ local config = function()
     vim.cmd([[
 	colorscheme rose-pine
     ]])
-    -- Set lualine theme
-    require('lualine').setup({
-        options = {theme = 'rose-pine', section_separators = {left = '', right = ''}}
-    })
 end
 
 return config

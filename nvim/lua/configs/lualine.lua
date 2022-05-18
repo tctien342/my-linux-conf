@@ -1,6 +1,11 @@
 local config = function()
+    local gps = require('nvim-gps')
     require('lualine').setup {
-        options = {fmt = string.lower},
+        options = {
+            fmt = string.lower,
+            theme = 'rose-pine',
+            section_separators = {left = '', right = ''}
+        },
         sections = {
             lualine_a = {
                 {
@@ -15,12 +20,22 @@ local config = function()
                 {
                     'filename',
                     fmt = function(str)
+                        local output = str
+                        if (gps.is_available()) then
+                            local location = gps.get_location()
+                            if (location == '') then
+                            else
+                                output = output .. ' > ' .. location
+                            end
+                        end
+
                         local sig = require('lsp_signature').status_line(64)
                         if (sig.hint == '') then
-                            return str
                         else
-                            return str .. ' > ' .. sig.hint
+                            output = output .. ' > ' .. sig.hint
                         end
+
+                        return output
                     end
                 }
             }

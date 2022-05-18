@@ -6,6 +6,7 @@ local gomove_config = require('configs.gomove')
 local telescope_config = require('configs.telescope')
 local theme_config = require('configs.theme')
 local wilder_config = require('configs.wilder')
+local comment_config = require('configs.comment')
 
 return require('packer').startup(function()
     -- Packer can manage itself
@@ -22,15 +23,15 @@ return require('packer').startup(function()
     -- Treesitter for better language compatible
     use {
         'nvim-treesitter/nvim-treesitter',
-        requires = 'windwp/nvim-ts-autotag',
+        requires = {'windwp/nvim-ts-autotag', 'JoosepAlviste/nvim-ts-context-commentstring'},
         run = ':TSUpdate',
         config = treesitter_config
     }
 
-    -- Navigtion using HJKL
-    use {'christoomey/vim-tmux-navigator'} -- Autocomplete using CMP
+    -- Navigtion with tmux using HJKL
+    use {'christoomey/vim-tmux-navigator'}
 
-    -- Ma best fen
+    -- Help code suggestion with github's Copilot
     use {
         'zbirenbaum/copilot.lua',
         event = {'VimEnter'},
@@ -40,8 +41,10 @@ return require('packer').startup(function()
             end, 100)
         end
     }
+    -- Bind copilot with CMP
     use {'zbirenbaum/copilot-cmp', after = {'copilot.lua', 'nvim-cmp'}}
 
+    -- Code auto complete with luasnip as snippet's manager
     use {
         'hrsh7th/nvim-cmp', 'hrsh7th/cmp-nvim-lsp', 'hrsh7th/cmp-buffer', 'hrsh7th/cmp-path',
         'hrsh7th/cmp-cmdline', 'onsails/lspkind-nvim', 'L3MON4D3/LuaSnip',
@@ -51,6 +54,7 @@ return require('packer').startup(function()
     -- Collection of configurations for the built-in LSP client
     use {
         'neovim/nvim-lspconfig', 'williamboman/nvim-lsp-installer', 'RRethy/vim-illuminate', {
+            -- LSP status on bottom right of screen
             'j-hui/fidget.nvim',
             config = function()
                 require'fidget'.setup {window = {blend = 0}}
@@ -80,7 +84,7 @@ return require('packer').startup(function()
         config = function()
             require('trouble').setup {}
             vim.cmd([[
-                nnoremap <leader>xx <cmd>TroubleToggle<cr>
+	        nnoremap <leader>xx <cmd>TroubleToggle<cr>
                 nnoremap <leader>xw <cmd>TroubleToggle workspace_diagnostics<cr>
                 nnoremap <leader>xd <cmd>TroubleToggle document_diagnostics<cr>
                 nnoremap <leader>xq <cmd>TroubleToggle quickfix<cr>
@@ -101,6 +105,7 @@ return require('packer').startup(function()
     -- Function's signature when coding
     use {
         'ray-x/lsp_signature.nvim',
+        requires = 'williamboman/nvim-lsp-installer',
         config = function()
             require'lsp_signature'.setup({
                 bind = true, -- This is mandatory, otherwise border config won't get registered.
@@ -142,21 +147,17 @@ return require('packer').startup(function()
 
     -- Comment block of code
     use {
-        'terrortylor/nvim-comment',
-        config = function()
-            require('nvim_comment').setup()
-        end
+        'numToStr/Comment.nvim',
+        requires = 'JoosepAlviste/nvim-ts-context-commentstring',
+        config = comment_config
     }
-
-    -- Generate docstring
-    use {'kkoomen/vim-doge', run = ':call doge#install()'}
 
     -- Theme of nvim, transparent background
     use {
         'rose-pine/neovim',
         as = 'rose-pine',
         tag = 'v1.*',
-        requires = {'nvim-lualine/lualine.nvim', 'ray-x/lsp_signature.nvim'},
+        requires = {'ray-x/lsp_signature.nvim'},
         config = theme_config
     }
 
@@ -183,20 +184,30 @@ return require('packer').startup(function()
         end
     }
 
+    -- For show location in lualine
+    use {
+        'SmiteshP/nvim-gps',
+        requires = 'nvim-treesitter/nvim-treesitter',
+        config = function()
+            require('nvim-gps').setup()
+        end
+    }
+
     -- Vim status line
     use {
         'nvim-lualine/lualine.nvim',
-        requires = {'kyazdani42/nvim-web-devicons', opt = true},
+        requires = {
+            {'kyazdani42/nvim-web-devicons', opt = true}, 'rose-pine/neovim',
+            'ray-x/lsp_signature.nvim', 'SmiteshP/nvim-gps'
+        },
         config = lualine_config
     }
 
     -- Smooth scroll
     use {'karb94/neoscroll.nvim', config = scroll_config}
+
     -- Move block code
     use {'booperlv/nvim-gomove', config = gomove_config}
-
-    -- Git lens alternative
-    use {'f-person/git-blame.nvim'}
 
     -- Scrollbar with LSP support
     use {
@@ -229,4 +240,11 @@ return require('packer').startup(function()
             require('presence'):setup({})
         end
     } -- Discord activity
+    use {
+        'napmn/react-extract.nvim',
+        config = function()
+            require('react-extract').setup()
+            vim.keymap.set({'v'}, '<Leader>re', require('react-extract').extract_to_new_file)
+        end
+    }
 end)
