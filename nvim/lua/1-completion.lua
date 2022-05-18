@@ -4,7 +4,7 @@ local lspkind = require('lspkind')
 local luasnip = require('luasnip')
 local cmp_autopairs = require('nvim-autopairs.completion.cmp')
 
-require('luasnip.loaders.from_vscode').lazy_load({paths = {'/Users/saintno/.config/nvim/snippets'}})
+require('luasnip.loaders.from_vscode').lazy_load({paths = {'./snippets'}})
 
 local has_words_before = function()
     local line, col = unpack(vim.api.nvim_win_get_cursor(0))
@@ -41,6 +41,10 @@ cmp.setup({
         })
     },
     window = {
+        completion = { -- rounded border; thin-style scrollbar
+            border = 'single',
+            scrollbar = '║'
+        },
         documentation = {
             border = 'single',
             winhighlight = 'NormalFloat:CompeDocumentation,FloatBorder:CompeDocumentationBorder',
@@ -75,7 +79,7 @@ cmp.setup({
         ['<CR>'] = cmp.mapping.confirm({select = true})
     },
     sources = {
-        {name = 'copilot'}, {name = 'luasnip'}, {name = 'nvim_lsp'}, {name = 'buffer'},
+        {name = 'copilot'}, {name = 'nvim_lsp'}, {name = 'luasnip'}, {name = 'buffer'},
         {name = 'path'}
     }
 })
@@ -90,10 +94,7 @@ cmp.setup.filetype('gitcommit', {
 -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline('/', {sources = {{name = 'buffer'}}})
 
--- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
--- cmp.setup.cmdline(':', {sources = cmp.config.sources({{name = 'path'}}, {{name = 'cmdline'}})})
-
 -- For autopairs
 cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done({map_char = {tex = ''}}))
-
 cmp_autopairs.lisp[#cmp_autopairs.lisp + 1] = 'racket'
+
