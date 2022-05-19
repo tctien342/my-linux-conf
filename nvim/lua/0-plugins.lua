@@ -33,16 +33,15 @@ return require('packer').startup(function()
 
     -- Help code suggestion with github's Copilot
     use {
-        'zbirenbaum/copilot.lua',
-        event = {'VimEnter'},
+        'github/copilot.vim',
         config = function()
-            vim.defer_fn(function()
-                require('copilot').setup()
-            end, 100)
+            vim.cmd([[
+		imap <silent><script><expr> <C-A> copilot#Accept("\<CR>")
+		let g:copilot_no_tab_map = v:true
+	]])
         end
     }
-    -- Bind copilot with CMP
-    use {'zbirenbaum/copilot-cmp', after = {'copilot.lua', 'nvim-cmp'}}
+    use {'hrsh7th/cmp-copilot', after = {'copilot.vim', 'nvim-cmp'}}
 
     -- Code auto complete with luasnip as snippet's manager
     use {
