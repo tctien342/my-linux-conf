@@ -64,7 +64,10 @@ return require('packer').startup(function()
     -- Rust support
     use {
         'simrat39/rust-tools.nvim',
-        requires = {'neovim/nvim-lspconfig', 'nvim-lua/plenary.nvim', 'mfussenegger/nvim-dap'}
+        requires = {
+            'neovim/nvim-lspconfig', 'nvim-lua/plenary.nvim', 'mfussenegger/nvim-dap',
+            'alx741/vim-rustfmt'
+        }
     }
 
     -- Flutter support
@@ -154,7 +157,6 @@ return require('packer').startup(function()
     -- Theme of nvim, transparent background
     use {
         'rose-pine/neovim',
-        as = 'rose-pine',
         tag = 'v1.*',
         requires = {'ray-x/lsp_signature.nvim'},
         config = theme_config
@@ -238,7 +240,9 @@ return require('packer').startup(function()
         config = function()
             require('presence'):setup({})
         end
-    } -- Discord activity
+    }
+
+    -- Discord activity
     use {
         'napmn/react-extract.nvim',
         config = function()
