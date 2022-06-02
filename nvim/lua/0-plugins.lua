@@ -23,7 +23,10 @@ return require('packer').startup(function()
     -- Treesitter for better language compatible
     use {
         'nvim-treesitter/nvim-treesitter',
-        requires = {'windwp/nvim-ts-autotag', 'JoosepAlviste/nvim-ts-context-commentstring'},
+        requires = {
+            'windwp/nvim-ts-autotag', 'JoosepAlviste/nvim-ts-context-commentstring',
+            'p00f/nvim-ts-rainbow'
+        },
         run = ':TSUpdate',
         config = treesitter_config
     }
@@ -156,8 +159,7 @@ return require('packer').startup(function()
 
     -- Theme of nvim, transparent background
     use {
-        'rose-pine/neovim',
-        tag = 'v1.*',
+        'projekt0n/github-nvim-theme',
         requires = {'ray-x/lsp_signature.nvim'},
         config = theme_config
     }
@@ -197,9 +199,10 @@ return require('packer').startup(function()
     -- Vim status line
     use {
         'nvim-lualine/lualine.nvim',
+        after = 'github-nvim-theme',
         requires = {
-            {'kyazdani42/nvim-web-devicons', opt = true}, 'rose-pine/neovim',
-            'ray-x/lsp_signature.nvim', 'SmiteshP/nvim-gps'
+            {'kyazdani42/nvim-web-devicons', opt = true}, 'ray-x/lsp_signature.nvim',
+            'SmiteshP/nvim-gps'
         },
         config = lualine_config
     }
@@ -233,12 +236,46 @@ return require('packer').startup(function()
         end
     }
 
-    use {'gelguy/wilder.nvim', config = wilder_config}
+    use {'roxma/nvim-yarp', run = 'pip install -r requirements.txt'}
+
+    use {
+        'gelguy/wilder.nvim',
+        requires = {'roxma/nvim-yarp', 'roxma/vim-hug-neovim-rpc'},
+        config = wilder_config
+    }
 
     use {
         'andweeb/presence.nvim',
         config = function()
             require('presence'):setup({})
+        end
+    }
+
+    use {
+        'lewis6991/gitsigns.nvim',
+        config = function()
+            require('gitsigns').setup({current_line_blame = true})
+        end
+    }
+
+    use {
+        'lukas-reineke/indent-blankline.nvim',
+        config = function()
+            vim.opt.list = true
+            require('indent_blankline').setup {
+                space_char_blankline = ' ',
+                show_current_context = true,
+                show_current_context_start = true
+            }
+        end
+    }
+
+    use {
+        'phaazon/hop.nvim',
+        branch = 'v1', -- optional but strongly recommended
+        config = function()
+            -- you can configure Hop the way you like here; see :h hop-config
+            require'hop'.setup {keys = 'etovxqpdygfblzhckisuran'}
         end
     }
 
@@ -248,6 +285,14 @@ return require('packer').startup(function()
         config = function()
             require('react-extract').setup()
             vim.keymap.set({'v'}, '<Leader>re', require('react-extract').extract_to_new_file)
+        end
+    }
+
+    use {
+        'akinsho/toggleterm.nvim',
+        tag = 'v1.*',
+        config = function()
+            require('toggleterm').setup()
         end
     }
 end)

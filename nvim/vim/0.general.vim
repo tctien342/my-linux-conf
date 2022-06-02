@@ -13,18 +13,18 @@ set colorcolumn=0 "-------------------------------------------- line column show
 set nospell "-------------------------------------------------- Disable spelling
 set title "-------------------------------------- Let vim set the terminal title
 set updatetime=100 "-------------------------------- Redraw the status bar often
-set list "--------------------------------------------- Show trailing whitespace
+" set list "--------------------------------------------- Show trailing whitespace
 set showcmd "--------------------------------------- Display incomplete commands
 set laststatus=2 "-------------------------------------- Always show status line
 set showtabline=2 "----------------------------------------- Always show tabline
 set display+=lastline "--------------------- As must as possible of the lastline
 set previewheight=3 "------------------------------------ Smaller preview height
 set relativenumber "------------------------------------- Show relative number
+set number "--------------------------------------------- Current line number
 set signcolumn=yes "------------------------------------- Fix diagnostic sign jumping in number bar
 set splitright  "---------------------------------- Fix nvim-tree not fixed left
 
 
-set relativenumber "------------------------------------- Show relative number
 set termguicolors "--------------------------------------- True color for neovim
 if (empty($TMUX))
   if (has("nvim"))
@@ -41,6 +41,17 @@ set noswapfile "------------------------------------------ Dont create wrap file
 set nobackup "------------------------------------------------- Dont save backup
 filetype plugin on "--------------------------------------------- Turn on plugin
 set backspace=indent,eol,start "----------------- Allow backspace in insert mode
+
+" TAB CORRECTION {{{
+
+" Use tab as 2 space, correct indent plugins
+set tabstop=4
+set softtabstop=0
+set expandtab
+set shiftwidth=2
+set smarttab
+
+" }}}
 
 " PYTHON PROVIDERS {{{
 
@@ -62,4 +73,5 @@ if has('mouse')
     set mouse=a "----------------------------- Allow use mouse, possible in nvim
 endif
 
-set clipboard+=unnamedplus "------------------------------------- Enable clipboard
+
+set clipboard=unnamedplus "------------------------------------- Enable clipboard

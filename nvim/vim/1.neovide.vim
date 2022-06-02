@@ -1,4 +1,4 @@
-set guifont=MesloLGL\ Nerd\ Font:h13
+" set guifont=MesloLGL\ Nerd\ Font:h13
 let g:neovide_refresh_rate=120
 let g:neovide_transparency=0.8
 " let g:neovide_floating_blur = 0.1

@@ -1,11 +1,7 @@
 local config = function()
     local gps = require('nvim-gps')
     require('lualine').setup {
-        options = {
-            fmt = string.lower,
-            theme = 'rose-pine',
-            section_separators = {left = '', right = ''}
-        },
+        options = {fmt = string.lower, theme = 'auto', section_separators = {left = '', right = ''}},
         sections = {
             lualine_a = {
                 {

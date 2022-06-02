@@ -34,3 +34,6 @@ map('n', '`7', '<cmd>BufferLineGoToBuffer 7<cr>')
 map('n', '`8', '<cmd>BufferLineGoToBuffer 8<cr>')
 map('n', '`9', '<cmd>BufferLineGoToBuffer 9<cr>')
 
+-- Using hop for jumping
+map('n', 'gw', '<cmd>HopWord<cr>')
+map('n', 'gl', '<cmd>HopLine<cr>')
