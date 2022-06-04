@@ -22,6 +22,11 @@ map('n', '``', '<cmd>lua vim.diagnostic.open_float(nil, { focus = false, border 
 
 -- Close current buffer
 map('n', '<C-q>', '<cmd>BClose<cr>')
+map('n', '<C-`>', '<cmd>ToggleTermToggleAll<cr>')
+-- map('i', '<C-`>', '<cmd>ToggleTermToggleAll<cr>')
+
+-- Open Workspace
+map('n', '<leader>w', '<cmd>Telescope workspaces<cr>')
 
 -- Switching buffer with <`-number>
 map('n', '`1', '<cmd>BufferLineGoToBuffer 1<cr>')

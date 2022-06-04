@@ -79,8 +79,9 @@ cmp.setup({
         ['<CR>'] = cmp.mapping.confirm({select = true})
     },
     sources = {
-        {name = 'copilot'}, {name = 'nvim_lsp'}, {name = 'luasnip'}, {name = 'buffer'},
-        {name = 'path'}
+        {name = 'copilot', priority = 7}, {name = 'nvim_lsp', priority = 6},
+        {name = 'luasnip', priority = 3}, {name = 'buffer', priority = 4},
+        {name = 'path', priority = 3}
     }
 })
 

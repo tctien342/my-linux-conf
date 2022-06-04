@@ -13,7 +13,7 @@ local config = function()
     require'nvim-tree'.setup {
         auto_reload_on_write = true,
         create_in_closed_folder = true,
-        -- reload_on_bufenter = true,
+        update_cwd = true,
         diagnostics = {
             enable = true,
             show_on_dirs = false,
@@ -32,7 +32,7 @@ local config = function()
             highlight_opened_files = 'all',
             icons = {show = {git = true}}
         },
-        update_focused_file = {enable = true, update_cwd = false, ignore_list = {}}
+        update_focused_file = {enable = false, update_cwd = false, ignore_list = {}}
     }
 end
 

@@ -31,6 +31,15 @@ return require('packer').startup(function()
         config = treesitter_config
     }
 
+    -- Dim unused variable
+    use {
+        'narutoxy/dim.lua',
+        requires = {'nvim-treesitter/nvim-treesitter', 'neovim/nvim-lspconfig'},
+        config = function()
+            require('dim').setup({disable_lsp_decorations = true})
+        end
+    }
+
     -- Navigtion with tmux using HJKL
     use {'christoomey/vim-tmux-navigator'}
 
@@ -62,6 +71,16 @@ return require('packer').startup(function()
                 require'fidget'.setup {window = {blend = 0}}
             end
         }
+    }
+
+    -- use
+    use {
+        'mattn/emmet-vim',
+        config = function()
+            vim.cmd([[
+              let g:user_emmet_leader_key=','
+            ]])
+        end
     }
 
     -- Rust support
@@ -293,6 +312,14 @@ return require('packer').startup(function()
         tag = 'v1.*',
         config = function()
             require('toggleterm').setup()
+        end
+    }
+
+    -- Work space management
+    use {
+        'natecraddock/workspaces.nvim',
+        config = function()
+            require('workspaces').setup({hooks = {open = {'BCloseAll'}}})
         end
     }
 end)

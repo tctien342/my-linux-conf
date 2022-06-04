@@ -13,8 +13,8 @@ local tailwindcss_opts = require 'servers.tailwindcss'
 -- Config supported servers
 local servers = {
     'bashls', 'pyright', 'clangd', 'yamlls', 'cssls', 'tsserver', 'eslint', 'jsonls', 'sumneko_lua',
-    'efm', 'vimls', 'emmet_ls', 'cssmodules_ls', 'dockerls', 'dotls', 'html', 'jsonls',
-    'tailwindcss', 'cssmodules_ls', 'rust_analyzer'
+    'efm', 'vimls', 'cssmodules_ls', 'dockerls', 'dotls', 'html', 'jsonls', 'tailwindcss',
+    'cssmodules_ls', 'rust_analyzer'
 }
 -- Pr-esetup
 lsp_installer.setup {}

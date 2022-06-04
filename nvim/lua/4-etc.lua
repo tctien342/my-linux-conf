@@ -1,5 +1,6 @@
 -- Preload telescope extension
 require('telescope').load_extension('ui-select')
+require('telescope').load_extension('workspaces')
 
 function _G.set_terminal_keymaps()
     local opts = {noremap = true}
@@ -16,6 +17,9 @@ vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
 vim.cmd([[
       autocmd TermEnter term://*toggleterm#*
             \ tnoremap <silent><c-t> <Cmd>exe v:count1 . "ToggleTerm"<CR>
+
+      autocmd TermEnter term://*toggleterm#*
+            \ tnoremap <silent><c-`> <Cmd>ToggleTermToggleAll<CR>
 
       nnoremap <silent><c-t> <Cmd>exe v:count1 . "ToggleTerm"<CR>
       inoremap <silent><c-t> <Esc><Cmd>exe v:count1 . "ToggleTerm"<CR>

@@ -3,11 +3,11 @@ local config = function()
         -- One of "all", "maintained" (parsers with maintainers), or a list of languages
         ensure_installed = {
             'typescript', 'python', 'javascript', 'html', 'css', 'bash', 'json', 'scss', 'tsx',
-            'rust', 'dart', 'go', 'cpp', 'cmake', 'lua', 'solidity', 'yaml'
+            'rust', 'go', 'cpp', 'cmake', 'lua', 'solidity', 'yaml'
         },
 
         -- Install languages synchronously (only applied to `ensure_installed`)
-        sync_install = true,
+        -- sync_install = true,
         autotag = {enable = true}, -- Plugin
         context_commentstring = {enable = true}, -- Plugin
         highlight = {
