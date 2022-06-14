@@ -1,9 +1,9 @@
 local utils = require('configs.utils')
 
 -- Default format JS will be eslint, if not have config yet -> fallback into Prettier
-vim.cmd [[
+vim.cmd([[
     command! FormatJS EslintFixAll"
-]]
+]])
 
 local eslint_opts = function(opts)
     local default_attach = opts.on_attach

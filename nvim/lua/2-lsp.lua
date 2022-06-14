@@ -8,6 +8,7 @@ local javascript_opts = require 'servers.javascript'
 local efm_opts = require 'servers.efm'
 local eslint_opts = require 'servers.eslint'
 local lua_opts = require 'servers.lua'
+local rust_opts = require 'servers.rust'
 local tailwindcss_opts = require 'servers.tailwindcss'
 
 -- Config supported servers
@@ -47,20 +48,7 @@ local enhance_server_opts = {
         opts.capabilities.textDocument.completion.completionItem.snippetSupport = true
         opts.filetypes = {'html', 'css', 'typescriptreact', 'javascriptreact'}
     end,
-    ['tailwindcss'] = tailwindcss_opts,
-    ['rust_analyzer'] = function(opts)
-        return {
-            tools = {
-                autoSetHints = true,
-                hover_with_actions = false,
-                inlay_hints = {
-                    show_parameter_hints = true,
-                    parameter_hints_prefix = '',
-                    other_hints_prefix = ''
-                }
-            }
-        }
-    end
+    ['tailwindcss'] = tailwindcss_opts
 }
 
 -- Bind into LSP
@@ -74,7 +62,7 @@ for _, server in ipairs(servers) do
         enhance_server_opts[server](opts)
     end
     if server == 'rust_analyzer' then
-        require('rust-tools').setup(opts)
+        require('rust-tools').setup(rust_opts(opts))
     else
         lspconfig[server].setup(opts)
     end

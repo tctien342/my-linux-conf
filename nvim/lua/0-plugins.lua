@@ -53,7 +53,7 @@ return require('packer').startup(function()
 	]])
         end
     }
-    use {'hrsh7th/cmp-copilot', after = {'copilot.vim', 'nvim-cmp'}}
+    -- use {'hrsh7th/cmp-copilot', after = {'copilot.vim', 'nvim-cmp'}}
 
     -- Code auto complete with luasnip as snippet's manager
     use {
@@ -241,19 +241,19 @@ return require('packer').startup(function()
     }
 
     -- Auto forcus window
-    use {
-        'beauwilliams/focus.nvim',
-        config = function()
-            require('focus').setup({
-                relativenumber = false,
-                hybridnumber = false,
-                cursorline = false,
-                signcolumn = false,
-                compatible_filetrees = {'neo-tree'},
-                treewidth = 30
-            })
-        end
-    }
+    -- use {
+    --     'beauwilliams/focus.nvim',
+    --     config = function()
+    --         require('focus').setup({
+    --             relativenumber = false,
+    --             hybridnumber = false,
+    --             cursorline = false,
+    --             signcolumn = false,
+    --             compatible_filetrees = {'neo-tree'},
+    --             treewidth = 30
+    --         })
+    --     end
+    -- }
 
     use {'roxma/nvim-yarp', run = 'pip install -r requirements.txt'}
 
