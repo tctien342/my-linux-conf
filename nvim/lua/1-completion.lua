@@ -20,25 +20,32 @@ cmp.setup({
         end
     },
     formatting = {
-        format = lspkind.cmp_format({
-            mode = 'symbol_text', -- show only symbol annotations
-            maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
-
-            -- The function below will be called before any actual modifications from lspkind
-            -- so that you can provide more controls on popup customization. (See [#30](https://github.com/onsails/lspkind-nvim/pull/30))
-            before = function(entry, vim_item)
-                vim_item.menu = ({
-                    copilot = '[AI]',
-                    nvim_lsp = '[LSP]',
-                    emoji = '[EMO]',
-                    path = '[PTH]',
-                    calc = '[CAL]',
-                    vsnip = '[SNI]',
-                    buffer = '[BUF]'
-                })[entry.source.name]
-                return vim_item
+        format = function(entry_stock, vim_item_stock)
+            if entry_stock.source.name == 'copilot' then
+                vim_item_stock.kind = ' Copilot'
+                vim_item_stock.kind_hl_group = 'CmpItemKindCopilot'
+                return vim_item_stock
             end
-        })
+            return lspkind.cmp_format({
+                mode = 'symbol_text', -- show only symbol annotations
+                maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
+
+                -- The function below will be called before any actual modifications from lspkind
+                -- so that you can provide more controls on popup customization. (See [#30](https://github.com/onsails/lspkind-nvim/pull/30))
+                before = function(entry, vim_item)
+                    vim_item.menu = ({
+                        copilot = '[AI]',
+                        nvim_lsp = '[LSP]',
+                        emoji = '[EMO]',
+                        path = '[PTH]',
+                        calc = '[CAL]',
+                        luasnip = '[SNI]',
+                        buffer = '[BUF]'
+                    })[entry.source.name]
+                    return vim_item
+                end
+            })(entry_stock, vim_item_stock)
+        end
     },
     window = {
         completion = { -- rounded border; thin-style scrollbar
@@ -85,6 +92,9 @@ cmp.setup({
     }
 })
 
+-- Codepilot color
+vim.api.nvim_set_hl(0, 'CmpItemKindCopilot', {fg = '#6CC644'})
+
 -- Set configuration for specific filetype.
 cmp.setup.filetype('gitcommit', {
     sources = cmp.config.sources({
@@ -96,6 +106,5 @@ cmp.setup.filetype('gitcommit', {
 cmp.setup.cmdline('/', {sources = {{name = 'buffer'}}})
 
 -- For autopairs
-cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done({map_char = {tex = ''}}))
-cmp_autopairs.lisp[#cmp_autopairs.lisp + 1] = 'racket'
+cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
 

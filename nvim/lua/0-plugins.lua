@@ -44,16 +44,17 @@ return require('packer').startup(function()
     use {'christoomey/vim-tmux-navigator'}
 
     -- Help code suggestion with github's Copilot
-    use {
-        'github/copilot.vim',
-        config = function()
-            vim.cmd([[
-		imap <silent><script><expr> <C-A> copilot#Accept("\<CR>")
-		let g:copilot_no_tab_map = v:true
-	]])
-        end
-    }
-    -- use {'hrsh7th/cmp-copilot', after = {'copilot.vim', 'nvim-cmp'}}
+    -- Ma fen is gone, friendship now requires paying :(
+    -- use {
+    --     'zbirenbaum/copilot.lua',
+    --     event = {'VimEnter'},
+    --     config = function()
+    --         vim.defer_fn(function()
+    --             require('copilot').setup()
+    --         end, 100)
+    --     end
+    -- }
+    -- use {'zbirenbaum/copilot-cmp', module = 'copilot_cmp'}
 
     -- Code auto complete with luasnip as snippet's manager
     use {
