@@ -1,4 +1,4 @@
--- This file content setup for cmp completion
+-- This file content setup for code completion
 local cmp = require 'cmp'
 local lspkind = require('lspkind')
 local luasnip = require('luasnip')
@@ -34,13 +34,16 @@ cmp.setup({
                 -- so that you can provide more controls on popup customization. (See [#30](https://github.com/onsails/lspkind-nvim/pull/30))
                 before = function(entry, vim_item)
                     vim_item.menu = ({
-                        copilot = '[AI]',
+                        copilot = '[AIS]',
                         nvim_lsp = '[LSP]',
                         emoji = '[EMO]',
                         path = '[PTH]',
                         calc = '[CAL]',
                         luasnip = '[SNI]',
-                        buffer = '[BUF]'
+                        buffer = '[BUF]',
+                        spell = '[SPE]',
+                        nvim_lua = '[NVI]',
+                        tmux = '[MUX]'
                     })[entry.source.name]
                     return vim_item
                 end
@@ -88,12 +91,23 @@ cmp.setup({
     sources = {
         {name = 'copilot', priority = 7}, {name = 'nvim_lsp', priority = 6},
         {name = 'luasnip', priority = 3}, {name = 'buffer', priority = 4},
-        {name = 'path', priority = 3}
+        {name = 'path', priority = 3}, {name = 'nvim_lua', priority = 3},
+        {name = 'spell', priority = 3}, {name = 'tmux', priority = 2, option = {all_panes = true}}
+    },
+    sorting = {
+        comparators = {
+            cmp.config.compare.offset, cmp.config.compare.exact, cmp.config.compare.score,
+            require'cmp-under-comparator'.under, cmp.config.compare.kind,
+            cmp.config.compare.sort_text, cmp.config.compare.length, cmp.config.compare.order
+        }
     }
 })
-
 -- Codepilot color
 vim.api.nvim_set_hl(0, 'CmpItemKindCopilot', {fg = '#6CC644'})
+
+-- Config complete for vim cmd
+cmp.setup.cmdline(':', {mapping = cmp.mapping.preset.cmdline(), sources = {{name = 'cmdline'}}})
+cmp.setup.cmdline('/', {mapping = cmp.mapping.preset.cmdline(), sources = {{name = 'buffer'}}})
 
 -- Set configuration for specific filetype.
 cmp.setup.filetype('gitcommit', {
@@ -102,9 +116,5 @@ cmp.setup.filetype('gitcommit', {
     }, {{name = 'buffer'}})
 })
 
--- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
-cmp.setup.cmdline('/', {sources = {{name = 'buffer'}}})
-
 -- For autopairs
 cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
-

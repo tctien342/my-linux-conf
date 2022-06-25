@@ -1,82 +1,93 @@
+local autopairs_config = require('configs.autopairs')
+local treesitter_config = require('configs.treesister')
+local hlargs_config = require('configs.hlargs')
+local bufferline_config = require('configs.bufferline')
 local explorer_config = require('configs.explorer')
 local scroll_config = require('configs.scroll')
 local lualine_config = require('configs.lualine')
-local treesitter_config = require('configs.treesister')
 local gomove_config = require('configs.gomove')
 local telescope_config = require('configs.telescope')
 local theme_config = require('configs.theme')
-local wilder_config = require('configs.wilder')
 local comment_config = require('configs.comment')
 
 return require('packer').startup(function()
-    -- Packer can manage itself
-    use 'wbthomason/packer.nvim'
+    use 'wbthomason/packer.nvim' -- Packer can manage itself
 
-    -- Auto pairs
     use {
-        'windwp/nvim-autopairs',
-        config = function()
-            require('nvim-autopairs').setup {}
-        end
+        'windwp/nvim-autopairs', --------------------- Add support for auto pairs
+        requires = {'nvim-treesitter/nvim-treesitter'},
+        config = autopairs_config
     }
 
-    -- Treesitter for better language compatible
     use {
-        'nvim-treesitter/nvim-treesitter',
+        'nvim-treesitter/nvim-treesitter', ------------------ Treesitter for highlight syntax, language compatible
         requires = {
-            'windwp/nvim-ts-autotag', 'JoosepAlviste/nvim-ts-context-commentstring',
-            'p00f/nvim-ts-rainbow'
+            'windwp/nvim-ts-autotag', ----------------------- Support auto tag for html
+            'JoosepAlviste/nvim-ts-context-commentstring', -- Better comment block code
+            'p00f/nvim-ts-rainbow' -------------------------- Add rainbow color for code pair
         },
         run = ':TSUpdate',
         config = treesitter_config
     }
 
-    -- Dim unused variable
     use {
-        'narutoxy/dim.lua',
+        'm-demare/hlargs.nvim', ----------------------------- Support for highlight function args
+        requires = {'nvim-treesitter/nvim-treesitter'},
+        config = hlargs_config
+    }
+
+    use {
+        'narutoxy/dim.lua', ------------------------------- Dim unused variable
         requires = {'nvim-treesitter/nvim-treesitter', 'neovim/nvim-lspconfig'},
         config = function()
             require('dim').setup({disable_lsp_decorations = true})
         end
     }
 
-    -- Navigtion with tmux using HJKL
-    use {'christoomey/vim-tmux-navigator'}
-
-    -- Help code suggestion with github's Copilot
-    -- Ma fen is gone, friendship now requires paying :(
-    -- use {
-    --     'zbirenbaum/copilot.lua',
-    --     event = {'VimEnter'},
-    --     config = function()
-    --         vim.defer_fn(function()
-    --             require('copilot').setup()
-    --         end, 100)
-    --     end
-    -- }
-    -- use {'zbirenbaum/copilot-cmp', module = 'copilot_cmp'}
-
-    -- Code auto complete with luasnip as snippet's manager
     use {
-        'hrsh7th/nvim-cmp', 'hrsh7th/cmp-nvim-lsp', 'hrsh7th/cmp-buffer', 'hrsh7th/cmp-path',
-        'hrsh7th/cmp-cmdline', 'onsails/lspkind-nvim', 'L3MON4D3/LuaSnip',
-        'saadparwaiz1/cmp_luasnip'
+        'christoomey/vim-tmux-navigator' ----- Navigtion between screen and tmux using HJKL
     }
 
-    -- Collection of configurations for the built-in LSP client
     use {
-        'neovim/nvim-lspconfig', 'williamboman/nvim-lsp-installer', 'RRethy/vim-illuminate', {
-            -- LSP status on bottom right of screen
-            'j-hui/fidget.nvim',
-            config = function()
-                require'fidget'.setup {window = {blend = 0}}
-            end
-        }
+        'neovim/nvim-lspconfig', ------------- Setup built-in LSP
+        'williamboman/nvim-lsp-installer' ---- Auto download language server
     }
 
-    -- use
     use {
-        'mattn/emmet-vim',
+        'j-hui/fidget.nvim', ----------------- Add LSP status at bottom-right
+        config = function()
+            require'fidget'.setup {window = {blend = 0}}
+        end
+    }
+
+    use {
+        'hrsh7th/nvim-cmp', -------------------- UI Completion
+        'hrsh7th/cmp-nvim-lsp', ---------------- Nvim LSP binding
+        'hrsh7th/cmp-buffer', ------------------ Buffer completion
+        'hrsh7th/cmp-path', -------------------- Path Completion
+        'onsails/lspkind-nvim', ---------------- Vscode style in completion
+        'L3MON4D3/LuaSnip', -------------------- Support snippet for completion
+        'saadparwaiz1/cmp_luasnip', ------------ Snippet source
+        'hrsh7th/cmp-nvim-lua', ---------------- Completion for Nvim lua API
+        'f3fora/cmp-spell', -------------------- Spell suggestion
+        'andersevenrud/cmp-tmux', -------------- Completion from tmux content,
+        'lukas-reineke/cmp-under-comparator', -- Better completion's sorting
+        'hrsh7th/cmp-cmdline', ----------------- Bind completion into vim cmd
+        'zbirenbaum/copilot-cmp' --------------- Copilot completion
+    }
+
+    use {
+        'zbirenbaum/copilot.lua', -------------- Help auto complete from some case
+        event = {'VimEnter'},
+        config = function()
+            vim.defer_fn(function()
+                require('copilot').setup()
+            end, 100)
+        end
+    }
+
+    use {
+        'mattn/emmet-vim', -------------------- Emmet support for NVIM
         config = function()
             vim.cmd([[
               let g:user_emmet_leader_key=','
@@ -84,52 +95,38 @@ return require('packer').startup(function()
         end
     }
 
-    -- Rust support
     use {
-        'simrat39/rust-tools.nvim',
-        requires = {
-            'neovim/nvim-lspconfig', 'nvim-lua/plenary.nvim', 'mfussenegger/nvim-dap',
-            'alx741/vim-rustfmt'
-        }
+        'simrat39/rust-tools.nvim', ---------- Rust workplace,
+        'alx741/vim-rustfmt', ---------------- Using RustFtm for code formating
+        requires = {'neovim/nvim-lspconfig', 'nvim-lua/plenary.nvim', 'mfussenegger/nvim-dap'}
     }
 
-    -- Flutter support
     use {
-        'akinsho/flutter-tools.nvim',
+        'akinsho/flutter-tools.nvim', -------- Flutter workplace
         requires = 'nvim-lua/plenary.nvim',
         config = function()
             require('flutter-tools').setup {widget_guides = {enabled = true}}
         end
     }
 
-    -- For checking and debug LSP diagnostic
     use {
-        'folke/trouble.nvim',
+        'folke/trouble.nvim', --------------- Lsp warning and error support tool
         requires = 'kyazdani42/nvim-web-devicons',
         config = function()
             require('trouble').setup {}
-            vim.cmd([[
-	        nnoremap <leader>xx <cmd>TroubleToggle<cr>
-                nnoremap <leader>xw <cmd>TroubleToggle workspace_diagnostics<cr>
-                nnoremap <leader>xd <cmd>TroubleToggle document_diagnostics<cr>
-                nnoremap <leader>xq <cmd>TroubleToggle quickfix<cr>
-                nnoremap <leader>xl <cmd>TroubleToggle loclist<cr>
-            ]])
         end
     }
 
-    -- Code action sign
     use {
-        'kosayoda/nvim-lightbulb',
+        'kosayoda/nvim-lightbulb', --------------------- Add lsp action sign
+        requires = 'antoinemadec/FixCursorHold.nvim', -- Fix CursorHold performance
         config = function()
-            require'nvim-lightbulb'.setup {}
-            vim.cmd [[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()]]
+            require('nvim-lightbulb').setup({autocmd = {enabled = true}})
         end
     }
 
-    -- Function's signature when coding
     use {
-        'ray-x/lsp_signature.nvim',
+        'ray-x/lsp_signature.nvim', ------------------- Function's signature information
         requires = 'williamboman/nvim-lsp-installer',
         config = function()
             require'lsp_signature'.setup({
@@ -143,82 +140,65 @@ return require('packer').startup(function()
         end
     }
 
-    -- For files searching, code actions
     use {
-        'nvim-telescope/telescope.nvim',
+        'nvim-telescope/telescope.nvim', -------------- File search, text search, buffer search...
         requires = {{'nvim-lua/plenary.nvim'}},
         config = telescope_config
     }
 
-    use {'nvim-telescope/telescope-ui-select.nvim', requires = {'nvim-telescope/telescope.nvim'}}
-
-    -- Format code for common languages
-    use {'prettier/vim-prettier', run = 'npm i && npm i prettier-plugin-solidity'}
-
-    -- Tree explorer
     use {
-        'kyazdani42/nvim-tree.lua',
+        'nvim-telescope/telescope-ui-select.nvim', ------ Code action for telescope
+        requires = {'nvim-telescope/telescope.nvim'}
+    }
+
+    use {
+        'prettier/vim-prettier', -------------------------- Code formatter for common language
+        run = 'npm i && npm i prettier-plugin-solidity'
+    }
+
+    use {
+        'kyazdani42/nvim-tree.lua', ----------------------- File Explorer
         requires = {
-            'kyazdani42/nvim-web-devicons' -- not strictly required, but recommended
+            'kyazdani42/nvim-web-devicons' ---------------- Support icons
         },
         config = explorer_config
     }
 
-    -- Fast close buffer with Leader-bx or Leader-bs
-    use 'kyoz/ezbuf.vim'
+    use 'kyoz/ezbuf.vim' ---------------------------------- Fast delete buffer LeaderBX and LeaderBS
+    use 'mg979/vim-visual-multi' -------------------------- Multiple cursor with Ctrl-N
 
-    -- Multiple cursor with C-N
-    use 'mg979/vim-visual-multi'
-
-    -- Comment block of code
     use {
-        'numToStr/Comment.nvim',
+        'numToStr/Comment.nvim', -------------------------- Better comment block of codes
         requires = 'JoosepAlviste/nvim-ts-context-commentstring',
         config = comment_config
     }
 
-    -- Theme of nvim, transparent background
     use {
-        'projekt0n/github-nvim-theme',
+        'projekt0n/github-nvim-theme', -------------------- Nvim theme
         requires = {'ray-x/lsp_signature.nvim'},
         config = theme_config
     }
 
-    -- Color viewer
     use {
-        'norcalli/nvim-colorizer.lua',
-        config = function()
-            require'colorizer'.setup()
-        end
-    }
-    -- Buffer's tab
-    use {
-        'akinsho/bufferline.nvim',
-        config = function()
-            require('bufferline').setup {
-                options = {
-                    diagnostics = 'nvim_lsp',
-                    offsets = {
-                        {filetype = 'NvimTree', text = 'File Explorer', text_align = 'center'}
-                    }
-                }
-            }
-            vim.cmd([[nnoremap <silent> gt :BufferLinePick<CR>]])
-        end
+        'rrethy/vim-hexokinase', ------------------------- Color review tool
+        run = 'make hexokinase'
     }
 
-    -- For show location in lualine
     use {
-        'SmiteshP/nvim-gps',
+        'akinsho/bufferline.nvim', ----------------------- Buffer tabs
+        config = bufferline_config
+    }
+
+    use {
+        'SmiteshP/nvim-gps', ----------------------------- Current line location in LSP for lualine
         requires = 'nvim-treesitter/nvim-treesitter',
         config = function()
             require('nvim-gps').setup()
         end
     }
 
-    -- Vim status line
     use {
-        'nvim-lualine/lualine.nvim',
+        'nvim-lualine/lualine.nvim', ---------------------- Bottom line status
         after = 'github-nvim-theme',
         requires = {
             {'kyazdani42/nvim-web-devicons', opt = true}, 'ray-x/lsp_signature.nvim',
@@ -227,59 +207,39 @@ return require('packer').startup(function()
         config = lualine_config
     }
 
-    -- Smooth scroll
-    use {'karb94/neoscroll.nvim', config = scroll_config}
-
-    -- Move block code
-    use {'booperlv/nvim-gomove', config = gomove_config}
-
-    -- Scrollbar with LSP support
     use {
-        'petertriho/nvim-scrollbar',
+        'karb94/neoscroll.nvim', ------------------------- Smooth scrolling support
+        config = scroll_config
+    }
+
+    use {
+        'booperlv/nvim-gomove', ------------------------- Support for moving block code
+        config = gomove_config
+    }
+
+    use {
+        'petertriho/nvim-scrollbar', -------------------- Add scrollbar in file
         config = function()
             require('scrollbar').setup()
         end
     }
 
-    -- Auto forcus window
-    -- use {
-    --     'beauwilliams/focus.nvim',
-    --     config = function()
-    --         require('focus').setup({
-    --             relativenumber = false,
-    --             hybridnumber = false,
-    --             cursorline = false,
-    --             signcolumn = false,
-    --             compatible_filetrees = {'neo-tree'},
-    --             treewidth = 30
-    --         })
-    --     end
-    -- }
-
-    use {'roxma/nvim-yarp', run = 'pip install -r requirements.txt'}
-
     use {
-        'gelguy/wilder.nvim',
-        requires = {'roxma/nvim-yarp', 'roxma/vim-hug-neovim-rpc'},
-        config = wilder_config
-    }
-
-    use {
-        'andweeb/presence.nvim',
+        'andweeb/presence.nvim', ----------------------- Support for Discord status
         config = function()
             require('presence'):setup({})
         end
     }
 
     use {
-        'lewis6991/gitsigns.nvim',
+        'lewis6991/gitsigns.nvim', --------------------- Add git info into buffer, AKA gitlens in vscode
         config = function()
             require('gitsigns').setup({current_line_blame = true})
         end
     }
 
     use {
-        'lukas-reineke/indent-blankline.nvim',
+        'lukas-reineke/indent-blankline.nvim', --------- Better space and tab visual
         config = function()
             vim.opt.list = true
             require('indent_blankline').setup {
@@ -291,34 +251,23 @@ return require('packer').startup(function()
     }
 
     use {
-        'phaazon/hop.nvim',
-        branch = 'v1', -- optional but strongly recommended
+        'phaazon/hop.nvim', ---------------------------- Jump around buffer with go word(gw) and go line(gl)
+        branch = 'v1',
         config = function()
-            -- you can configure Hop the way you like here; see :h hop-config
             require'hop'.setup {keys = 'etovxqpdygfblzhckisuran'}
         end
     }
 
-    -- Discord activity
     use {
-        'napmn/react-extract.nvim',
-        config = function()
-            require('react-extract').setup()
-            vim.keymap.set({'v'}, '<Leader>re', require('react-extract').extract_to_new_file)
-        end
-    }
-
-    use {
-        'akinsho/toggleterm.nvim',
+        'akinsho/toggleterm.nvim', --------------------- Add support for terminal, quick open with ctrl-t and <index>-ctrl-t
         tag = 'v1.*',
         config = function()
             require('toggleterm').setup()
         end
     }
 
-    -- Work space management
     use {
-        'natecraddock/workspaces.nvim',
+        'natecraddock/workspaces.nvim', ---------------- Add support for multiple workspace
         config = function()
             require('workspaces').setup({hooks = {open = {'BCloseAll'}}})
         end

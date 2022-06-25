@@ -10,10 +10,11 @@ set guioptions-=L "-------------------------------- Remove left-hand scroll bar
 set nowrap "------------------------------------------ Single row, no break line
 set nocompatible "--------------------------------------------- For Nvim Polygot
 set colorcolumn=0 "-------------------------------------------- line column show
-set nospell "-------------------------------------------------- Disable spelling
+set spell "-------------------------------------------- Enable spelling checking
+set spelllang=en_us "------------------------------------------ Default language
+set spelloptions=camel "--------------------------------------- Support JS camel
 set title "-------------------------------------- Let vim set the terminal title
 set updatetime=100 "-------------------------------- Redraw the status bar often
-" set list "--------------------------------------------- Show trailing whitespace
 set showcmd "--------------------------------------- Display incomplete commands
 set laststatus=2 "-------------------------------------- Always show status line
 set showtabline=2 "----------------------------------------- Always show tabline
@@ -53,6 +54,18 @@ set smarttab
 
 " }}}
 
+
+" FIX JS Camel case {{{
+
+fun! IgnoreCamelCaseSpell()
+    syn match myExCapitalWords +\<\w*[A-Z]\K*\>+ contains=@NoSpell
+endfun
+
+autocmd BufRead,BufNewFile * :call IgnoreCamelCaseSpell()
+autocmd BufRead,BufNewFile * :syntax on
+
+" }}}
+
 " PYTHON PROVIDERS {{{
 
   if has('macunix')
@@ -75,3 +88,4 @@ endif
 
 
 set clipboard=unnamedplus "------------------------------------- Enable clipboard
+

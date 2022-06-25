@@ -10,6 +10,7 @@ local config = function()
     vim.cmd([[
        hi NormalFloat guibg=NONE
        hi Pmenu guibg=NONE
+       hi SpellBad cterm=underline guisp=gray
     ]])
 end
 

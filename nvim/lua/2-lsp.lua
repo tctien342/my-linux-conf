@@ -35,7 +35,6 @@ end
 
 -- Default attach for all server
 local attach_default = function(client, bufnr)
-    require'illuminate'.on_attach(client)
 end
 
 -- Specific server configuration
