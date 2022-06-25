@@ -5,7 +5,6 @@ local bufferline_config = require('configs.bufferline')
 local explorer_config = require('configs.explorer')
 local scroll_config = require('configs.scroll')
 local lualine_config = require('configs.lualine')
-local gomove_config = require('configs.gomove')
 local telescope_config = require('configs.telescope')
 local theme_config = require('configs.theme')
 local comment_config = require('configs.comment')
@@ -40,7 +39,7 @@ return require('packer').startup(function()
         'narutoxy/dim.lua', ------------------------------- Dim unused variable
         requires = {'nvim-treesitter/nvim-treesitter', 'neovim/nvim-lspconfig'},
         config = function()
-            require('dim').setup({disable_lsp_decorations = true})
+            require'dim'.setup {disable_lsp_decorations = true}
         end
     }
 
@@ -81,7 +80,7 @@ return require('packer').startup(function()
         event = {'VimEnter'},
         config = function()
             vim.defer_fn(function()
-                require('copilot').setup()
+                require'copilot'.setup {}
             end, 100)
         end
     }
@@ -89,9 +88,7 @@ return require('packer').startup(function()
     use {
         'mattn/emmet-vim', -------------------- Emmet support for NVIM
         config = function()
-            vim.cmd([[
-              let g:user_emmet_leader_key=','
-            ]])
+            vim.g.user_emmet_leader_key = ','
         end
     }
 
@@ -105,7 +102,7 @@ return require('packer').startup(function()
         'akinsho/flutter-tools.nvim', -------- Flutter workplace
         requires = 'nvim-lua/plenary.nvim',
         config = function()
-            require('flutter-tools').setup {widget_guides = {enabled = true}}
+            require'flutter-tools'.setup {widget_guides = {enabled = true}}
         end
     }
 
@@ -113,7 +110,7 @@ return require('packer').startup(function()
         'folke/trouble.nvim', --------------- Lsp warning and error support tool
         requires = 'kyazdani42/nvim-web-devicons',
         config = function()
-            require('trouble').setup {}
+            require'trouble'.setup {}
         end
     }
 
@@ -121,7 +118,7 @@ return require('packer').startup(function()
         'kosayoda/nvim-lightbulb', --------------------- Add lsp action sign
         requires = 'antoinemadec/FixCursorHold.nvim', -- Fix CursorHold performance
         config = function()
-            require('nvim-lightbulb').setup({autocmd = {enabled = true}})
+            require'nvim-lightbulb'.setup {autocmd = {enabled = true}}
         end
     }
 
@@ -129,14 +126,14 @@ return require('packer').startup(function()
         'ray-x/lsp_signature.nvim', ------------------- Function's signature information
         requires = 'williamboman/nvim-lsp-installer',
         config = function()
-            require'lsp_signature'.setup({
+            require'lsp_signature'.setup {
                 bind = true, -- This is mandatory, otherwise border config won't get registered.
                 hint_enable = true,
                 fix_pos = false,
                 auto_close_after = 3,
                 floating_window = false,
                 handler_opts = {border = 'single'}
-            })
+            }
         end
     }
 
@@ -193,7 +190,7 @@ return require('packer').startup(function()
         'SmiteshP/nvim-gps', ----------------------------- Current line location in LSP for lualine
         requires = 'nvim-treesitter/nvim-treesitter',
         config = function()
-            require('nvim-gps').setup()
+            require'nvim-gps'.setup {}
         end
     }
 
@@ -214,27 +211,29 @@ return require('packer').startup(function()
 
     use {
         'booperlv/nvim-gomove', ------------------------- Support for moving block code
-        config = gomove_config
+        config = function()
+            require('gomove').setup {}
+        end
     }
 
     use {
         'petertriho/nvim-scrollbar', -------------------- Add scrollbar in file
         config = function()
-            require('scrollbar').setup()
+            require('scrollbar').setup {}
         end
     }
 
     use {
         'andweeb/presence.nvim', ----------------------- Support for Discord status
         config = function()
-            require('presence'):setup({})
+            require('presence'):setup{}
         end
     }
 
     use {
         'lewis6991/gitsigns.nvim', --------------------- Add git info into buffer, AKA gitlens in vscode
         config = function()
-            require('gitsigns').setup({current_line_blame = true})
+            require('gitsigns').setup {current_line_blame = true}
         end
     }
 
@@ -262,14 +261,14 @@ return require('packer').startup(function()
         'akinsho/toggleterm.nvim', --------------------- Add support for terminal, quick open with ctrl-t and <index>-ctrl-t
         tag = 'v1.*',
         config = function()
-            require('toggleterm').setup()
+            require('toggleterm').setup {}
         end
     }
 
     use {
         'natecraddock/workspaces.nvim', ---------------- Add support for multiple workspace
         config = function()
-            require('workspaces').setup({hooks = {open = {'BCloseAll'}}})
+            require('workspaces').setup {hooks = {open = {'BCloseAll'}}}
         end
     }
 end)
