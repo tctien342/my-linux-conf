@@ -73,7 +73,8 @@ return require('packer').startup(function()
         'andersevenrud/cmp-tmux', -------------- Completion from tmux content,
         'lukas-reineke/cmp-under-comparator', -- Better completion's sorting
         'hrsh7th/cmp-cmdline', ----------------- Bind completion into vim cmd
-        'zbirenbaum/copilot-cmp' --------------- Copilot completion
+        'zbirenbaum/copilot-cmp', -------------- Copilot completion
+        run = {'pip3 install black isort flake8 mypy'}
     }
 
     use {
