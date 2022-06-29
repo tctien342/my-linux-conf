@@ -1,7 +1,6 @@
 local efm_opts = function(opts)
     opts.init_options = {documentFormatting = true}
     opts.filetypes = {'lua', 'json', 'python'}
-    opts.cmd = {'/Users/saintno/go/bin/efm-langserver'}
     opts.settings = {
         rootMarkers = {'.git/'},
         languages = {
