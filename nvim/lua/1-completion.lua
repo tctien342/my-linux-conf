@@ -89,7 +89,7 @@ cmp.setup({
         ['<CR>'] = cmp.mapping.confirm({select = true})
     },
     sources = {
-        {name = 'copilot', priority = 7}, {name = 'nvim_lsp', priority = 6},
+        {name = 'copilot', priority = 5}, {name = 'nvim_lsp', priority = 6},
         {name = 'luasnip', priority = 3}, {name = 'buffer', priority = 4},
         {name = 'path', priority = 3}, {name = 'nvim_lua', priority = 3},
         {name = 'spell', priority = 3}, {name = 'tmux', priority = 2, option = {all_panes = true}}

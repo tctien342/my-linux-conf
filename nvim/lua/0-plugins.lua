@@ -8,6 +8,7 @@ local lualine_config = require('configs.lualine')
 local telescope_config = require('configs.telescope')
 local theme_config = require('configs.theme')
 local comment_config = require('configs.comment')
+local lspsaga_config = require('configs.lspsaga')
 
 return require('packer').startup(function()
     use 'wbthomason/packer.nvim' -- Packer can manage itself
@@ -114,13 +115,11 @@ return require('packer').startup(function()
         end
     }
 
-    use {
-        'kosayoda/nvim-lightbulb', --------------------- Add lsp action sign
-        requires = 'antoinemadec/FixCursorHold.nvim', -- Fix CursorHold performance
-        config = function()
-            require'nvim-lightbulb'.setup {autocmd = {enabled = true}}
-        end
-    }
+    use({
+        'glepnir/lspsaga.nvim', ------------- Bind extra feature into LSP
+        branch = 'main',
+        config = lspsaga_config
+    })
 
     use {
         'ray-x/lsp_signature.nvim', ------------------- Function's signature information
