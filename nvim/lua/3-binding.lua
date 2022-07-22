@@ -50,6 +50,9 @@ map('v', '<S-j>', '<Plug>GoVSMDown') ----------------------------- Move current 
 map('v', '<S-k>', '<Plug>GoVSMUp') ------------------------------- Move current block code up
 map('v', '<S-l>', '<Plug>GoVSMRight') ---------------------------- Move current block code right
 
+map('n', 'ts', '<cmd>colorscheme meh<cr>') ----------------------- Theme Simple, Simple color mode
+map('n', 'td', '<cmd>colorscheme sonokai<cr>') ------------------- Theme Default, for colorful
+
 ------------------------------------------------------------------
 -- Work space management                                         -
 ------------------------------------------------------------------

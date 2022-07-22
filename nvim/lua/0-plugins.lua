@@ -1,6 +1,5 @@
 local autopairs_config = require('configs.autopairs')
 local treesitter_config = require('configs.treesister')
-local hlargs_config = require('configs.hlargs')
 local bufferline_config = require('configs.bufferline')
 local explorer_config = require('configs.explorer')
 local scroll_config = require('configs.scroll')
@@ -32,16 +31,12 @@ return require('packer').startup(function()
 
     use {
         'm-demare/hlargs.nvim', ----------------------------- Support for highlight function args
-        requires = {'nvim-treesitter/nvim-treesitter'},
-        config = hlargs_config
+        requires = {'nvim-treesitter/nvim-treesitter'}
     }
 
     use {
         'narutoxy/dim.lua', ------------------------------- Dim unused variable
-        requires = {'nvim-treesitter/nvim-treesitter', 'neovim/nvim-lspconfig'},
-        config = function()
-            require'dim'.setup {disable_lsp_decorations = true}
-        end
+        requires = {'nvim-treesitter/nvim-treesitter', 'neovim/nvim-lspconfig'}
     }
 
     use {
@@ -170,8 +165,10 @@ return require('packer').startup(function()
         config = comment_config
     }
 
+    use 'davidosomething/vim-colors-meh'
     use {
-        'projekt0n/github-nvim-theme', -------------------- Nvim theme
+        'sainnhe/sonokai', ----------------------------------- Main Theme
+        -- 'projekt0n/github-nvim-theme', -------------------- Github theme
         requires = {'ray-x/lsp_signature.nvim'},
         config = theme_config
     }
@@ -196,7 +193,7 @@ return require('packer').startup(function()
 
     use {
         'nvim-lualine/lualine.nvim', ---------------------- Bottom line status
-        after = 'github-nvim-theme',
+        after = 'sonokai',
         requires = {
             {'kyazdani42/nvim-web-devicons', opt = true}, 'ray-x/lsp_signature.nvim',
             'SmiteshP/nvim-gps'

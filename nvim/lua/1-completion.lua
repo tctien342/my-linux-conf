@@ -20,40 +20,51 @@ cmp.setup({
         end
     },
     formatting = {
+        fields = {'kind', 'abbr', 'menu'},
         format = function(entry_stock, vim_item_stock)
+            local kind
             if entry_stock.source.name == 'copilot' then
                 vim_item_stock.kind = ' Copilot'
                 vim_item_stock.kind_hl_group = 'CmpItemKindCopilot'
-                return vim_item_stock
-            end
-            return lspkind.cmp_format({
-                mode = 'symbol_text', -- show only symbol annotations
-                maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
+                kind = vim_item_stock
+            else
+                kind = lspkind.cmp_format({
+                    mode = 'symbol_text', -- show only symbol annotations
+                    maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
 
-                -- The function below will be called before any actual modifications from lspkind
-                -- so that you can provide more controls on popup customization. (See [#30](https://github.com/onsails/lspkind-nvim/pull/30))
-                before = function(entry, vim_item)
-                    vim_item.menu = ({
-                        copilot = '[AIS]',
-                        nvim_lsp = '[LSP]',
-                        emoji = '[EMO]',
-                        path = '[PTH]',
-                        calc = '[CAL]',
-                        luasnip = '[SNI]',
-                        buffer = '[BUF]',
-                        spell = '[SPE]',
-                        nvim_lua = '[NVI]',
-                        tmux = '[MUX]'
-                    })[entry.source.name]
-                    return vim_item
-                end
-            })(entry_stock, vim_item_stock)
+                    -- The function below will be called before any actual modifications from lspkind
+                    -- so that you can provide more controls on popup customization. (See [#30](https://github.com/onsails/lspkind-nvim/pull/30))
+                    before = function(entry, vim_item)
+                        vim_item.menu = ({
+                            copilot = '[AIS]',
+                            nvim_lsp = '[LSP]',
+                            emoji = '[EMO]',
+                            path = '[PTH]',
+                            calc = '[CAL]',
+                            luasnip = '[SNI]',
+                            buffer = '[BUF]',
+                            spell = '[SPE]',
+                            nvim_lua = '[NVI]',
+                            tmux = '[MUX]'
+                        })[entry.source.name]
+                        return vim_item
+                    end
+                })(entry_stock, vim_item_stock)
+            end
+
+            local strings = vim.split(kind.kind, '%s', {trimempty = true})
+            kind.kind = ' ' .. strings[1] .. ' '
+            kind.menu = '    (' .. strings[2] .. ')'
+            return kind
         end
     },
     window = {
         completion = { -- rounded border; thin-style scrollbar
+            winhighlight = 'Normal:Pmenu,FloatBorder:BorderBG,CursorLine:PmenuSel,Search:None',
             border = 'single',
-            scrollbar = '║'
+            scrollbar = '║',
+            col_offset = -3,
+            side_padding = 0
         },
         documentation = {
             border = 'single',
@@ -102,8 +113,6 @@ cmp.setup({
         }
     }
 })
--- Codepilot color
-vim.api.nvim_set_hl(0, 'CmpItemKindCopilot', {fg = '#6CC644'})
 
 -- Config complete for vim cmd
 cmp.setup.cmdline(':', {mapping = cmp.mapping.preset.cmdline(), sources = {{name = 'cmdline'}}})
@@ -118,3 +127,51 @@ cmp.setup.filetype('gitcommit', {
 
 -- For autopairs
 cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
+
+-- Config highlights
+local highlight = {
+    PmenuSel = {bg = '#282C34', fg = 'NONE'},
+    Pmenu = {fg = '#C5CDD9', bg = '#22252A'},
+
+    CmpItemAbbrDeprecated = {fg = '#7E8294', bg = 'NONE', strikethrough = true},
+    CmpItemAbbrMatch = {fg = '#82AAFF', bg = 'NONE', bold = true},
+    CmpItemAbbrMatchFuzzy = {fg = '#82AAFF', bg = 'NONE', bold = true},
+    CmpItemMenu = {fg = '#C792EA', bg = 'NONE', italic = true},
+
+    CmpItemKindField = {fg = '#EED8DA', bg = '#B5585F'},
+    CmpItemKindProperty = {fg = '#EED8DA', bg = '#B5585F'},
+    CmpItemKindEvent = {fg = '#EED8DA', bg = '#B5585F'},
+
+    CmpItemKindText = {fg = '#C3E88D', bg = '#9FBD73'},
+    CmpItemKindEnum = {fg = '#C3E88D', bg = '#9FBD73'},
+    CmpItemKindKeyword = {fg = '#C3E88D', bg = '#9FBD73'},
+
+    CmpItemKindConstant = {fg = '#FFE082', bg = '#D4BB6C'},
+    CmpItemKindConstructor = {fg = '#FFE082', bg = '#D4BB6C'},
+    CmpItemKindReference = {fg = '#FFE082', bg = '#D4BB6C'},
+
+    CmpItemKindFunction = {fg = '#EADFF0', bg = '#A377BF'},
+    CmpItemKindStruct = {fg = '#EADFF0', bg = '#A377BF'},
+    CmpItemKindClass = {fg = '#EADFF0', bg = '#A377BF'},
+    CmpItemKindModule = {fg = '#EADFF0', bg = '#A377BF'},
+    CmpItemKindOperator = {fg = '#EADFF0', bg = '#A377BF'},
+
+    CmpItemKindVariable = {fg = '#C5CDD9', bg = '#7E8294'},
+    CmpItemKindFile = {fg = '#C5CDD9', bg = '#7E8294'},
+
+    CmpItemKindUnit = {fg = '#F5EBD9', bg = '#D4A959'},
+    CmpItemKindSnippet = {fg = '#F5EBD9', bg = '#D4A959'},
+    CmpItemKindFolder = {fg = '#F5EBD9', bg = '#D4A959'},
+
+    CmpItemKindMethod = {fg = '#DDE5F5', bg = '#6C8ED4'},
+    CmpItemKindValue = {fg = '#DDE5F5', bg = '#6C8ED4'},
+    CmpItemKindEnumMember = {fg = '#DDE5F5', bg = '#6C8ED4'},
+
+    CmpItemKindInterface = {fg = '#D8EEEB', bg = '#58B5A8'},
+    CmpItemKindColor = {fg = '#D8EEEB', bg = '#58B5A8'},
+    CmpItemKindTypeParameter = {fg = '#D8EEEB', bg = '#58B5A8'}
+}
+for k, v in pairs(highlight) do vim.api.nvim_set_hl(0, k, v) end
+
+-- Codepilot color
+vim.api.nvim_set_hl(0, 'CmpItemKindCopilot', {fg = '#6CC644'})
