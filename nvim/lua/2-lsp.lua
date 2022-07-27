@@ -5,6 +5,7 @@ local lspconfig = require 'lspconfig'
 
 -- Language server configuration
 local javascript_opts = require 'servers.javascript'
+local html_opts = require 'servers.html'
 local efm_opts = require 'servers.efm'
 local eslint_opts = require 'servers.eslint'
 local lua_opts = require 'servers.lua'
@@ -42,6 +43,7 @@ local enhance_server_opts = {
     ['tsserver'] = javascript_opts,
     ['eslint'] = eslint_opts,
     ['efm'] = efm_opts,
+    ['html'] = html_opts,
     ['sumneko_lua'] = lua_opts,
     ['emmet_ls'] = function(opts)
         opts.capabilities.textDocument.completion.completionItem.snippetSupport = true

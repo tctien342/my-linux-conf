@@ -23,7 +23,8 @@ return require('packer').startup(function()
         requires = {
             'windwp/nvim-ts-autotag', ----------------------- Support auto tag for html
             'JoosepAlviste/nvim-ts-context-commentstring', -- Better comment block code
-            'p00f/nvim-ts-rainbow' -------------------------- Add rainbow color for code pair
+            'p00f/nvim-ts-rainbow', ------------------------- Add rainbow color for code pair
+            'sheerun/vim-polyglot' -------------------------- Alternative for treesitter highlight
         },
         run = ':TSUpdate',
         config = treesitter_config
