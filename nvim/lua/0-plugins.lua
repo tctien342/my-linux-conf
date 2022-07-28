@@ -23,8 +23,7 @@ return require('packer').startup(function()
         requires = {
             'windwp/nvim-ts-autotag', ----------------------- Support auto tag for html
             'JoosepAlviste/nvim-ts-context-commentstring', -- Better comment block code
-            'p00f/nvim-ts-rainbow', ------------------------- Add rainbow color for code pair
-            'sheerun/vim-polyglot' -------------------------- Alternative for treesitter highlight
+            'p00f/nvim-ts-rainbow' -------------------------- Add rainbow color for code pair
         },
         run = ':TSUpdate',
         config = treesitter_config
@@ -55,6 +54,17 @@ return require('packer').startup(function()
             require'fidget'.setup {window = {blend = 0}}
         end
     }
+
+    use({
+        'https://git.sr.ht/~whynothugo/lsp_lines.nvim', --------- Show diagnostics in visual lines
+        config = function()
+            require('lsp_lines').setup()
+            vim.diagnostic.config({
+                virtual_text = false, --------------------------- Disable vim default diagnostics
+                virtual_lines = false --------------------------- Hide diagnostic by default
+            })
+        end
+    })
 
     use {
         'hrsh7th/nvim-cmp', -------------------- UI Completion

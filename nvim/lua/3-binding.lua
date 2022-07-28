@@ -10,6 +10,7 @@ local tele_defi =
     '<cmd>lua require("telescope.builtin").lsp_definitions({initial_mode = "normal"})<cr>'
 local diag_log = '<cmd>lua vim.diagnostic.open_float(nil, { focus = false, border = "single" })<cr>'
 local tele_ref = '<cmd>lua require("telescope.builtin").lsp_references()<cr>'
+local toggle_diag = '<cmd>lua require("lsp_lines").toggle()<cr>'
 local saga_range_action = function()
     vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<C-U>', true, false, true))
     lsp_action.range_code_action()
@@ -35,11 +36,11 @@ map('n', 'gp', '<cmd>PrettierAsync<cr>') ------------------------- Go prettier, 
 map('n', 'gj', tele_ref) ----------------------------------------- Go jump, jump to referrals
 map('n', 'gw', '<cmd>HopWord<cr>') ------------------------------- Go Word, jump into word
 map('n', 'gl', '<cmd>HopLine<cr>') ------------------------------- Go line, jump into line
-map('n', '``', diag_log) ----------------------------------------- Show diagnostic log under cursor
 map('n', '<C-q>', '<cmd>BClose<cr>') ----------------------------- Close current buffer
 map('n', 'D', '<cmd>Lspsaga hover_doc<CR>') ---------------------- Hover function detail
 map('n', '<C-f>', saga_scroll_up) -------------------------------- Move hover popup up, Forward
 map('n', '<C-b>', saga_scroll_down) ------------------------------ Move hover popup down, Backward
+map('n', '``', toggle_diag) -------------------------------------- Show diagnostic log under cursor
 
 map('n', '<S-h>', '<Plug>GoNSMLeft') ----------------------------- Move current character left
 map('n', '<S-j>', '<Plug>GoNSMDown') ----------------------------- Move current character down
