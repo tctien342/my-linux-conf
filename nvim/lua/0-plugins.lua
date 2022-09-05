@@ -55,17 +55,6 @@ return require('packer').startup(function()
         end
     }
 
-    use({
-        'https://git.sr.ht/~whynothugo/lsp_lines.nvim', --------- Show diagnostics in visual lines
-        config = function()
-            require('lsp_lines').setup()
-            vim.diagnostic.config({
-                virtual_text = false, --------------------------- Disable vim default diagnostics
-                virtual_lines = false --------------------------- Hide diagnostic by default
-            })
-        end
-    })
-
     use {
         'hrsh7th/nvim-cmp', -------------------- UI Completion
         'hrsh7th/cmp-nvim-lsp', ---------------- Nvim LSP binding
@@ -79,19 +68,27 @@ return require('packer').startup(function()
         'andersevenrud/cmp-tmux', -------------- Completion from tmux content,
         'lukas-reineke/cmp-under-comparator', -- Better completion's sorting
         'hrsh7th/cmp-cmdline', ----------------- Bind completion into vim cmd
-        'zbirenbaum/copilot-cmp', -------------- Copilot completion
+        -- 'zbirenbaum/copilot-cmp', -------------- Copilot completion
         run = {'pip3 install black isort flake8 mypy'}
     }
 
     use {
-        'zbirenbaum/copilot.lua', -------------- Help auto complete from some case
-        event = {'VimEnter'},
+        'kosayoda/nvim-lightbulb',
+        requires = 'antoinemadec/FixCursorHold.nvim',
         config = function()
-            vim.defer_fn(function()
-                require'copilot'.setup {}
-            end, 100)
+            require('nvim-lightbulb').setup({autocmd = {enabled = true}})
         end
     }
+
+    -- use {
+    --     'zbirenbaum/copilot.lua', -------------- Help auto complete from some case
+    --     event = {'VimEnter'},
+    --     config = function()
+    --         vim.defer_fn(function()
+    --             require'copilot'.setup {}
+    --         end, 100)
+    --     end
+    -- }
 
     use {
         'mattn/emmet-vim', -------------------- Emmet support for NVIM
@@ -111,6 +108,14 @@ return require('packer').startup(function()
         requires = 'nvim-lua/plenary.nvim',
         config = function()
             require'flutter-tools'.setup {widget_guides = {enabled = true}}
+        end
+    }
+
+    use {
+        'windwp/nvim-spectre',
+        requires = 'nvim-lua/plenary.nvim',
+        config = function()
+            require'spectre'.setup {}
         end
     }
 
@@ -178,8 +183,7 @@ return require('packer').startup(function()
 
     use 'davidosomething/vim-colors-meh'
     use {
-        'sainnhe/sonokai', ----------------------------------- Main Theme
-        -- 'projekt0n/github-nvim-theme', -------------------- Github theme
+        'projekt0n/github-nvim-theme', -------------------- Github theme
         requires = {'ray-x/lsp_signature.nvim'},
         config = theme_config
     }
@@ -204,7 +208,6 @@ return require('packer').startup(function()
 
     use {
         'nvim-lualine/lualine.nvim', ---------------------- Bottom line status
-        after = 'sonokai',
         requires = {
             {'kyazdani42/nvim-web-devicons', opt = true}, 'ray-x/lsp_signature.nvim',
             'SmiteshP/nvim-gps'
@@ -249,6 +252,7 @@ return require('packer').startup(function()
         'lukas-reineke/indent-blankline.nvim', --------- Better space and tab visual
         config = function()
             vim.opt.list = true
+            vim.opt.listchars:append 'space:⋅'
             require('indent_blankline').setup {
                 space_char_blankline = ' ',
                 show_current_context = true,

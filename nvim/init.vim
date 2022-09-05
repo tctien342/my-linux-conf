@@ -3,6 +3,7 @@
 " CONFIG'S SOURCES {{{
     runtime vim/0.general.vim "---- General vim config
     runtime vim/1.neovide.vim "---- Neovide specifict config
+    runtime vim/2.etc.vim "-------- Other configs
 " }}}
 
 " LUA CONFIGURATION {{{

@@ -6,9 +6,9 @@ local config = function()
         move_in_saga = {prev = 'k', next = 'j'},
         show_diagnostic_source = true,
         code_action_icon = '💡',
-        code_action_num_shortcut = true,
+        code_action_num_shortcut = false,
         code_action_lightbulb = {
-            enable = true,
+            enable = false,
             sign = true,
             sign_priority = 20,
             virtual_text = true

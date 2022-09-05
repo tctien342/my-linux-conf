@@ -1,4 +1,3 @@
-local action = require('lspsaga.action')
 local lsp_action = require('lspsaga.codeaction')
 local utils = require 'configs.utils'
 local map = utils.map
@@ -10,16 +9,14 @@ local tele_defi =
     '<cmd>lua require("telescope.builtin").lsp_definitions({initial_mode = "normal"})<cr>'
 local diag_log = '<cmd>lua vim.diagnostic.open_float(nil, { focus = false, border = "single" })<cr>'
 local tele_ref = '<cmd>lua require("telescope.builtin").lsp_references()<cr>'
-local toggle_diag = '<cmd>lua require("lsp_lines").toggle()<cr>'
+local toggle_diag = '<cmd>Lspsaga show_line_diagnostics<CR>'
 local saga_range_action = function()
     vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<C-U>', true, false, true))
     lsp_action.range_code_action()
 end
 local saga_scroll_up = function()
-    action.smart_scroll_with_saga(1)
 end
 local saga_scroll_down = function()
-    action.smart_scroll_with_saga(1)
 end
 
 ------------------------------------------------------------------
@@ -52,7 +49,11 @@ map('v', '<S-k>', '<Plug>GoVSMUp') ------------------------------- Move current 
 map('v', '<S-l>', '<Plug>GoVSMRight') ---------------------------- Move current block code right
 
 map('n', 'ts', '<cmd>colorscheme meh<cr>') ----------------------- Theme Simple, Simple color mode
-map('n', 'td', '<cmd>colorscheme sonokai<cr>') ------------------- Theme Default, for colorful
+map('n', 'td', '<cmd>colorscheme xcodedark<cr>') ----------------- Theme Default, for colorful
+
+map('n', 'ff', '<cmd>lua require("spectre").open()<CR>') --------- FIND FIND Open search dialog
+map('n', 'fw', '<cmd>lua require("spectre").open_visual({select_word=true})<CR>') --------- FIND WORD Open search dialog for current word
+map('v', 'f', '<esc>:lua require("spectre").open_visual()<CR>') -- FIND WORD Open search dialog for current selected word
 
 ------------------------------------------------------------------
 -- Work space management                                         -

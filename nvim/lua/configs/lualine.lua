@@ -3,7 +3,7 @@ local config = function()
     require('lualine').setup {
         options = {
             fmt = string.lower,
-            theme = 'sonokai',
+            theme = 'github_dark',
             section_separators = {left = '', right = ''}
         },
         sections = {

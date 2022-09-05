@@ -1,20 +1,15 @@
 local config = function()
     -- GITHUB THEME CONFIG
-    -- require('github-theme').setup({
-    --     theme_style = 'dimmed',
-    --     transparent = true,
-    --     function_style = 'bold',
-    --     dark_float = false,
-    --     dark_sidebar = false
-    -- })
+    require('github-theme').setup({
+        theme_style = 'dimmed',
+        transparent = true,
+        function_style = 'bold',
+        dark_float = false,
+        dark_sidebar = false
+    })
+
     -- Transparency float widow
     vim.cmd([[
-      let g:sonokai_style = 'andromeda'
-      let g:sonokai_better_performance = 1
-      let g:sonokai_enable_italic = 1
-      let g:sonokai_transparent_background = 1
-      colorscheme sonokai
-
       hi NormalFloat guibg=NONE
       hi Pmenu guibg=NONE
       hi SpellBad cterm=underline guisp=gray
