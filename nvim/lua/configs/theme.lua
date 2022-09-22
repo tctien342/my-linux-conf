@@ -1,15 +1,18 @@
 local config = function()
     -- GITHUB THEME CONFIG
-    require('github-theme').setup({
-        theme_style = 'dimmed',
-        transparent = true,
-        function_style = 'bold',
-        dark_float = false,
-        dark_sidebar = false
-    })
+    -- require('github-theme').setup({
+    --     theme_style = 'dimmed',
+    --     transparent = true,
+    --     function_style = 'bold',
+    --     dark_float = false,
+    --     dark_sidebar = false
+    -- })
 
     -- Transparency float widow
+    vim.g.rasmus_bold_booleans = true
+    vim.g.rasmus_transparent = true
     vim.cmd([[
+      colorscheme rasmus
       hi NormalFloat guibg=NONE
       hi Pmenu guibg=NONE
       hi SpellBad cterm=underline guisp=gray

@@ -28,7 +28,6 @@ set splitright  "---------------------------------- Fix nvim-tree not fixed left
 set clipboard=unnamedplus "------------------------------------ Enable clipboard
 
 
-set termguicolors "--------------------------------------- True color for neovim
 if (empty($TMUX))
   if (has("nvim"))
     let $NVIM_TUI_ENABLE_TRUE_COLOR=1
@@ -38,6 +37,8 @@ if (empty($TMUX))
     let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
     set termguicolors
   endif
+else
+  set termguicolors "--------------------------------------- True color for neovim
 endif
 
 set noswapfile "------------------------------------------ Dont create wrap file

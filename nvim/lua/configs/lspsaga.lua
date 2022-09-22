@@ -4,7 +4,7 @@ local config = function()
     saga.init_lsp_saga({
         border_style = 'single',
         move_in_saga = {prev = 'k', next = 'j'},
-        show_diagnostic_source = true,
+        -- show_diagnostic_source = true,
         code_action_icon = '💡',
         code_action_num_shortcut = false,
         code_action_lightbulb = {

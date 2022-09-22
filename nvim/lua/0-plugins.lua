@@ -183,7 +183,8 @@ return require('packer').startup(function()
 
     use 'davidosomething/vim-colors-meh'
     use {
-        'projekt0n/github-nvim-theme', -------------------- Github theme
+        -- 'projekt0n/github-nvim-theme', -------------------- Github theme
+        'kvrohit/rasmus.nvim',
         requires = {'ray-x/lsp_signature.nvim'},
         config = theme_config
     }
