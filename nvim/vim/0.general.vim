@@ -1,6 +1,6 @@
 let mapleader = " " "---------------------------------------- Setting leader key
 set pumheight=6 "----------------------------------- limit autocomple candidates
-set completeopt=longest,menu,noselect "---------------- Setup for CMP completion
+set completeopt=menu,menuone,noselect "------------- Setup for CMP completion
 
 set guioptions-=m "--------------------------------------------- Remove menu bar
 set guioptions-=T "---------------------------------------------- Remove toolbar
@@ -9,9 +9,8 @@ set guioptions-=L "--------------------------------- Remove left-hand scroll bar
 
 set encoding=UTF-8 "------------------------------------------ Set nvim encoding
 set nowrap "------------------------------------------ Single row, no break line
-set nocompatible "--------------------------------------------- For Nvim Polygot
 set colorcolumn=0 "-------------------------------------------- line column show
-set spell "-------------------------------------------- Enable spelling checking
+" set spell "-------------------------------------------- Enable spelling checking
 set spelllang=en_us "------------------------------------------ Default language
 set spelloptions=camel "--------------------------------------- Support JS camel
 set title "-------------------------------------- Let vim set the terminal title
@@ -20,7 +19,7 @@ set showcmd "--------------------------------------- Display incomplete commands
 set laststatus=2 "-------------------------------------- Always show status line
 set showtabline=2 "----------------------------------------- Always show tabline
 set display+=lastline "--------------------- As must as possible of the lastline
-set previewheight=3 "------------------------------------ Smaller preview height
+set previewheight=4 "------------------------------------ Smaller preview height
 set relativenumber "--------------------------------------- Show relative number
 set number "------------------------------------------------ Current line number
 set signcolumn=yes "------------------ Fix diagnostic sign jumping in number bar
@@ -45,6 +44,7 @@ set noswapfile "------------------------------------------ Dont create wrap file
 set nobackup "------------------------------------------------- Dont save backup
 filetype plugin on "--------------------------------------------- Turn on plugin
 set backspace=indent,eol,start "----------------- Allow backspace in insert mode
+autocmd BufRead,BufNewFile * :syntax on "------------- Turn syntax for all files
 
 " TAB CORRECTION {{{
 
@@ -55,18 +55,6 @@ set expandtab
 set shiftwidth=2
 set smarttab
 set autoindent
-
-" }}}
-
-
-" FIX JS Camel case {{{
-
-fun! IgnoreCamelCaseSpell()
-    syn match myExCapitalWords +\<\w*[A-Z]\K*\>+ contains=@NoSpell
-endfun
-
-autocmd BufRead,BufNewFile * :call IgnoreCamelCaseSpell()
-autocmd BufRead,BufNewFile * :syntax on
 
 " }}}
 

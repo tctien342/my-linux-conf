@@ -1,10 +1,10 @@
 local config = function()
-    require('bufferline').setup {
-        options = {
-            diagnostics = 'nvim_lsp',
-            offsets = {{filetype = 'NvimTree', text = 'File Explorer', text_align = 'center'}}
-        }
+  require('bufferline').setup {
+    options = {
+      diagnostics = 'nvim_lsp',
+      offsets = { { filetype = 'NvimTree', text = 'File Explorer', text_align = 'center' } }
     }
+  }
 end
 
 return config
