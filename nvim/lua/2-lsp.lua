@@ -54,7 +54,7 @@ local enhance_server_opts = {
 
 -- Bind into LSP
 for _, server in ipairs(servers) do
-  local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol
+  local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol
     .make_client_capabilities())
   -- Specify the default options which we'll use to setup all servers
   local opts = { capabilities = capabilities, on_attach = attach_default }

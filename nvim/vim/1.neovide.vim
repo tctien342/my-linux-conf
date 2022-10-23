@@ -1,6 +1,6 @@
 if exists("g:neovide")
   " Font
-  set guifont=JetBrainsMono\ Nerd\ Font:h16
+  set guifont=JetBrainsMono\ Nerd\ Font:h14
 
   " FPS
   let g:neovide_refresh_rate=120
