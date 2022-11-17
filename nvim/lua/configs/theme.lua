@@ -1,31 +1,5 @@
 local config = function()
-  -- GITHUB THEME CONFIG
-  -- require('github-theme').setup({
-  --     theme_style = 'dimmed',
-  --     transparent = true,
-  --     function_style = 'bold',
-  --     dark_float = false,
-  --     dark_sidebar = false
-  -- })
-  vim.g.catppuccin_flavour = "mocha"
-  require("catppuccin").setup({
-    transparent_background = true,
-    term_colors = true,
-    integrations = {
-      treesitter = true,
-      cmp = true,
-      gitsigns = true,
-      telescope = true,
-      nvimtree = true,
-      hop = true,
-      lsp_saga = true,
-      ts_rainbow = true,
-      lsp_trouble = true
-      -- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
-    },
-  })
   vim.cmd([[
-      colorscheme catppuccin
       hi NormalFloat guibg=NONE
       hi Pmenu guibg=NONE
       hi SpellBad cterm=underline guisp=gray
@@ -37,6 +11,10 @@ local config = function()
       hi InfoFloat guibg=NONE
       hi HintFloat guibg=NONE
     ]])
+  vim.g.oxocarbon_lua_keep_terminal = true
+  vim.g.oxocarbon_lua_transparent = true
+  vim.g.oxocarbon_lua_alternative_telescope = true
+  vim.cmd.colorscheme 'oxocarbon-lua'
 end
 
 return config

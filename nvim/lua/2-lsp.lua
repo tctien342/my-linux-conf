@@ -2,6 +2,7 @@
 local lsp_installer = require 'nvim-lsp-installer'
 local init_checker = false
 local lspconfig = require 'lspconfig'
+local navic = require 'nvim-navic'
 
 -- Language server configuration
 local javascript_opts = require 'servers.javascript'
@@ -36,6 +37,9 @@ end
 
 -- Default attach for all server
 local attach_default = function(client, bufnr)
+  if client.server_capabilities.documentSymbolProvider then
+    navic.attach(client, bufnr)
+  end
 end
 
 -- Specific server configuration

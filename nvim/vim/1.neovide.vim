@@ -1,9 +1,10 @@
 if exists("g:neovide")
   " Font
-  set guifont=JetBrainsMono\ Nerd\ Font:h14
+  set guifont=Hack\ Nerd\ Font:h15:#e-subpixelantialias:#h-none
 
   " FPS
   let g:neovide_refresh_rate=120
+  let g:neovide_refresh_rate_idle = 5
 
   " Background
   let g:neovide_transparency=0.0
@@ -15,9 +16,10 @@ if exists("g:neovide")
   let g:neovide_floating_blur_amount_y = 2.0
  
   " Utilities
+  let g:neovide_confirm_quit = v:true
   let g:neovide_remember_window_size = v:true
   let g:neovide_input_use_logo=v:true
-  let g:neovide_cursor_vfx_mode = "pixiedust"
+  let g:neovide_cursor_vfx_mode = "sonicboom"
   let g:neovide_cursor_antialiasing=v:true
 
   " MacOS Fix for system clipboard

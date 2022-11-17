@@ -4,11 +4,15 @@ local config = function()
   saga.init_lsp_saga({
     border_style = 'single',
     move_in_saga = { prev = 'k', next = 'j' },
+    symbol_in_winbar = {
+      enable = false,
+      in_custom = false,
+    },
     -- show_diagnostic_source = true,
     code_action_icon = '💡',
     code_action_num_shortcut = false,
     code_action_lightbulb = {
-      enable = false,
+      enable = true,
       sign = true,
       sign_priority = 20,
       virtual_text = true

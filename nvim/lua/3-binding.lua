@@ -28,7 +28,7 @@ map('n', 'gd', tele_defi) ---------------------------------------- Go definition
 map('n', 'ga', '<cmd>Lspsaga code_action<CR>') ------------------- Go action, code action
 map('v', 'ga', saga_range_action) -------------------------------- Go action, code action in visual mode
 map('n', 'gr', '<cmd>Lspsaga rename<CR>') ------------------------ Go rename, rename variable
-map('n', 'gf', '<cmd>lua vim.lsp.buf.formatting()<cr>') ---------- Go format, call code format
+map('n', 'gf', '<cmd>lua vim.lsp.buf.format({async = true})<cr>') ---------- Go format, call code format
 map('n', 'gp', '<cmd>PrettierAsync<cr>') ------------------------- Go prettier, call prettier for format web's languages
 map('n', 'gj', tele_ref) ----------------------------------------- Go jump, jump to referrals
 map('n', 'gw', '<cmd>HopWord<cr>') ------------------------------- Go Word, jump into word

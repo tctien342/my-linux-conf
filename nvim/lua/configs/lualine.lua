@@ -1,5 +1,5 @@
 local config = function()
-  local gps = require('nvim-gps')
+  local navic = require("nvim-navic")
   require('lualine').setup {
     options = { fmt = string.lower, section_separators = { left = '', right = '' } },
     sections = {
@@ -15,22 +15,15 @@ local config = function()
       lualine_c = {
         {
           'filename',
-          fmt = function(str)
-            local output = str
-            if (gps.is_available()) then
-              local location = gps.get_location()
+          fmt = function()
+            local output = ''
+            if (navic.is_available()) then
+              local location = navic.get_location()
               if (location == '') then
               else
-                output = output .. ' > ' .. location
+                output = '|  ' .. location
               end
             end
-
-            local sig = require('lsp_signature').status_line(64)
-            if (sig.hint == '') then
-            else
-              output = output .. ' > ' .. sig.hint
-            end
-
             return output
           end
         }
