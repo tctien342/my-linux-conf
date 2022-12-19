@@ -79,7 +79,11 @@ cmp.setup({
         fallback()
       end
     end, { 'i', 's' }),
-    ['<CR>'] = cmp.mapping.confirm({ select = true })
+    ["<CR>"] = cmp.mapping.confirm({
+      -- this is the important line
+      behavior = cmp.ConfirmBehavior.Replace,
+      select = false,
+    }),
   },
   sources = {
     { name = 'nvim_lsp' }, { name = 'ultisnips' },
@@ -87,6 +91,7 @@ cmp.setup({
     { name = 'nvim_lua' }, { name = 'spell', priority = 6 },
   },
   sorting = {
+    priority_weight = 2,
     comparators = {
       cmp.config.compare.offset, cmp.config.compare.exact, cmp.config.compare.score,
       require 'cmp-under-comparator'.under, cmp.config.compare.kind,
@@ -156,3 +161,11 @@ for k, v in pairs(highlight) do vim.api.nvim_set_hl(0, k, v) end
 
 -- Codepilot color
 vim.api.nvim_set_hl(0, 'CmpItemKindCopilot', { fg = '#6CC644' })
+
+cmp.event:on("menu_opened", function()
+  vim.b.copilot_suggestion_hidden = true
+end)
+
+cmp.event:on("menu_closed", function()
+  vim.b.copilot_suggestion_hidden = false
+end)

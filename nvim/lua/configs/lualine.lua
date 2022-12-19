@@ -1,7 +1,7 @@
 local config = function()
   local navic = require("nvim-navic")
   require('lualine').setup {
-    options = { fmt = string.lower, section_separators = { left = '', right = '' } },
+    options = { fmt = string.lower, section_separators = { left = '', right = '' }, theme = 'tokyonight' },
     sections = {
       lualine_a = {
         {

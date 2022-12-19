@@ -158,7 +158,7 @@ return require('packer').startup(function()
   }
 
   use {
-    'B4mbus/oxocarbon-lua.nvim',
+    'folke/tokyonight.nvim',
     requires = { 'ray-x/lsp_signature.nvim' },
     config = theme_config
   }
@@ -166,8 +166,8 @@ return require('packer').startup(function()
   use {
     'rrethy/vim-hexokinase', ------------------------- Color review tool
     run = 'make hexokinase',
-    config = function ()
-     vim.cmd [[
+    config = function()
+      vim.cmd [[
        let g:Hexokinase_highlighters = ['foregroundfull']
      ]]
     end
@@ -240,7 +240,7 @@ return require('packer').startup(function()
 
   use {
     'phaazon/hop.nvim', ---------------------------- Jump around buffer with go word(gw) and go line(gl)
-    branch = 'v1',
+    branch = 'v2',
     config = function()
       require 'hop'.setup { keys = 'etovxqpdygfblzhckisuran' }
     end
@@ -258,5 +258,18 @@ return require('packer').startup(function()
     config = function()
       require('workspaces').setup { hooks = { open = { 'BCloseAll' } } }
     end
+  }
+
+  use {
+    "zbirenbaum/copilot.lua",
+    event = "VimEnter",
+    config = function()
+      vim.defer_fn(function()
+        require("copilot").setup({
+          panel = { keymap = { open = "<C-CR>" } },
+          suggestion = { auto_trigger = true, keymap = { accept = "<C-a>" } }
+        })
+      end, 100)
+    end,
   }
 end)

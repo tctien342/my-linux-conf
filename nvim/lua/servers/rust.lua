@@ -5,9 +5,8 @@ local rust_opts = function(opts)
     hover_with_actions = false,
     runnables = { use_telescope = true },
     inlay_hints = {
-      show_parameter_hints = false,
-      parameter_hints_prefix = '',
-      other_hints_prefix = ''
+      auto = true,
+      show_parameter_hints = true,
     }
   }
   output.server = {

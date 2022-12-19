@@ -1,4 +1,7 @@
 local config = function()
+  require("tokyonight").setup({
+    transparent = true
+  })
   vim.cmd([[
       hi NormalFloat guibg=NONE
       hi Pmenu guibg=NONE
@@ -11,10 +14,7 @@ local config = function()
       hi InfoFloat guibg=NONE
       hi HintFloat guibg=NONE
     ]])
-  vim.g.oxocarbon_lua_keep_terminal = true
-  vim.g.oxocarbon_lua_transparent = true
-  vim.g.oxocarbon_lua_alternative_telescope = true
-  vim.cmd.colorscheme 'oxocarbon-lua'
+  vim.cmd.colorscheme 'tokyonight'
 end
 
 return config
