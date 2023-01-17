@@ -9,8 +9,6 @@ local config = function()
         -- keep insert mode after selection in the picker, default is false
         keep_insert = false
       }
-
-      -- lsp_code_actions = {theme = 'dropdown'}
     }
   })
 end

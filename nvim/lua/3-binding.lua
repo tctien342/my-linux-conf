@@ -1,4 +1,3 @@
-local lsp_action = require('lspsaga.codeaction')
 local utils = require 'configs.utils'
 local map = utils.map
 
@@ -10,10 +9,6 @@ local tele_defi =
 local diag_log = '<cmd>lua vim.diagnostic.open_float(nil, { focus = false, border = "single" })<cr>'
 local tele_ref = '<cmd>lua require("telescope.builtin").lsp_references()<cr>'
 local toggle_diag = '<cmd>Lspsaga show_line_diagnostics<CR>'
-local saga_range_action = function()
-  vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<C-U>', true, false, true))
-  lsp_action.range_code_action()
-end
 local saga_scroll_up = function()
 end
 local saga_scroll_down = function()
@@ -26,7 +21,7 @@ map('n', 'gs', '<cmd>w<cr>') ------------------------------------- Go save
 map('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<cr>') --------- Go declaration
 map('n', 'gd', tele_defi) ---------------------------------------- Go definitions
 map('n', 'ga', '<cmd>Lspsaga code_action<CR>') ------------------- Go action, code action
-map('v', 'ga', saga_range_action) -------------------------------- Go action, code action in visual mode
+-- map('v', 'ga', 'saga_range_action') -------------------------------- Go action, code action in visual mode
 map('n', 'gr', '<cmd>Lspsaga rename<CR>') ------------------------ Go rename, rename variable
 map('n', 'gf', '<cmd>lua vim.lsp.buf.format({async = true})<cr>') ---------- Go format, call code format
 map('n', 'gp', '<cmd>PrettierAsync<cr>') ------------------------- Go prettier, call prettier for format web's languages

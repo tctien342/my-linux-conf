@@ -1,8 +1,8 @@
 -- This file contain setup for lsp servers
-local lsp_installer = require 'nvim-lsp-installer'
-local init_checker = false
+local lsp_installer = require 'mason'
+local mason_bridge = require 'mason-lspconfig'
+
 local lspconfig = require 'lspconfig'
-local navic = require 'nvim-navic'
 
 -- Language server configuration
 local javascript_opts = require 'servers.javascript'
@@ -19,27 +19,15 @@ local servers = {
   'efm', 'vimls', 'cssmodules_ls', 'dockerls', 'dotls', 'html', 'jsonls', 'tailwindcss',
   'cssmodules_ls', 'rust_analyzer'
 }
--- Pr-esetup
-lsp_installer.setup {}
 
--- Checking if all servers is installed
-for _, name in pairs(servers) do
-  local server_is_found, server = lsp_installer.get_server(name)
-  if server_is_found and not server:is_installed() then
-    init_checker = true
-    server:install()
-  end
-end
-if init_checker then
-  -- Show installer if not install any of LSP
-  require 'nvim-lsp-installer'.info_window.open()
-end
+-- Pre-setup
+lsp_installer.setup {}
+mason_bridge.setup {
+  ensure_installed = servers
+}
 
 -- Default attach for all server
 local attach_default = function(client, bufnr)
-  if client.server_capabilities.documentSymbolProvider then
-    navic.attach(client, bufnr)
-  end
 end
 
 -- Specific server configuration
@@ -73,14 +61,16 @@ for _, server in ipairs(servers) do
   end
 end
 
-local lsp = vim.lsp
-lsp.handlers['textDocument/publishDiagnostics'] = lsp.with(lsp.diagnostic.on_publish_diagnostics, {
-  virtual_text = false,
-  signs = true,
-  update_in_insert = true,
-  underline = true
-})
 
-lsp.handlers['textDocument/hover'] = lsp.with(vim.lsp.handlers.hover, { border = 'single' })
-lsp.handlers['textDocument/signatureHelp'] = lsp.with(vim.lsp.handlers.signature_help,
-  { border = 'single' })
+-- vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(
+--   vim.lsp.diagnostic.on_publish_diagnostics, {
+--   virtual_text = false,
+--   signs = true,
+--   update_in_insert = true,
+--   underline = true
+-- })
+vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = 'single' })
+vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(
+  vim.lsp.handlers.signature_help, {
+  border = 'single'
+})

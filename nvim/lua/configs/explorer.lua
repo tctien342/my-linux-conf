@@ -12,7 +12,6 @@ local config = function()
 
   require 'nvim-tree'.setup {
     auto_reload_on_write = true,
-    create_in_closed_folder = true,
     update_cwd = true,
     diagnostics = {
       enable = true,

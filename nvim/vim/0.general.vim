@@ -1,6 +1,6 @@
 let mapleader = " " "---------------------------------------- Setting leader key
 set pumheight=6 "----------------------------------- limit autocomple candidates
-set completeopt=menu,menuone,noselect "------------- Setup for CMP completion
+set completeopt=menu,menuone,noselect "---------------- Setup for CMP completion
 
 set guioptions-=m "--------------------------------------------- Remove menu bar
 set guioptions-=T "---------------------------------------------- Remove toolbar
@@ -10,22 +10,21 @@ set guioptions-=L "--------------------------------- Remove left-hand scroll bar
 set encoding=UTF-8 "------------------------------------------ Set nvim encoding
 set nowrap "------------------------------------------ Single row, no break line
 set colorcolumn=0 "-------------------------------------------- line column show
-" set spell "-------------------------------------------- Enable spelling checking
-set spelllang=en_us "------------------------------------------ Default language
-set spelloptions=camel "--------------------------------------- Support JS camel
 set title "-------------------------------------- Let vim set the terminal title
 set updatetime=100 "-------------------------------- Redraw the status bar often
 set showcmd "--------------------------------------- Display incomplete commands
-set laststatus=2 "-------------------------------------- Always show status line
-set showtabline=2 "----------------------------------------- Always show tabline
+set laststatus=1 "-------------------------------------- Always show status line
+set showtabline=1 "----------------------------------------- Always show tabline
 set display+=lastline "--------------------- As must as possible of the lastline
-set previewheight=4 "------------------------------------ Smaller preview height
-set relativenumber "--------------------------------------- Show relative number
+set previewheight=6 "------------------------------------ Smaller preview height
 set number "------------------------------------------------ Current line number
-set signcolumn=yes "------------------ Fix diagnostic sign jumping in number bar
+set relativenumber "--------------------------------------- Show relative number
+set signcolumn=yes "----------------- Fix diagnostic sign jumping in number bar
 set splitright  "---------------------------------- Fix nvim-tree not fixed left
 set clipboard=unnamedplus "------------------------------------ Enable clipboard
 
+set spell "-------------------------------------------------- Enable spell check
+set spelllang=en_us "---------------------------------------- Set spell language
 
 if (empty($TMUX))
   if (has("nvim"))
@@ -76,4 +75,3 @@ set autoindent
 if has('mouse')
     set mouse=a "-------------------------------- Allow use mouse, possible in nvim
 endif
-

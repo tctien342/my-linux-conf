@@ -4,11 +4,9 @@ local lspkind = require('lspkind')
 local cmp_autopairs = require('nvim-autopairs.completion.cmp')
 
 local has_words_before = function()
-  if vim.api.nvim_buf_get_option(0, 'buftype') == 'prompt' then return false end
+  if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then return false end
   local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-  return col ~= 0
-      and vim.api.nvim_buf_get_text(0, line - 1, 0, line - 1, col, {})[1]:match('^%s*$')
-      == nil
+  return col ~= 0 and vim.api.nvim_buf_get_text(0, line - 1, 0, line - 1, col, {})[1]:match("^%s*$") == nil
 end
 
 cmp.setup({
@@ -19,32 +17,17 @@ cmp.setup({
     end,
   },
   formatting = {
-    fields = { 'kind', 'abbr', 'menu' },
-    format = function(entry_stock, vim_item_stock)
-      local kind = lspkind.cmp_format({
-        mode = 'symbol_text', -- show only symbol annotations
-        maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
-        before = function(entry, vim_item)
-          vim_item.menu = ({
-            copilot = '[AIC]',
-            nvim_lsp = '[LSP]',
-            emoji = '[EMO]',
-            path = '[PTH]',
-            calc = '[CAL]',
-            luasnip = '[SNI]',
-            buffer = '[BUF]',
-            spell = '[SPE]',
-            nvim_lua = '[NVI]',
-            tmux = '[MUX]'
-          })[entry.source.name]
-          return vim_item
-        end
-      })(entry_stock, vim_item_stock)
-      local strings = vim.split(kind.kind, '%s', { trimempty = true })
-      kind.kind = ' ' .. strings[1] .. ' '
-      kind.menu = '    (' .. strings[2] .. ')'
+    fields = { "kind", "abbr", "menu" },
+    format = function(entry, vim_item)
+      local kind = require("lspkind").cmp_format(
+        { mode = "symbol_text", maxwidth = 50, symbol_map = { Copilot = "A" } }
+      )(entry, vim_item)
+      local strings = vim.split(kind.kind, "%s", { trimempty = true })
+      kind.kind = " " .. (strings[1] or "") .. " "
+      kind.menu = "    (" .. (strings[2] or "") .. ")"
+
       return kind
-    end
+    end,
   },
   window = {
     completion = { -- rounded border; thin-style scrollbar
@@ -86,9 +69,11 @@ cmp.setup({
     }),
   },
   sources = {
-    { name = 'nvim_lsp' }, { name = 'ultisnips' },
-    { name = 'buffer' }, { name = 'path' },
-    { name = 'nvim_lua' }, { name = 'spell', priority = 6 },
+    { name = "copilot", priority = 1 },
+    { name = 'nvim_lsp', priority = 2 }, { name = 'ultisnips', priority = 3 },
+    { name = 'buffer', priority = 4 }, { name = 'path', priority = 4 },
+    { name = 'nvim_lua', priority = 2 },
+
   },
   sorting = {
     priority_weight = 2,
@@ -101,7 +86,19 @@ cmp.setup({
 })
 
 -- Config complete for vim cmd
-cmp.setup.cmdline(':', { mapping = cmp.mapping.preset.cmdline(), sources = { { name = 'cmdline' } } })
+cmp.setup.cmdline(':', {
+  mapping = cmp.mapping.preset.cmdline(),
+  sources = cmp.config.sources({
+    { name = 'path' }
+  }, {
+    {
+      name = 'cmdline',
+      option = {
+        ignore_cmds = { 'Man', '!' }
+      }
+    }
+  })
+})
 cmp.setup.cmdline('/', { mapping = cmp.mapping.preset.cmdline(), sources = { { name = 'buffer' } } })
 
 -- Set configuration for specific filetype.
@@ -160,7 +157,7 @@ local highlight = {
 for k, v in pairs(highlight) do vim.api.nvim_set_hl(0, k, v) end
 
 -- Codepilot color
-vim.api.nvim_set_hl(0, 'CmpItemKindCopilot', { fg = '#6CC644' })
+vim.api.nvim_set_hl(0, 'CmpItemKindCopilot', { fg = '#000000', bg = '#ffffff' })
 
 cmp.event:on("menu_opened", function()
   vim.b.copilot_suggestion_hidden = true
