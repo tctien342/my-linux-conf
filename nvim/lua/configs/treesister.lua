@@ -3,7 +3,7 @@ local config = function()
     -- One of "all", "maintained" (parsers with maintainers), or a list of languages
     ensure_installed = {
       'typescript', 'python', 'javascript', 'html', 'css', 'bash', 'json', 'scss', 'tsx',
-      'rust', 'go', 'cpp', 'cmake', 'lua', 'solidity', 'yaml', 'fish', 'markdown'
+      'rust', 'go', 'cpp', 'cmake', 'lua', 'solidity', 'yaml', 'fish', 'markdown', 'markdown_inline'
     },
 
     -- Install languages synchronously (only applied to `ensure_installed`)

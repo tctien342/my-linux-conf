@@ -29,7 +29,8 @@ map('n', 'gj', tele_ref) ----------------------------------------- Go jump, jump
 map('n', 'gw', '<cmd>HopWord<cr>') ------------------------------- Go Word, jump into word
 map('n', 'gl', '<cmd>HopLine<cr>') ------------------------------- Go line, jump into line
 map('n', '<C-q>', '<cmd>BClose<cr>') ----------------------------- Close current buffer
-map('n', 'D', '<cmd>Lspsaga hover_doc<CR>') ---------------------- Hover function detail
+-- map('n', 'D', '<cmd>Lspsaga hover_doc<CR>') ---------------------- Hover function detail
+map("n", "D", "<cmd>Lspsaga hover_doc ++quiet<CR>")
 map('n', '<C-f>', saga_scroll_up) -------------------------------- Move hover popup up, Forward
 map('n', '<C-b>', saga_scroll_down) ------------------------------ Move hover popup down, Backward
 map('n', '``', toggle_diag) -------------------------------------- Show diagnostic log under cursor

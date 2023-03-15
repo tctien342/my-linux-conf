@@ -87,7 +87,8 @@ return require('packer').startup(function()
   use({
     'glepnir/lspsaga.nvim', ------------- Bind extra feature into LSP
     branch = 'main',
-    config = require('configs.lspsaga')
+    config = require('configs.lspsaga'),
+    requires = { {"nvim-tree/nvim-web-devicons"} }
   })
 
   use {
